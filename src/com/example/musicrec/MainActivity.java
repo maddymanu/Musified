@@ -36,8 +36,8 @@ public class MainActivity extends Activity {
 			startActivity(intent);
 			finish();
 		} else {
-//			Intent intent = new Intent(MainActivity.this, TabsActivity.class);
-//			startActivity(intent);
+			Intent intent = new Intent(MainActivity.this, Welcome.class);
+			startActivity(intent);
 		}
 		
 		

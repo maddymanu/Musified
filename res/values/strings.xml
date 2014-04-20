@@ -2,7 +2,7 @@
 <resources>
 
     <string name="hello">Hello World, ParseStarterProjectActivity!</string>
-    <string name="app_name">Parse.com Login Tutorial</string>
+    <string name="app_name">Musify</string>
     <string name="Username">Username</string>
     <string name="Password">Password</string>
     <string name="LoginBtn">Login</string>
@@ -21,6 +21,6 @@
     <string name="password_label">Password:</string>
     <string name="already_have_an_account_label">Already Have An Account? Log In!</string>
     <string name="sign_in_label">Sign In</string>
-    <string name="dont_have_an_account_label">Don&amp;apos;t have an account? Register!</string>
+    <string name="dont_have_an_account_label">Dont have an account? Register!</string>
 
 </resources>
