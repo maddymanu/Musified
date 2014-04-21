@@ -108,9 +108,11 @@ public class FragmentTab1 extends SherlockFragment {
 
 		IntentFilter iF = new IntentFilter();
 		iF.addAction("com.android.music.metachanged");
-		iF.addAction("com.android.music.playstatechanged");
-		iF.addAction("com.android.music.playbackcomplete");
-		iF.addAction("com.android.music.queuechanged");
+		//iF.addAction("com.android.music.playstatechanged");
+		//iF.addAction("com.android.music.playbackcomplete");
+		//iF.addAction("com.android.music.queuechanged");
+		//iF.addAction("com.android.music.musicservicecommand");
+		//iF.addAction("com.android.music.command");
 		getActivity().registerReceiver(mReceiver, iF);
 		return rootView;
 	}
@@ -118,9 +120,12 @@ public class FragmentTab1 extends SherlockFragment {
 	private BroadcastReceiver mReceiver = new BroadcastReceiver() {
 		@Override
 		public void onReceive(Context context, Intent intent) {
+			
 			String action = intent.getAction();
 			String cmd = intent.getStringExtra("command");
 			Log.d("mIntentReceiver.onReceive", action + "/" + cmd);
+			
+			
 			String artist = intent.getStringExtra("artist");
 			String album = intent.getStringExtra("album");
 			String track = intent.getStringExtra("track");
@@ -131,7 +136,7 @@ public class FragmentTab1 extends SherlockFragment {
 			currSong.setAuthor(ParseUser.getCurrentUser());
 			currSong.setTitle(track);
 			currSong.setArtist(artist);
-			currSong.saveInBackground();
+			//currSong.saveInBackground();
 			
 		}
 	};
