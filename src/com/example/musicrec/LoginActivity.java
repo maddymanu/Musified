@@ -91,11 +91,11 @@ public class LoginActivity extends Activity {
 		});
 	}
 
-	public void showRegistration(View v) {
-		Intent intent = new Intent(this, RegisterActivity.class);
-		startActivity(intent);
-		finish();
-	}
+//	public void showRegistration(View v) {
+//		Intent intent = new Intent(this, RegisterActivity.class);
+//		startActivity(intent);
+//		finish();
+//	}
 
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
