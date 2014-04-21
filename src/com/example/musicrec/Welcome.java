@@ -34,6 +34,7 @@ public class Welcome extends SherlockFragmentActivity {
 		// Set Tab Icon and Titles
 		Tab1 = actionBar.newTab().setText("Feed");
 		Tab2 = actionBar.newTab().setText("FriendList");
+		
 
 		// Set Tab Listeners
 		Tab1.setTabListener(new TabListener(fragmentTab1));
