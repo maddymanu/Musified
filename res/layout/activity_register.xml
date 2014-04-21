@@ -42,6 +42,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="3dp"
             android:text="@string/password_label" />
 
         <com.beardedhen.androidbootstrap.BootstrapEditText
@@ -57,10 +58,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:layout_marginTop="2dp"
             android:onClick="register"
             android:text="@string/sign_up_label"
             bootstrapbutton:bb_roundedCorners="true"
             bootstrapbutton:bb_type="primary" />
+
     </LinearLayout>
 
     <com.beardedhen.androidbootstrap.BootstrapButton

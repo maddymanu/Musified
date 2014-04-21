@@ -61,9 +61,9 @@
             android:layout_gravity="center"
             android:onClick="signIn"
             android:text="@string/sign_in_label"
-            bootstrapbutton:bb_roundedCorners="true"
             bootstrapbutton:bb_icon_left="fa-heart"
             bootstrapbutton:bb_icon_right="fa-heart"
+            bootstrapbutton:bb_roundedCorners="true"
             bootstrapbutton:bb_type="primary" />
     </LinearLayout>
 
