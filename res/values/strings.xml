@@ -3,6 +3,7 @@
 
     <string name="hello">Hello World, ParseStarterProjectActivity!</string>
     <string name="app_name">Musify</string>
+     <string name="app_id">830750263621357</string>
     <string name="Username">Username</string>
     <string name="Password">Password</string>
     <string name="LoginBtn">Login</string>
