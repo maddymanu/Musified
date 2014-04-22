@@ -14,6 +14,7 @@ public class Welcome extends SherlockFragmentActivity {
 	ActionBar.Tab Tab1, Tab2;
 	Fragment fragmentTab1 = new FragmentTab1();
 	Fragment fragmentTab2 = new FragmentTab2();
+	
 
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
