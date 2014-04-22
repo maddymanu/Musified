@@ -458,7 +458,8 @@ int id abs__submit_area 0x7f040031
 int id abs__textButton 0x7f040015
 int id abs__title 0x7f04001d
 int id abs__up 0x7f04000d
-int id action_settings 0x7f040063
+int id action_settings 0x7f040066
+int id artist 0x7f040063
 int id com_facebook_login_activity_progress_bar 0x7f04004a
 int id com_facebook_picker_activity_circle 0x7f040049
 int id com_facebook_picker_checkbox 0x7f04004c
@@ -499,9 +500,10 @@ int id lblSubTitle 0x7f04005f
 int id lblText 0x7f04005d
 int id lblTitle 0x7f04005e
 int id listMode 0x7f040004
+int id listview 0x7f040064
 int id login_password 0x7f040036
 int id login_username 0x7f040035
-int id logout_btn 0x7f040062
+int id logout_btn 0x7f040065
 int id normal 0x7f040001
 int id picker_subtitle 0x7f040057
 int id placeholder 0x7f040045
@@ -516,6 +518,7 @@ int id sign_in 0x7f040037
 int id sign_up 0x7f04003d
 int id small 0x7f040000
 int id tabMode 0x7f040005
+int id title 0x7f040062
 int id txtText 0x7f040043
 int id useLogo 0x7f040006
 int id wrap_content 0x7f040003
@@ -570,7 +573,8 @@ int layout row_title_and_subtitle 0x7f03002e
 int layout row_two_columns 0x7f03002f
 int layout sherlock_spinner_dropdown_item 0x7f030030
 int layout sherlock_spinner_item 0x7f030031
-int layout tab_feed 0x7f030032
+int layout single_song_item 0x7f030032
+int layout tab_feed 0x7f030033
 int menu main 0x7f0b0000
 int string LoginBtn 0x7f07002d
 int string LogoutBtn 0x7f07002f

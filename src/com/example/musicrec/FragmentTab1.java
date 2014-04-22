@@ -12,6 +12,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
 import com.actionbarsherlock.app.SherlockFragment;
 import com.facebook.Request;
@@ -38,9 +42,12 @@ public class FragmentTab1 extends SherlockFragment {
   public static final String CMDNEXT = "next";
 
   Song currSong;
-  private List<Song> songArrayList = null;
+  private ArrayList<Song> songArrayList = null;
   int i = 0;
-  Thread a, b, c;
+
+  ListView listview;
+  ArrayAdapter<String> adapter;
+  CustomArrayAdapter adapter2 ;
 
   @SuppressWarnings("deprecation")
   @Override
@@ -114,7 +121,7 @@ public class FragmentTab1 extends SherlockFragment {
                       @Override
                       public void done(List<ParseObject> songListForSingleUser,
                           ParseException e) {
-                        
+
                         if (e == null && songListForSingleUser != null) {
 
                           for (i = 0; i < songListForSingleUser.size(); i++) {
@@ -128,32 +135,33 @@ public class FragmentTab1 extends SherlockFragment {
                           }
                           //
                         }
-                        try {
-                          Thread.sleep(4000);
-                        } catch (InterruptedException e2) {
-                          e2.printStackTrace();
-                        }
-                        
+
+
                         Log.d("User", "Whole size is + " + songArrayList.size());
+
+                        
+                        // Add to the arrayadapter over here
+                        listview = (ListView) getActivity().getWindow().getDecorView().findViewById(R.id.listview);
+                        
+                        adapter2 = new CustomArrayAdapter(getActivity(), songArrayList);
+                        listview.setAdapter(adapter2);
+                        
                       } // here were done getting the songList for each
                         // followed.
-                      
+
                     });
-                    
+
                   }
-                  
+
                 }
               });
-           
-              
+
             }
 
           }
 
         });
-    
-   
-    
+
     IntentFilter iF = new IntentFilter();
     iF.addAction("com.android.music.metachanged");
     getActivity().registerReceiver(mReceiver, iF);

@@ -1389,7 +1389,8 @@ containing a value of this type.
         public static final int abs__textButton=0x7f040015;
         public static final int abs__title=0x7f04001d;
         public static final int abs__up=0x7f04000d;
-        public static final int action_settings=0x7f040063;
+        public static final int action_settings=0x7f040066;
+        public static final int artist=0x7f040063;
         public static final int com_facebook_login_activity_progress_bar=0x7f04004a;
         public static final int com_facebook_picker_activity_circle=0x7f040049;
         public static final int com_facebook_picker_checkbox=0x7f04004c;
@@ -1430,9 +1431,10 @@ containing a value of this type.
         public static final int lblText=0x7f04005d;
         public static final int lblTitle=0x7f04005e;
         public static final int listMode=0x7f040004;
+        public static final int listview=0x7f040064;
         public static final int login_password=0x7f040036;
         public static final int login_username=0x7f040035;
-        public static final int logout_btn=0x7f040062;
+        public static final int logout_btn=0x7f040065;
         public static final int normal=0x7f040001;
         public static final int picker_subtitle=0x7f040057;
         public static final int placeholder=0x7f040045;
@@ -1447,6 +1449,7 @@ containing a value of this type.
         public static final int sign_up=0x7f04003d;
         public static final int small=0x7f040000;
         public static final int tabMode=0x7f040005;
+        public static final int title=0x7f040062;
         public static final int txtText=0x7f040043;
         public static final int useLogo=0x7f040006;
         public static final int wrap_content=0x7f040003;
@@ -1505,7 +1508,8 @@ containing a value of this type.
         public static final int row_two_columns=0x7f03002f;
         public static final int sherlock_spinner_dropdown_item=0x7f030030;
         public static final int sherlock_spinner_item=0x7f030031;
-        public static final int tab_feed=0x7f030032;
+        public static final int single_song_item=0x7f030032;
+        public static final int tab_feed=0x7f030033;
     }
     public static final class menu {
         public static final int main=0x7f0b0000;
