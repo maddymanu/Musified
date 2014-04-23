@@ -7,8 +7,8 @@
         android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingLeft="5dp"
-        android:textSize="30sp" >
+        android:paddingLeft="65dp"
+        android:textSize="20sp" >
     </TextView>
 
     <TextView
@@ -16,14 +16,17 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/title"
-        android:paddingLeft="5dp"
+        android:paddingLeft="65dp"
         android:textSize="12sp" >
     </TextView>
-    
-    <ImageView 
+
+    <ImageView
         android:id="@+id/profileImage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingLeft="5dp"/>
+        android:layout_alignLeft="@+id/title"
+        android:minHeight="50dp"
+        android:minWidth="50dp"
+        android:paddingLeft="5dp" />
 
 </RelativeLayout>

@@ -33,13 +33,13 @@ import com.parse.ParseUser;
 
 public class FragmentTab1 extends SherlockFragment {
 
-  public static final String SERVICECMD = "com.android.music.musicservicecommand";
-  public static final String CMDNAME = "command";
-  public static final String CMDTOGGLEPAUSE = "togglepause";
-  public static final String CMDSTOP = "stop";
-  public static final String CMDPAUSE = "pause";
-  public static final String CMDPREVIOUS = "previous";
-  public static final String CMDNEXT = "next";
+//  public static final String SERVICECMD = "com.android.music.musicservicecommand";
+//  public static final String CMDNAME = "command";
+//  public static final String CMDTOGGLEPAUSE = "togglepause";
+//  public static final String CMDSTOP = "stop";
+//  public static final String CMDPAUSE = "pause";
+//  public static final String CMDPREVIOUS = "previous";
+//  public static final String CMDNEXT = "next";
 
   Song currSong;
   private ArrayList<Song> songArrayList = null;
@@ -163,7 +163,21 @@ public class FragmentTab1 extends SherlockFragment {
         });
 
     IntentFilter iF = new IntentFilter();
-    iF.addAction("com.android.music.metachanged");
+    iF.addAction("com.android.music.metachanged"); 
+    iF.addAction("com.android.music.playstatechanged"); 
+    iF.addAction("com.android.music.musicservicecommand");
+    iF.addAction("fm.last.android.metachanged");
+    iF.addAction("com.sec.android.app.music.metachanged");
+    iF.addAction("com.nullsoft.winamp.metachanged");
+    iF.addAction("com.amazon.mp3.metachanged");     
+    iF.addAction("com.miui.player.metachanged");        
+    iF.addAction("com.real.IMP.metachanged");
+    iF.addAction("com.sonyericsson.music.metachanged");
+    iF.addAction("com.rdio.android.metachanged");
+    iF.addAction("com.samsung.sec.android.MusicPlayer.metachanged");
+    iF.addAction("com.andrew.apollo.metachanged");
+    iF.addAction("com.spotify.mobile.android.metadatachanged"); 
+    
     getActivity().registerReceiver(mReceiver, iF);
     return rootView;
   }
@@ -184,9 +198,20 @@ public class FragmentTab1 extends SherlockFragment {
       // everytime theres an update, push it to Parse track.
       currSong = new Song();
       currSong.setAuthor(ParseUser.getCurrentUser());
-      currSong.setTitle(track);
-      currSong.setArtist(artist);
-      currSong.saveInBackground();
+      if(track != null) {
+        currSong.setTitle(track);
+      } else {
+        currSong.setTitle("unknown");
+      }
+      
+      if(artist != null){
+        currSong.setArtist(artist);
+      } else {
+        currSong.setArtist("unknown");
+      }
+      
+      
+      //currSong.saveInBackground();
 
     }
   };
