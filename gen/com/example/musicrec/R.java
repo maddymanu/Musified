@@ -1389,7 +1389,7 @@ containing a value of this type.
         public static final int abs__textButton=0x7f040015;
         public static final int abs__title=0x7f04001d;
         public static final int abs__up=0x7f04000d;
-        public static final int action_settings=0x7f040066;
+        public static final int action_settings=0x7f040067;
         public static final int artist=0x7f040063;
         public static final int com_facebook_login_activity_progress_bar=0x7f04004a;
         public static final int com_facebook_picker_activity_circle=0x7f040049;
@@ -1431,13 +1431,14 @@ containing a value of this type.
         public static final int lblText=0x7f04005d;
         public static final int lblTitle=0x7f04005e;
         public static final int listMode=0x7f040004;
-        public static final int listview=0x7f040064;
+        public static final int listview=0x7f040065;
         public static final int login_password=0x7f040036;
         public static final int login_username=0x7f040035;
-        public static final int logout_btn=0x7f040065;
+        public static final int logout_btn=0x7f040066;
         public static final int normal=0x7f040001;
         public static final int picker_subtitle=0x7f040057;
         public static final int placeholder=0x7f040045;
+        public static final int profileImage=0x7f040064;
         public static final int registerButton=0x7f040039;
         public static final int register_password=0x7f04003c;
         public static final int register_username=0x7f04003b;

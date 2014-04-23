@@ -7,21 +7,25 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.parse.ParseException;
 import com.parse.ParseUser;
 
+@SuppressLint("NewApi")
 public class CustomArrayAdapter extends ArrayAdapter<Song> {
 
   private final Context context;
@@ -48,6 +52,7 @@ public class CustomArrayAdapter extends ArrayAdapter<Song> {
     // 3. Get the two text view from the rowView
     TextView titleView = (TextView) rowView.findViewById(R.id.title);
     TextView artistView = (TextView) rowView.findViewById(R.id.artist);
+    final ImageView profileImage = (ImageView) rowView.findViewById(R.id.profileImage);
 
     // 4. Set the text for textView
     Song currSong = (Song) songArrayList.get(position);
@@ -62,19 +67,34 @@ public class CustomArrayAdapter extends ArrayAdapter<Song> {
       e1.printStackTrace();
     }
 
+    final String userFacebookId = songUser.get("fbId").toString();
     AsyncTask<Void, Void, Bitmap> t = new AsyncTask<Void, Void, Bitmap>() {
       protected Bitmap doInBackground(Void... p) {
         Bitmap bm = null;
+        Log.d("User", "Bitmap-" + bm); 
         try {
-          URL aURL = new URL("http://graph.facebook.com/" + songUser.get("fbId")
-              + "/picture?type=large");
-          URLConnection conn = aURL.openConnection();
-          conn.setUseCaches(true);
-          conn.connect();
-          InputStream is = conn.getInputStream();
-          BufferedInputStream bis = new BufferedInputStream(is);
-          bm = BitmapFactory.decodeStream(bis);
-          bis.close();
+          
+//          String aURL = new URL("http://graph.facebook.com/" + songUser.get("fbId")
+//              + "/picture?type=large");
+          
+          String url = String.format(
+              "https://graph.facebook.com/%s/picture",
+              userFacebookId);
+
+          
+          Log.d("User", "Bitmap-" + url); 
+          
+          
+//          URLConnection conn = aURL.openConnection();
+//          conn.setUseCaches(true);
+//          conn.connect();
+          
+          
+          InputStream is = new URL(url).openStream();
+          //BufferedInputStream bis = new BufferedInputStream(is);
+          bm = BitmapFactory.decodeStream(is);
+          
+          //bis.close();
           is.close();
         } catch (IOException e) {
           e.printStackTrace();
@@ -83,10 +103,10 @@ public class CustomArrayAdapter extends ArrayAdapter<Song> {
       }
 
       protected void onPostExecute(Bitmap bm) {
-
-//        Drawable drawable = new BitmapDrawable(getResources(), bm);
-//
-//        photoImageView.setBackgroundDrawable(drawable);
+        
+        Log.d("User", "Bitmap-" + bm); 
+        
+        profileImage.setImageBitmap(bm);
 
       }
     };
@@ -95,5 +115,7 @@ public class CustomArrayAdapter extends ArrayAdapter<Song> {
     // 5. return rowView
     return rowView;
   }
+  
+
 
 }
