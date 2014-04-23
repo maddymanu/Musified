@@ -1,13 +1,26 @@
 package com.example.musicrec;
 
+import java.io.BufferedInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.ArrayList;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import android.os.AsyncTask;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
+
+import com.parse.ParseException;
+import com.parse.ParseUser;
 
 public class CustomArrayAdapter extends ArrayAdapter<Song> {
 
@@ -38,10 +51,48 @@ public class CustomArrayAdapter extends ArrayAdapter<Song> {
 
     // 4. Set the text for textView
     Song currSong = (Song) songArrayList.get(position);
+    // currSong.get
     titleView.setText(currSong.get("title").toString());
     artistView.setText(currSong.get("artist").toString());
 
-    // 5. retrn rowView
+    final ParseUser songUser = currSong.getAuthor();
+    try {
+      songUser.fetchIfNeeded();
+    } catch (ParseException e1) {
+      e1.printStackTrace();
+    }
+
+    AsyncTask<Void, Void, Bitmap> t = new AsyncTask<Void, Void, Bitmap>() {
+      protected Bitmap doInBackground(Void... p) {
+        Bitmap bm = null;
+        try {
+          URL aURL = new URL("http://graph.facebook.com/" + songUser.get("fbId")
+              + "/picture?type=large");
+          URLConnection conn = aURL.openConnection();
+          conn.setUseCaches(true);
+          conn.connect();
+          InputStream is = conn.getInputStream();
+          BufferedInputStream bis = new BufferedInputStream(is);
+          bm = BitmapFactory.decodeStream(bis);
+          bis.close();
+          is.close();
+        } catch (IOException e) {
+          e.printStackTrace();
+        }
+        return bm;
+      }
+
+      protected void onPostExecute(Bitmap bm) {
+
+//        Drawable drawable = new BitmapDrawable(getResources(), bm);
+//
+//        photoImageView.setBackgroundDrawable(drawable);
+
+      }
+    };
+    t.execute();
+
+    // 5. return rowView
     return rowView;
   }
 
