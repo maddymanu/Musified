@@ -76,12 +76,12 @@ public class FragmentTab1 extends SherlockFragment {
       }
     });
 
-    try {
-      Thread.sleep(2000);
-    } catch (InterruptedException e) {
-      // TODO Auto-generated catch block
-      e.printStackTrace();
-    }
+//    try {
+//      Thread.sleep(2000);
+//    } catch (InterruptedException e) {
+//      // TODO Auto-generated catch block
+//      e.printStackTrace();
+//    }
 
     RequestAsyncTask r = Request.executeMyFriendsRequestAsync(
         ParseFacebookUtils.getSession(), new Request.GraphUserListCallback() {

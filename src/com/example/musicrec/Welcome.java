@@ -5,7 +5,8 @@ import android.support.v4.app.Fragment;
 
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
-import com.parse.ParseUser;
+import com.actionbarsherlock.view.Menu;
+import com.actionbarsherlock.view.MenuInflater;
 
 //Is basically the Tab Holder for different tabs
 
@@ -27,14 +28,14 @@ public class Welcome extends SherlockFragmentActivity {
 		actionBar.setDisplayShowHomeEnabled(false);
 
 		// Hide Actionbar Title
-		actionBar.setDisplayShowTitleEnabled(false);
+		actionBar.setDisplayShowTitleEnabled(true);
 
 		// Create Actionbar Tabs
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 
 		// Set Tab Icon and Titles
-		Tab1 = actionBar.newTab().setText("Feed");
-		Tab2 = actionBar.newTab().setText("FriendList");
+		Tab1 = actionBar.newTab().setText("Friends");
+		Tab2 = actionBar.newTab().setText("None");
 		
 
 		// Set Tab Listeners
@@ -46,5 +47,13 @@ public class Welcome extends SherlockFragmentActivity {
 		actionBar.addTab(Tab1);
 		actionBar.addTab(Tab2);
 
+	}
+	
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+	  MenuInflater inflater = getSupportMenuInflater();
+    inflater.inflate(R.menu.main, menu);
+
+    return super.onCreateOptionsMenu(menu);
 	}
 }

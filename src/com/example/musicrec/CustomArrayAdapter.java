@@ -57,7 +57,8 @@ public class CustomArrayAdapter extends ArrayAdapter<Song> {
     // 4. Set the text for textView
     Song currSong = (Song) songArrayList.get(position);
     // currSong.get
-    titleView.setText(currSong.get("title").toString());
+    String title = currSong.get("title").toString().substring(0, 1).toUpperCase() + currSong.get("title").toString().substring(1).toLowerCase();
+    titleView.setText(title);
     artistView.setText(currSong.get("artist").toString());
 
     final ParseUser songUser = currSong.getAuthor();
