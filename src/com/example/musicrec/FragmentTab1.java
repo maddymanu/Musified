@@ -1,6 +1,7 @@
 package com.example.musicrec;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -119,7 +120,7 @@ public class FragmentTab1 extends SherlockFragment {
 
                     ParseQuery<ParseObject> query = ParseQuery.getQuery("Song");
                     query.whereEqualTo("author", currUser);
-
+                    query.addDescendingOrder("createdAt");
                     query.findInBackground(new FindCallback<ParseObject>() {
 
                       @Override
@@ -141,6 +142,10 @@ public class FragmentTab1 extends SherlockFragment {
                         }
 
                         Log.d("User", "Whole size is + " + songArrayList.size());
+                        //for each song in the arraylist, get its date and order it by that
+                        for (Song s : songArrayList) {
+                          Date d = s.getCreatedAt();
+                        }
 
                         // Add to the arrayadapter over here
                         listview = (ListView) getActivity().getWindow()
