@@ -1,7 +1,9 @@
 package com.example.musicrec;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -12,8 +14,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -33,13 +33,17 @@ import com.parse.ParseUser;
 
 public class FragmentTab1 extends SherlockFragment {
 
-//  public static final String SERVICECMD = "com.android.music.musicservicecommand";
-//  public static final String CMDNAME = "command";
-//  public static final String CMDTOGGLEPAUSE = "togglepause";
-//  public static final String CMDSTOP = "stop";
-//  public static final String CMDPAUSE = "pause";
-//  public static final String CMDPREVIOUS = "previous";
-//  public static final String CMDNEXT = "next";
+  public static Boolean IS_RUNNING = false;
+  Map<String, String> map = new HashMap<String, String>();
+
+  // public static final String SERVICECMD =
+  // "com.android.music.musicservicecommand";
+  // public static final String CMDNAME = "command";
+  // public static final String CMDTOGGLEPAUSE = "togglepause";
+  // public static final String CMDSTOP = "stop";
+  // public static final String CMDPAUSE = "pause";
+  // public static final String CMDPREVIOUS = "previous";
+  // public static final String CMDNEXT = "next";
 
   Song currSong;
   private ArrayList<Song> songArrayList = null;
@@ -47,7 +51,7 @@ public class FragmentTab1 extends SherlockFragment {
 
   ListView listview;
   ArrayAdapter<String> adapter;
-  CustomArrayAdapter adapter2 ;
+  CustomArrayAdapter adapter2;
 
   @SuppressWarnings("deprecation")
   @Override
@@ -136,16 +140,16 @@ public class FragmentTab1 extends SherlockFragment {
                           //
                         }
 
-
                         Log.d("User", "Whole size is + " + songArrayList.size());
 
-                        
                         // Add to the arrayadapter over here
-                        listview = (ListView) getActivity().getWindow().getDecorView().findViewById(R.id.listview);
-                        
-                        adapter2 = new CustomArrayAdapter(getActivity(), songArrayList);
+                        listview = (ListView) getActivity().getWindow()
+                            .getDecorView().findViewById(R.id.listview);
+
+                        adapter2 = new CustomArrayAdapter(getActivity(),
+                            songArrayList);
                         listview.setAdapter(adapter2);
-                        
+
                       } // here were done getting the songList for each
                         // followed.
 
@@ -163,21 +167,21 @@ public class FragmentTab1 extends SherlockFragment {
         });
 
     IntentFilter iF = new IntentFilter();
-    iF.addAction("com.android.music.metachanged"); 
-    iF.addAction("com.android.music.playstatechanged"); 
+    iF.addAction("com.android.music.metachanged");
+    iF.addAction("com.android.music.playstatechanged");
     iF.addAction("com.android.music.musicservicecommand");
     iF.addAction("fm.last.android.metachanged");
     iF.addAction("com.sec.android.app.music.metachanged");
     iF.addAction("com.nullsoft.winamp.metachanged");
-    iF.addAction("com.amazon.mp3.metachanged");     
-    iF.addAction("com.miui.player.metachanged");        
+    iF.addAction("com.amazon.mp3.metachanged");
+    iF.addAction("com.miui.player.metachanged");
     iF.addAction("com.real.IMP.metachanged");
     iF.addAction("com.sonyericsson.music.metachanged");
     iF.addAction("com.rdio.android.metachanged");
     iF.addAction("com.samsung.sec.android.MusicPlayer.metachanged");
     iF.addAction("com.andrew.apollo.metachanged");
-    iF.addAction("com.spotify.mobile.android.metadatachanged"); 
-    
+    iF.addAction("com.spotify.mobile.android.metadatachanged");
+
     getActivity().registerReceiver(mReceiver, iF);
     return rootView;
   }
@@ -188,30 +192,37 @@ public class FragmentTab1 extends SherlockFragment {
 
       String action = intent.getAction();
       String cmd = intent.getStringExtra("command");
-      Log.d("mIntentReceiver.onReceive", action + "/" + cmd);
 
       String artist = intent.getStringExtra("artist");
       String album = intent.getStringExtra("album");
       String track = intent.getStringExtra("track");
-      Log.d("Music", artist + ":" + album + ":" + track);
 
-      // everytime theres an update, push it to Parse track.
-      currSong = new Song();
-      currSong.setAuthor(ParseUser.getCurrentUser());
-      if(track != null) {
-        currSong.setTitle(track);
+      if (map.get(track) != null) {
+
       } else {
-        currSong.setTitle("unknown");
+        Log.d("mIntentReceiver.onReceive", action + "/" + cmd);
+        Log.d("Music", artist + ":" + album + ":" + track);
+        // everytime theres an update, push it to Parse track.
+        currSong = new Song();
+        currSong.setAuthor(ParseUser.getCurrentUser());
+
+        if (track != null) {
+          currSong.setTitle(track);
+        } else {
+          currSong.setTitle("unknown");
+        }
+
+        if (artist != null) {
+          currSong.setArtist(artist);
+        } else {
+          currSong.setArtist("unknown");
+        }
+
+        // currSong.saveInBackground();
+
       }
-      
-      if(artist != null){
-        currSong.setArtist(artist);
-      } else {
-        currSong.setArtist("unknown");
-      }
-      
-      
-      //currSong.saveInBackground();
+
+      map.put(track, artist);
 
     }
   };
