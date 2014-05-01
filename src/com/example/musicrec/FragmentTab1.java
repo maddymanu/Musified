@@ -158,7 +158,10 @@ public class FragmentTab1 extends SherlockFragment {
                           public void onItemClick(AdapterView<?> parent, View view, int position,
                               long id) {
                               //create a new for song at "Position"
-                            
+                            Intent currSongWindow = new Intent(getActivity(), CurrSongWindow.class);
+                            currSongWindow.putExtra("ARTIST", songArrayList.get(position).getArtist());
+                            currSongWindow.putExtra("TRACK", songArrayList.get(position).getTitle());
+                            startActivity(currSongWindow);
                           }
                         });
 

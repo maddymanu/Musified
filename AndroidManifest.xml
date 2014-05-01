@@ -27,6 +27,8 @@
         </activity>
         <activity android:name=".Welcome" >
         </activity>
+        <activity android:name=".CurrSongWindow" >
+        </activity>
         <activity
             android:name="LoginActivity"
             android:label="@string/title_activity_login" >
