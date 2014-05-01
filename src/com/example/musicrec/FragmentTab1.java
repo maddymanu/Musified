@@ -15,6 +15,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -77,12 +79,12 @@ public class FragmentTab1 extends SherlockFragment {
       }
     });
 
-//    try {
-//      Thread.sleep(2000);
-//    } catch (InterruptedException e) {
-//      // TODO Auto-generated catch block
-//      e.printStackTrace();
-//    }
+    // try {
+    // Thread.sleep(2000);
+    // } catch (InterruptedException e) {
+    // // TODO Auto-generated catch block
+    // e.printStackTrace();
+    // }
 
     RequestAsyncTask r = Request.executeMyFriendsRequestAsync(
         ParseFacebookUtils.getSession(), new Request.GraphUserListCallback() {
@@ -133,27 +135,32 @@ public class FragmentTab1 extends SherlockFragment {
 
                             songArrayList.add((Song) songListForSingleUser
                                 .get(i));
-                            Log.d("User", "Sizes are WHOLE + CURRENT "
-                                + songArrayList.size() + " "
-                                + songListForSingleUser.size());
+
 
                           }
                           //
                         }
 
-                        Log.d("User", "Whole size is + " + songArrayList.size());
-                        //for each song in the arraylist, get its date and order it by that
+                        // for each song in the arraylist, get its date and
+                        // order it by that
                         for (Song s : songArrayList) {
                           Date d = s.getCreatedAt();
                         }
 
-                        // Add to the arrayadapter over here
                         listview = (ListView) getActivity().getWindow()
                             .getDecorView().findViewById(R.id.listview);
 
                         adapter2 = new CustomArrayAdapter(getActivity(),
                             songArrayList);
                         listview.setAdapter(adapter2);
+                        
+                        listview.setOnItemClickListener(new OnItemClickListener() {
+                          public void onItemClick(AdapterView<?> parent, View view, int position,
+                              long id) {
+                              //create a new for song at "Position"
+                            
+                          }
+                        });
 
                       } // here were done getting the songList for each
                         // followed.
@@ -170,6 +177,8 @@ public class FragmentTab1 extends SherlockFragment {
           }
 
         });
+
+    
 
     IntentFilter iF = new IntentFilter();
     iF.addAction("com.android.music.metachanged");
@@ -223,6 +232,7 @@ public class FragmentTab1 extends SherlockFragment {
           currSong.setArtist("unknown");
         }
 
+        // CHANGE THIS TO ACTUALLY UPLOAD A SONG
         // currSong.saveInBackground();
 
       }
