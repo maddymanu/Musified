@@ -1503,14 +1503,15 @@ containing a value of this type.
         public static final int com_facebook_placepickerfragment_list_row=0x7f030029;
         public static final int com_facebook_search_bar_layout=0x7f03002a;
         public static final int com_facebook_usersettingsfragment=0x7f03002b;
-        public static final int font_awesome_text=0x7f03002c;
-        public static final int row_title=0x7f03002d;
-        public static final int row_title_and_subtitle=0x7f03002e;
-        public static final int row_two_columns=0x7f03002f;
-        public static final int sherlock_spinner_dropdown_item=0x7f030030;
-        public static final int sherlock_spinner_item=0x7f030031;
-        public static final int single_song_item=0x7f030032;
-        public static final int tab_feed=0x7f030033;
+        public static final int curr_song_window=0x7f03002c;
+        public static final int font_awesome_text=0x7f03002d;
+        public static final int row_title=0x7f03002e;
+        public static final int row_title_and_subtitle=0x7f03002f;
+        public static final int row_two_columns=0x7f030030;
+        public static final int sherlock_spinner_dropdown_item=0x7f030031;
+        public static final int sherlock_spinner_item=0x7f030032;
+        public static final int single_song_item=0x7f030033;
+        public static final int tab_feed=0x7f030034;
     }
     public static final class menu {
         public static final int main=0x7f0b0000;

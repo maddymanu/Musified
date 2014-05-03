@@ -52,12 +52,15 @@ public class CustomArrayAdapter extends ArrayAdapter<Song> {
     // 3. Get the two text view from the rowView
     TextView titleView = (TextView) rowView.findViewById(R.id.title);
     TextView artistView = (TextView) rowView.findViewById(R.id.artist);
-    final ImageView profileImage = (ImageView) rowView.findViewById(R.id.profileImage);
+    final ImageView profileImage = (ImageView) rowView
+        .findViewById(R.id.profileImage);
 
     // 4. Set the text for textView
     Song currSong = (Song) songArrayList.get(position);
     // currSong.get
-    String formattedTitle = currSong.get("title").toString().substring(0, 1).toUpperCase() + currSong.get("title").toString().substring(1).toLowerCase();
+    String formattedTitle = currSong.get("title").toString().substring(0, 1)
+        .toUpperCase()
+        + currSong.get("title").toString().substring(1).toLowerCase();
     titleView.setText(formattedTitle);
     artistView.setText(currSong.get("artist").toString());
 
@@ -72,30 +75,17 @@ public class CustomArrayAdapter extends ArrayAdapter<Song> {
     AsyncTask<Void, Void, Bitmap> t = new AsyncTask<Void, Void, Bitmap>() {
       protected Bitmap doInBackground(Void... p) {
         Bitmap bm = null;
-        Log.d("User", "Bitmap-" + bm); 
+        Log.d("User", "Bitmap-" + bm);
         try {
-          
-//          String aURL = new URL("http://graph.facebook.com/" + songUser.get("fbId")
-//              + "/picture?type=large");
-          
-          String url = String.format(
-              "https://graph.facebook.com/%s/picture",
+
+          String url = String.format("https://graph.facebook.com/%s/picture",
               userFacebookId);
 
-          
-          Log.d("User", "Bitmap-" + url); 
-          
-          
-//          URLConnection conn = aURL.openConnection();
-//          conn.setUseCaches(true);
-//          conn.connect();
-          
-          
           InputStream is = new URL(url).openStream();
-          //BufferedInputStream bis = new BufferedInputStream(is);
+          // BufferedInputStream bis = new BufferedInputStream(is);
           bm = BitmapFactory.decodeStream(is);
-          
-          //bis.close();
+
+          // bis.close();
           is.close();
         } catch (IOException e) {
           e.printStackTrace();
@@ -104,21 +94,17 @@ public class CustomArrayAdapter extends ArrayAdapter<Song> {
       }
 
       protected void onPostExecute(Bitmap bm) {
-        
-        Log.d("User", "Bitmap-" + bm); 
-        
+
+        Log.d("User", "Bitmap-" + bm);
+
         profileImage.setImageBitmap(bm);
 
       }
     };
     t.execute();
-    
-    
 
     // 5. return rowView
     return rowView;
   }
-  
-
 
 }

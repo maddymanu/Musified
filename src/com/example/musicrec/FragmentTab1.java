@@ -25,6 +25,7 @@ import com.facebook.Request;
 import com.facebook.RequestAsyncTask;
 import com.facebook.Response;
 import com.facebook.model.GraphUser;
+import com.google.android.youtube.player.YouTubeIntents;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseFacebookUtils;
@@ -51,6 +52,8 @@ public class FragmentTab1 extends SherlockFragment {
   Song currSong;
   private ArrayList<Song> songArrayList = null;
   int i = 0;
+  
+  private static final String USER_ID = "Google";
 
   ListView listview;
   ArrayAdapter<String> adapter;
@@ -160,8 +163,10 @@ public class FragmentTab1 extends SherlockFragment {
                               //create a new for song at "Position"
                             Intent currSongWindow = new Intent(getActivity(), CurrSongWindow.class);
                             currSongWindow.putExtra("ARTIST", songArrayList.get(position).getArtist());
-                            currSongWindow.putExtra("TRACK", songArrayList.get(position).getTitle());
+                            currSongWindow.putExtra("TITLE", songArrayList.get(position).getTitle());
                             startActivity(currSongWindow);
+                                                        
+                            
                           }
                         });
 

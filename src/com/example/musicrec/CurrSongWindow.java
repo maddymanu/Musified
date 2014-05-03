@@ -1,19 +1,38 @@
 package com.example.musicrec;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 
-public class CurrSongWindow extends Activity{
+import com.google.android.youtube.player.YouTubeIntents;
+
+public class CurrSongWindow extends Activity {
+
+
+  
+  String artist, title;
+
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    //setContentView(R.layout.activity_main);
-    
+    setContentView(R.layout.curr_song_window);
+
     Bundle extras = getIntent().getExtras();
     if (extras != null) {
-        String value = extras.getString("ARTIST");
-        Log.i("test" , value);
+       artist = extras.getString("ARTIST");
+       title = extras.getString("TITLE");
     }
-    
+
+    Intent intent = YouTubeIntents.createSearchIntent(this, title + " by " + artist);
+    startActivity(intent);
+
   }
+
+
+
+
+
+
+
+
+
 }
