@@ -52,6 +52,8 @@ public class CustomArrayAdapter extends ArrayAdapter<Song> {
     // 3. Get the two text view from the rowView
     TextView titleView = (TextView) rowView.findViewById(R.id.title);
     TextView artistView = (TextView) rowView.findViewById(R.id.artist);
+    TextView likeButtonTV = (TextView) rowView.findViewById(R.id.likeButton);
+
     final ImageView profileImage = (ImageView) rowView
         .findViewById(R.id.profileImage);
 
@@ -70,6 +72,15 @@ public class CustomArrayAdapter extends ArrayAdapter<Song> {
     } catch (ParseException e1) {
       e1.printStackTrace();
     }
+
+    likeButtonTV.setOnClickListener(new View.OnClickListener() {
+
+      @Override
+      public void onClick(View v) {
+        Log.i("Like", "likeButtoncliked");
+
+      }
+    });
 
     final String userFacebookId = songUser.get("fbId").toString();
     AsyncTask<Void, Void, Bitmap> t = new AsyncTask<Void, Void, Bitmap>() {
@@ -95,15 +106,12 @@ public class CustomArrayAdapter extends ArrayAdapter<Song> {
 
       protected void onPostExecute(Bitmap bm) {
 
-        Log.d("User", "Bitmap-" + bm);
-
         profileImage.setImageBitmap(bm);
 
       }
     };
     t.execute();
 
-    // 5. return rowView
     return rowView;
   }
 

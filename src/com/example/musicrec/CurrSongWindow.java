@@ -21,8 +21,6 @@ public class CurrSongWindow extends Activity {
       title = extras.getString("TITLE");
     }
 
-    
-
   }
 
   public void openYoutubeSearch(View v) {

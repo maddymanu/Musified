@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content" >
+    
 
     <TextView
         android:id="@+id/title"
@@ -30,5 +31,17 @@
         android:minHeight="50dp"
         android:minWidth="50dp"
         android:paddingLeft="5dp" />
+    
+    <TextView 
+       android:id="@+id/likeButton"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"               
+       android:text="Like"
+       android:textSize="17sp"
+       android:layout_alignParentBottom="true"
+       android:layout_alignParentRight="true"
+       android:textColor="#C0C0C0"
+       android:paddingRight="5dp"
+       android:clickable="true"/>
 
 </RelativeLayout>
