@@ -19,6 +19,14 @@ public class Song extends ParseObject{
 		put("title", title);
 	}
 	
+	public int getLikes() {
+    return getInt("likes");
+  }
+
+  public void setLikes(int l) {
+    put("likes", l);
+  }
+	
 	public String getArtist() {
 		return getString("artist");
 	}

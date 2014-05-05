@@ -1,18 +1,15 @@
 package com.example.musicrec;
 
-import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
-import java.net.URLConnection;
 import java.util.ArrayList;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
+import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -30,6 +27,7 @@ public class CustomArrayAdapter extends ArrayAdapter<Song> {
 
   private final Context context;
   private final ArrayList<Song> songArrayList;
+  private int count = 0;
 
   public CustomArrayAdapter(Context context, ArrayList<Song> itemsArrayList) {
 
@@ -52,13 +50,15 @@ public class CustomArrayAdapter extends ArrayAdapter<Song> {
     // 3. Get the two text view from the rowView
     TextView titleView = (TextView) rowView.findViewById(R.id.title);
     TextView artistView = (TextView) rowView.findViewById(R.id.artist);
-    TextView likeButtonTV = (TextView) rowView.findViewById(R.id.likeButton);
+    final TextView likeButtonTV = (TextView) rowView
+        .findViewById(R.id.likeButton);
+    final TextView heartTV = (TextView) rowView.findViewById(R.id.heartTV);
 
     final ImageView profileImage = (ImageView) rowView
         .findViewById(R.id.profileImage);
 
     // 4. Set the text for textView
-    Song currSong = (Song) songArrayList.get(position);
+    final Song currSong = (Song) songArrayList.get(position);
     // currSong.get
     String formattedTitle = currSong.get("title").toString().substring(0, 1)
         .toUpperCase()
@@ -77,16 +77,23 @@ public class CustomArrayAdapter extends ArrayAdapter<Song> {
 
       @Override
       public void onClick(View v) {
-        Log.i("Like", "likeButtoncliked");
-
+        Log.i("Liked!", "Should only show once for 1 song!");
+        count = currSong.getLikes();
+        count++;
+        currSong.setLikes(count);
+        likeButtonTV.setClickable(false);
+        currSong.saveInBackground();
       }
     });
+
+    Typeface font = Typeface.createFromAsset(context.getAssets(),
+        "fontawesome-webfont.ttf");
+    heartTV.setTypeface(font);
 
     final String userFacebookId = songUser.get("fbId").toString();
     AsyncTask<Void, Void, Bitmap> t = new AsyncTask<Void, Void, Bitmap>() {
       protected Bitmap doInBackground(Void... p) {
         Bitmap bm = null;
-        Log.d("User", "Bitmap-" + bm);
         try {
 
           String url = String.format("https://graph.facebook.com/%s/picture",

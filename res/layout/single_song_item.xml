@@ -2,25 +2,24 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content" >
-    
 
     <TextView
         android:id="@+id/title"
-        android:textStyle="bold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingLeft="65dp"
-        android:textSize="15sp" >
+        android:textSize="15sp"
+        android:textStyle="bold" >
     </TextView>
 
     <TextView
         android:id="@+id/artist"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
         android:layout_below="@+id/title"
         android:paddingLeft="65dp"
-        android:textSize="12sp"
-        android:layout_alignParentBottom="true" >
+        android:textSize="12sp" >
     </TextView>
 
     <ImageView
@@ -31,17 +30,28 @@
         android:minHeight="50dp"
         android:minWidth="50dp"
         android:paddingLeft="5dp" />
-    
-    <TextView 
-       android:id="@+id/likeButton"
-       android:layout_width="wrap_content"
-       android:layout_height="wrap_content"               
-       android:text="Like"
-       android:textSize="17sp"
-       android:layout_alignParentBottom="true"
-       android:layout_alignParentRight="true"
-       android:textColor="#C0C0C0"
-       android:paddingRight="5dp"
-       android:clickable="true"/>
+
+    <TextView
+        android:id="@+id/likeButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:clickable="true"
+        android:paddingRight="5dp"
+        android:text="Like"
+        android:textColor="#C0C0C0"
+        android:textSize="19sp" />
+
+    <TextView
+        android:id="@+id/heartTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:paddingRight="5dp"
+        android:text="@string/fa_heart"
+        android:layout_toLeftOf="@id/likeButton"
+        android:textColor="#C0C0C0"
+        android:textSize="19sp" />
 
 </RelativeLayout>
