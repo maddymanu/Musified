@@ -18,5 +18,13 @@
         android:layout_centerHorizontal="true"
         bootstrapbutton:bb_type="danger"
         android:onClick="openYoutubeSearch" />
+    
+    <com.beardedhen.androidbootstrap.BootstrapButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="Rdio"
+        bootstrapbutton:bb_type="danger"
+        android:onClick="openRdioSearch" />
 
 </RelativeLayout>
