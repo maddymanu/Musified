@@ -12,19 +12,26 @@
 
     <com.beardedhen.androidbootstrap.BootstrapButton
         android:layout_width="wrap_content"
+        android:id="@+id/youtubeSearch"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:text="YouTube"
-        android:layout_centerHorizontal="true"
+        android:layout_centerHorizontal="true" 
+        android:background="@drawable/youtube"
         bootstrapbutton:bb_type="danger"
         android:onClick="openYoutubeSearch" />
     
-    <com.beardedhen.androidbootstrap.BootstrapButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:height="50dp"
+        android:width="50dp"
+        android:gravity="center"
+        android:id="@+id/rdioSearch"
+        android:background="@drawable/rdioicon"
         android:layout_margin="10dp"
-        android:text="Rdio"
-        bootstrapbutton:bb_type="danger"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/youtubeSearch"
         android:onClick="openRdioSearch" />
 
 </RelativeLayout>
