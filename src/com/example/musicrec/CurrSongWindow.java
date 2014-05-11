@@ -15,6 +15,8 @@ import android.view.View;
 import com.echonest.api.v4.Artist;
 import com.echonest.api.v4.EchoNestAPI;
 import com.echonest.api.v4.EchoNestException;
+import com.echonest.api.v4.Image;
+import com.echonest.api.v4.PagedList;
 import com.google.android.youtube.player.YouTubeIntents;
 
 public class CurrSongWindow extends Activity {
@@ -44,6 +46,9 @@ public class CurrSongWindow extends Activity {
     try {
       List<Artist> artists = en.searchArtists(artist);
       currEchoArtist = artists.get(0);
+      PagedList<Image> imageList = currEchoArtist.getImages(0, 1);
+      Image currEchoArtistImage = imageList.get(0);
+      Log.i("CURR" , currEchoArtistImage.getURL());
     } catch (EchoNestException e) {
       e.printStackTrace();
     }
