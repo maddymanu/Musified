@@ -33,7 +33,7 @@ import com.parse.ParseUser;
 public class CustomArrayAdapter extends ArrayAdapter<Song> {
 
   private final Context context;
-  
+
   private final ArrayList<Song> songArrayList;
   private int count = 0;
   Artist currEchoArtist;
@@ -48,8 +48,7 @@ public class CustomArrayAdapter extends ArrayAdapter<Song> {
         .permitAll().build();
     StrictMode.setThreadPolicy(policy);
     en = new EchoNestAPI("FUS98WPLXFNIHZHHG");
-    
-    
+
     this.context = context;
     this.songArrayList = itemsArrayList;
   }
@@ -73,7 +72,7 @@ public class CustomArrayAdapter extends ArrayAdapter<Song> {
 
     final ImageView profileImage = (ImageView) rowView
         .findViewById(R.id.profileImage);
-    
+
     final ImageView artistImage = (ImageView) rowView
         .findViewById(R.id.artistImage);
 
@@ -109,19 +108,20 @@ public class CustomArrayAdapter extends ArrayAdapter<Song> {
     Typeface font = Typeface.createFromAsset(context.getAssets(),
         "fontawesome-webfont.ttf");
     heartTV.setTypeface(font);
-    
+
     try {
-      List<Artist> artists = en.searchArtists(currSong.get("artist").toString());
+      List<Artist> artists = en
+          .searchArtists(currSong.get("artist").toString());
       currEchoArtist = artists.get(0);
       PagedList<Image> imageList = currEchoArtist.getImages(0, 1);
       currEchoArtistImage = imageList.get(0);
-      Log.i("CURR" , currEchoArtistImage.getURL());
+      Log.i("CURR", currEchoArtistImage.getURL());
     } catch (EchoNestException e) {
       e.printStackTrace();
     }
 
     final String userFacebookId = songUser.get("fbId").toString();
-    
+
     /* for facebook Image */
     AsyncTask<Void, Void, Bitmap> t = new AsyncTask<Void, Void, Bitmap>() {
       protected Bitmap doInBackground(Void... p) {
@@ -144,29 +144,36 @@ public class CustomArrayAdapter extends ArrayAdapter<Song> {
 
       protected void onPostExecute(Bitmap bm) {
 
-       // profileImage.setImageBitmap(bm);
+        // profileImage.setImageBitmap(bm);
 
       }
     };
     t.execute();
-    
+
     /* for artist image */
     AsyncTask<Void, Void, Bitmap> artistImageTask = new AsyncTask<Void, Void, Bitmap>() {
       protected Bitmap doInBackground(Void... p) {
         Bitmap bm = null;
         try {
-          BitmapFactory.Options outDimens = new BitmapFactory.Options();
-          //outDimens.inSampleSize=4;
-          //outDimens.inJustDecodeBounds = true;
+
           
-          
+
           String url = currEchoArtistImage.getURL();
-
           InputStream is = new URL(url).openStream();
-          bm = BitmapFactory.decodeStream(is,null,outDimens);
 
-          // bis.close();
+          BitmapFactory.Options options = new BitmapFactory.Options();
+          options.inJustDecodeBounds = true;
+          
+          BitmapFactory.decodeStream(is, null, options);
+          
+          options.inSampleSize = calculateInSampleSize(options, 50, 50);
+          options.inJustDecodeBounds = false;
           is.close();
+
+          is = new URL(url).openStream();
+          bm = BitmapFactory.decodeStream(is, null, options);
+
+          
         } catch (IOException e) {
           e.printStackTrace();
         }
@@ -175,15 +182,31 @@ public class CustomArrayAdapter extends ArrayAdapter<Song> {
 
       protected void onPostExecute(Bitmap bm) {
 
-        artistImage.setImageBitmap(bm);
+        profileImage.setImageBitmap(bm);
+        // Log.i("BITMAP", "hello " + bm.getHeight());
 
       }
     };
     artistImageTask.execute();
-    
-    
 
     return rowView;
+  }
+
+  private static int calculateInSampleSize(BitmapFactory.Options options,
+      int reqWidth, int reqHeight) {
+
+    final int height = options.outHeight;
+    final int width = options.outWidth;
+    int inSampleSize = 1;
+
+    if (height > reqHeight || width > reqWidth) {
+
+      final int heightRatio = Math.round((float) height / (float) reqHeight);
+      final int widthRatio = Math.round((float) width / (float) reqWidth);
+
+      inSampleSize = heightRatio < widthRatio ? heightRatio : widthRatio;
+    }
+    return inSampleSize;
   }
 
 }
