@@ -31,10 +31,7 @@ public class CurrSongWindow extends Activity {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.curr_song_window);
     
-    /* TEMP SOL */
-    StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
-    StrictMode.setThreadPolicy(policy);
-    en = new EchoNestAPI("FUS98WPLXFNIHZHHG");
+   
 
     Bundle extras = getIntent().getExtras();
     if (extras != null) {
@@ -43,15 +40,6 @@ public class CurrSongWindow extends Activity {
     }
     
     
-    try {
-      List<Artist> artists = en.searchArtists(artist);
-      currEchoArtist = artists.get(0);
-      PagedList<Image> imageList = currEchoArtist.getImages(0, 1);
-      Image currEchoArtistImage = imageList.get(0);
-      Log.i("CURR" , currEchoArtistImage.getURL());
-    } catch (EchoNestException e) {
-      e.printStackTrace();
-    }
     
 
   }

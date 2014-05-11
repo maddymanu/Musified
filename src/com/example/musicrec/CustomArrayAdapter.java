@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.List;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -11,6 +12,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Typeface;
 import android.os.AsyncTask;
+import android.os.StrictMode;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,6 +21,11 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.echonest.api.v4.Artist;
+import com.echonest.api.v4.EchoNestAPI;
+import com.echonest.api.v4.EchoNestException;
+import com.echonest.api.v4.Image;
+import com.echonest.api.v4.PagedList;
 import com.parse.ParseException;
 import com.parse.ParseUser;
 
@@ -26,13 +33,23 @@ import com.parse.ParseUser;
 public class CustomArrayAdapter extends ArrayAdapter<Song> {
 
   private final Context context;
+  
   private final ArrayList<Song> songArrayList;
   private int count = 0;
+  Artist currEchoArtist;
+  private EchoNestAPI en;
+  Image currEchoArtistImage;
 
   public CustomArrayAdapter(Context context, ArrayList<Song> itemsArrayList) {
 
     super(context, R.layout.single_song_item, itemsArrayList);
-
+    /* TEMP SOL */
+    StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
+        .permitAll().build();
+    StrictMode.setThreadPolicy(policy);
+    en = new EchoNestAPI("FUS98WPLXFNIHZHHG");
+    
+    
     this.context = context;
     this.songArrayList = itemsArrayList;
   }
@@ -89,6 +106,16 @@ public class CustomArrayAdapter extends ArrayAdapter<Song> {
     Typeface font = Typeface.createFromAsset(context.getAssets(),
         "fontawesome-webfont.ttf");
     heartTV.setTypeface(font);
+    
+    try {
+      List<Artist> artists = en.searchArtists(currSong.get("artist").toString());
+      currEchoArtist = artists.get(0);
+      PagedList<Image> imageList = currEchoArtist.getImages(0, 1);
+      currEchoArtistImage = imageList.get(0);
+      Log.i("CURR" , currEchoArtistImage.getURL());
+    } catch (EchoNestException e) {
+      e.printStackTrace();
+    }
 
     final String userFacebookId = songUser.get("fbId").toString();
     AsyncTask<Void, Void, Bitmap> t = new AsyncTask<Void, Void, Bitmap>() {
