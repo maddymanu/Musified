@@ -10,6 +10,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
 import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.StrictMode;
@@ -172,6 +173,21 @@ public class CustomArrayAdapter extends ArrayAdapter<Song> {
 
           is = new URL(url).openStream();
           bm = BitmapFactory.decodeStream(is, null, options);
+          
+          int width = bm.getWidth();
+          int height = bm.getHeight();
+          int newWidth = 50;
+          int newHeight = 50;
+          
+          float scaleWidth = ((float) newWidth) / width;
+          float scaleHeight = ((float) newHeight) / height;
+          
+          Matrix matrix = new Matrix();
+          // resize the bit map
+          matrix.postScale(scaleWidth, scaleHeight);
+          
+          bm = Bitmap.createBitmap(bm, 0, 0,
+              width, height, matrix, true);
 
           
         } catch (IOException e) {
