@@ -30,6 +30,15 @@
         android:minHeight="50dp"
         android:minWidth="50dp"
         android:paddingLeft="5dp" />
+    
+    <ImageView
+        android:id="@+id/artistImage"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignRight="@id/profileImage"
+        android:minHeight="50dp"
+        android:minWidth="50dp"
+        android:paddingLeft="5dp" />
 
     <TextView
         android:id="@+id/likeButton"

@@ -73,6 +73,9 @@ public class CustomArrayAdapter extends ArrayAdapter<Song> {
 
     final ImageView profileImage = (ImageView) rowView
         .findViewById(R.id.profileImage);
+    
+    final ImageView artistImage = (ImageView) rowView
+        .findViewById(R.id.artistImage);
 
     // 4. Set the text for textView
     final Song currSong = (Song) songArrayList.get(position);
@@ -118,6 +121,8 @@ public class CustomArrayAdapter extends ArrayAdapter<Song> {
     }
 
     final String userFacebookId = songUser.get("fbId").toString();
+    
+    /* for facebook Image */
     AsyncTask<Void, Void, Bitmap> t = new AsyncTask<Void, Void, Bitmap>() {
       protected Bitmap doInBackground(Void... p) {
         Bitmap bm = null;
@@ -127,7 +132,6 @@ public class CustomArrayAdapter extends ArrayAdapter<Song> {
               userFacebookId);
 
           InputStream is = new URL(url).openStream();
-          // BufferedInputStream bis = new BufferedInputStream(is);
           bm = BitmapFactory.decodeStream(is);
 
           // bis.close();
@@ -140,11 +144,44 @@ public class CustomArrayAdapter extends ArrayAdapter<Song> {
 
       protected void onPostExecute(Bitmap bm) {
 
-        profileImage.setImageBitmap(bm);
+       // profileImage.setImageBitmap(bm);
 
       }
     };
     t.execute();
+    
+    /* for artist image */
+    AsyncTask<Void, Void, Bitmap> artistImageTask = new AsyncTask<Void, Void, Bitmap>() {
+      protected Bitmap doInBackground(Void... p) {
+        Bitmap bm = null;
+        try {
+          BitmapFactory.Options outDimens = new BitmapFactory.Options();
+          //outDimens.inSampleSize=4;
+          //outDimens.inJustDecodeBounds = true;
+          
+          
+          String url = currEchoArtistImage.getURL();
+
+          InputStream is = new URL(url).openStream();
+          bm = BitmapFactory.decodeStream(is,null,outDimens);
+
+          // bis.close();
+          is.close();
+        } catch (IOException e) {
+          e.printStackTrace();
+        }
+        return bm;
+      }
+
+      protected void onPostExecute(Bitmap bm) {
+
+        artistImage.setImageBitmap(bm);
+
+      }
+    };
+    artistImageTask.execute();
+    
+    
 
     return rowView;
   }
