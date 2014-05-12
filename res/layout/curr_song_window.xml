@@ -10,43 +10,54 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".TruitonYouTubeAPIActivity" >
 
-    <com.beardedhen.androidbootstrap.BootstrapButton
+    <ImageView
+        android:id="@+id/songImage"
         android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/title"
+        android:layout_centerHorizontal="true"
+        android:minHeight="200dp"
+        android:minWidth="200dp"
+        android:paddingLeft="5dp" />
+
+    <com.beardedhen.androidbootstrap.BootstrapButton
         android:id="@+id/youtubeSearch"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/songImage"
         android:layout_margin="10dp"
-        android:text="YouTube"
-        android:layout_centerHorizontal="true" 
         android:background="@drawable/youtube"
-        bootstrapbutton:bb_type="danger"
-        android:onClick="openYoutubeSearch" />
-    
+        android:onClick="openYoutubeSearch"
+        android:text="YouTube"
+        bootstrapbutton:bb_type="danger" />
+
     <com.beardedhen.androidbootstrap.BootstrapButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:adjustViewBounds="true"
-		android:ems="10"
-        android:gravity="center"
         android:id="@+id/rdioSearch"
-        android:text="Rdio"
-        android:layout_margin="10dp"
-        android:layout_centerHorizontal="true"
-        bootstrapbutton:bb_type="primary"
-        android:layout_below="@id/youtubeSearch"
-        android:onClick="openRdioSearch" />
-    
-    <com.beardedhen.androidbootstrap.BootstrapButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:adjustViewBounds="true"
-		android:ems="10"
-        android:gravity="center"
-        android:id="@+id/spotifySearch"
-        android:text="Spotify"
-        android:layout_margin="10dp"
+        android:layout_below="@id/youtubeSearch"
         android:layout_centerHorizontal="true"
-        bootstrapbutton:bb_type="success"
+        android:layout_margin="10dp"
+        android:adjustViewBounds="true"
+        android:ems="10"
+        android:gravity="center"
+        android:onClick="openRdioSearch"
+        android:text="Rdio"
+        bootstrapbutton:bb_type="primary" />
+
+    <com.beardedhen.androidbootstrap.BootstrapButton
+        android:id="@+id/spotifySearch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_below="@id/rdioSearch"
-        android:onClick="openSpotifySearch" />
+        android:layout_centerHorizontal="true"
+        android:layout_margin="10dp"
+        android:adjustViewBounds="true"
+        android:ems="10"
+        android:gravity="center"
+        android:onClick="openSpotifySearch"
+        android:text="Spotify"
+        bootstrapbutton:bb_type="success" />
 
 </RelativeLayout>
