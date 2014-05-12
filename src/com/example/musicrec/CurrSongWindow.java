@@ -62,6 +62,7 @@ public class CurrSongWindow extends Activity {
     p.setTitle(title);
     p.includeTracks(); // the album art is in the track data
     p.setLimit(true); // only return songs that have track data
+    
     p.addIDSpace("7digital-US");
 
     try {
