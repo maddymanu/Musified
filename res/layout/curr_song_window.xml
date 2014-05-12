@@ -21,17 +21,32 @@
         bootstrapbutton:bb_type="danger"
         android:onClick="openYoutubeSearch" />
     
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:height="50dp"
-        android:width="50dp"
+    <com.beardedhen.androidbootstrap.BootstrapButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+		android:ems="10"
         android:gravity="center"
         android:id="@+id/rdioSearch"
-        android:background="@drawable/rdioicon"
+        android:text="Rdio"
         android:layout_margin="10dp"
         android:layout_centerHorizontal="true"
+        bootstrapbutton:bb_type="primary"
         android:layout_below="@id/youtubeSearch"
         android:onClick="openRdioSearch" />
+    
+    <com.beardedhen.androidbootstrap.BootstrapButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+		android:ems="10"
+        android:gravity="center"
+        android:id="@+id/spotifySearch"
+        android:text="Spotify"
+        android:layout_margin="10dp"
+        android:layout_centerHorizontal="true"
+        bootstrapbutton:bb_type="success"
+        android:layout_below="@id/rdioSearch"
+        android:onClick="openSpotifySearch" />
 
 </RelativeLayout>

@@ -1,22 +1,20 @@
 package com.example.musicrec;
 
-import java.util.List;
-
 import android.app.Activity;
+import android.app.SearchManager;
+import android.content.ActivityNotFoundException;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.StrictMode;
-import android.util.Log;
+import android.provider.MediaStore;
 import android.view.View;
+import android.widget.Toast;
 
 import com.echonest.api.v4.Artist;
 import com.echonest.api.v4.EchoNestAPI;
-import com.echonest.api.v4.EchoNestException;
-import com.echonest.api.v4.Image;
-import com.echonest.api.v4.PagedList;
 import com.google.android.youtube.player.YouTubeIntents;
 
 public class CurrSongWindow extends Activity {
@@ -75,6 +73,22 @@ public class CurrSongWindow extends Activity {
     Intent intent = new Intent(Intent.ACTION_VIEW);
     intent.setData(Uri.parse(url));
     startActivity(intent);
+  }
+  
+  public void openSpotifySearch(View v) {
+    
+    Intent intent = new Intent(Intent.ACTION_MAIN);
+    intent.setAction(MediaStore.INTENT_ACTION_MEDIA_PLAY_FROM_SEARCH);
+    intent.setComponent(new ComponentName("com.spotify.mobile.android.ui", "com.spotify.mobile.android.ui.Launcher"));
+    intent.putExtra(SearchManager.QUERY, "michael jackson smooth criminal");
+    try {
+      startActivity(intent);
+    }catch (ActivityNotFoundException e) {
+      Toast.makeText(this, "You must first install Spotify", Toast.LENGTH_LONG).show();  
+      Intent i = new Intent(Intent.ACTION_VIEW,Uri.parse("market://details?id=com.spotify.mobile.android.ui"));
+      startActivity(i);
+    }
+    
   }
 
 }

@@ -77,6 +77,8 @@ public class CustomArrayAdapter extends ArrayAdapter<Song> {
     final ImageView artistImage = (ImageView) rowView
         .findViewById(R.id.artistImage);
 
+  
+
     // 4. Set the text for textView
     final Song currSong = (Song) songArrayList.get(position);
     // currSong.get
@@ -145,7 +147,7 @@ public class CustomArrayAdapter extends ArrayAdapter<Song> {
 
       protected void onPostExecute(Bitmap bm) {
 
-        // profileImage.setImageBitmap(bm);
+        profileImage.setImageBitmap(bm);
 
       }
     };
@@ -157,39 +159,35 @@ public class CustomArrayAdapter extends ArrayAdapter<Song> {
         Bitmap bm = null;
         try {
 
-          
-
           String url = currEchoArtistImage.getURL();
           InputStream is = new URL(url).openStream();
 
           BitmapFactory.Options options = new BitmapFactory.Options();
           options.inJustDecodeBounds = true;
-          
+
           BitmapFactory.decodeStream(is, null, options);
-          
+
           options.inSampleSize = calculateInSampleSize(options, 50, 50);
           options.inJustDecodeBounds = false;
           is.close();
 
           is = new URL(url).openStream();
           bm = BitmapFactory.decodeStream(is, null, options);
-          
+
           int width = bm.getWidth();
           int height = bm.getHeight();
           int newWidth = 50;
           int newHeight = 50;
-          
+
           float scaleWidth = ((float) newWidth) / width;
           float scaleHeight = ((float) newHeight) / height;
-          
+
           Matrix matrix = new Matrix();
           // resize the bit map
           matrix.postScale(scaleWidth, scaleHeight);
-          
-          bm = Bitmap.createBitmap(bm, 0, 0,
-              width, height, matrix, true);
 
-          
+          bm = Bitmap.createBitmap(bm, 0, 0, width, height, matrix, true);
+
         } catch (IOException e) {
           e.printStackTrace();
         }
@@ -198,8 +196,8 @@ public class CustomArrayAdapter extends ArrayAdapter<Song> {
 
       protected void onPostExecute(Bitmap bm) {
 
-        profileImage.setImageBitmap(bm);
-        // Log.i("BITMAP", "hello " + bm.getHeight());
+        /* SET THE ARTIST IMAAGE VIEW */
+        // profileImage.setImageBitmap(bm);
 
       }
     };
