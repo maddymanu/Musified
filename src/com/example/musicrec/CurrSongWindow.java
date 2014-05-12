@@ -80,7 +80,7 @@ public class CurrSongWindow extends Activity {
     Intent intent = new Intent(Intent.ACTION_MAIN);
     intent.setAction(MediaStore.INTENT_ACTION_MEDIA_PLAY_FROM_SEARCH);
     intent.setComponent(new ComponentName("com.spotify.mobile.android.ui", "com.spotify.mobile.android.ui.Launcher"));
-    intent.putExtra(SearchManager.QUERY, "michael jackson smooth criminal");
+    intent.putExtra(SearchManager.QUERY, title + " " + artist);
     try {
       startActivity(intent);
     }catch (ActivityNotFoundException e) {
