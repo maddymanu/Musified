@@ -9,8 +9,14 @@ import java.util.List;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.Bitmap.Config;
 import android.graphics.BitmapFactory;
-import android.graphics.Matrix;
+import android.graphics.Canvas;
+import android.graphics.Paint;
+import android.graphics.PorterDuff.Mode;
+import android.graphics.PorterDuffXfermode;
+import android.graphics.Rect;
+import android.graphics.RectF;
 import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.StrictMode;
@@ -77,7 +83,8 @@ public class CustomArrayAdapter extends ArrayAdapter<Song> {
     final ImageView artistImage = (ImageView) rowView
         .findViewById(R.id.artistImage);
 
-  
+    //com.beardedhen.androidbootstrap.BootstrapCircleThumbnail profileThumbnail;
+    //profileThumbnail.setImage(R.id.);
 
     // 4. Set the text for textView
     final Song currSong = (Song) songArrayList.get(position);
@@ -139,12 +146,16 @@ public class CustomArrayAdapter extends ArrayAdapter<Song> {
 
           InputStream is = new URL(url).openStream();
           bm = BitmapFactory.decodeStream(is);
+          
+          //testing
+          bm = getRoundedCornerBitmap(bm);
 
           // bis.close();
           is.close();
         } catch (IOException e) {
           e.printStackTrace();
         }
+        
         return bm;
       }
 
@@ -207,6 +218,28 @@ public class CustomArrayAdapter extends ArrayAdapter<Song> {
 //    artistImageTask.execute();
 
     return rowView;
+  }
+  
+  public static Bitmap getRoundedCornerBitmap(Bitmap bitmap) {
+    Bitmap output = Bitmap.createBitmap(bitmap.getWidth(),
+        bitmap.getHeight(), Config.ARGB_8888);
+    Canvas canvas = new Canvas(output);
+ 
+    final int color = 0xff424242;
+    final Paint paint = new Paint();
+    final Rect rect = new Rect(0, 0, bitmap.getWidth(), bitmap.getHeight());
+    final RectF rectF = new RectF(rect);
+    final float roundPx = 12;
+ 
+    paint.setAntiAlias(true);
+    canvas.drawARGB(0, 0, 0, 0);
+    paint.setColor(color);
+    canvas.drawRoundRect(rectF, roundPx, roundPx, paint);
+ 
+    paint.setXfermode(new PorterDuffXfermode(Mode.SRC_IN));
+    canvas.drawBitmap(bitmap, rect, rect, paint);
+ 
+    return output;
   }
 
   private static int calculateInSampleSize(BitmapFactory.Options options,
