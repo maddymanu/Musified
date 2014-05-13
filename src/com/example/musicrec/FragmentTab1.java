@@ -113,7 +113,7 @@ public class FragmentTab1 extends SherlockFragment {
                     ParseException e2) {
 
                   for (ParseObject obj : friendUsers) {
-                    // wtf
+                    
                     ParseUser currUser = (ParseUser) obj;
                     Log.d("User", "name is " + currUser.get("fbId"));
 
@@ -146,9 +146,9 @@ public class FragmentTab1 extends SherlockFragment {
 
                         // for each song in the arraylist, get its date and
                         // order it by that
-                        for (Song s : songArrayList) {
-                          Date d = s.getCreatedAt();
-                        }
+//                        for (Song s : songArrayList) {
+//                          Date d = s.getCreatedAt();
+//                        }
 
                         listview = (ListView) getActivity().getWindow()
                             .getDecorView().findViewById(R.id.listview);

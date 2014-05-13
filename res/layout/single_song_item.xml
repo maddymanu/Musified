@@ -3,7 +3,7 @@
     xmlns:bootstrapbutton="http://schemas.android.com/apk/res-auto"
     xmlns:fontawesometext="http://schemas.android.com/apk/res-auto"
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content" >
+    android:layout_height="60dp" >
 
     <TextView
         android:id="@+id/title"
@@ -18,8 +18,7 @@
         android:id="@+id/artist"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_below="@+id/title"
+        android:layout_below="@id/title"
         android:paddingLeft="65dp"
         android:textSize="12sp" >
     </TextView>
@@ -29,6 +28,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/title"
+        android:layout_centerVertical="true"
         android:minHeight="50dp"
         android:minWidth="50dp"
         android:paddingLeft="5dp"
@@ -48,8 +48,8 @@
         android:id="@+id/likeButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
         android:clickable="true"
         android:paddingRight="5dp"
         android:text="Like"
