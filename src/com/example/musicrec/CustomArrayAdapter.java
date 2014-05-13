@@ -115,7 +115,10 @@ public class CustomArrayAdapter extends ArrayAdapter<Song> {
     try {
       List<Artist> artists = en
           .searchArtists(currSong.get("artist").toString());
-      currEchoArtist = artists.get(0);
+      if(artists.size() > 0) {
+        currEchoArtist = artists.get(0);
+      }
+      
       PagedList<Image> imageList = currEchoArtist.getImages(0, 1);
       currEchoArtistImage = imageList.get(0);
       Log.i("CURR", currEchoArtistImage.getURL());
@@ -154,54 +157,54 @@ public class CustomArrayAdapter extends ArrayAdapter<Song> {
     t.execute();
 
     /* for artist image */
-    AsyncTask<Void, Void, Bitmap> artistImageTask = new AsyncTask<Void, Void, Bitmap>() {
-      protected Bitmap doInBackground(Void... p) {
-        Bitmap bm = null;
-        try {
-
-          String url = currEchoArtistImage.getURL();
-          InputStream is = new URL(url).openStream();
-
-          BitmapFactory.Options options = new BitmapFactory.Options();
-          options.inJustDecodeBounds = true;
-
-          BitmapFactory.decodeStream(is, null, options);
-
-          options.inSampleSize = calculateInSampleSize(options, 50, 50);
-          options.inJustDecodeBounds = false;
-          is.close();
-
-          is = new URL(url).openStream();
-          bm = BitmapFactory.decodeStream(is, null, options);
-
-          int width = bm.getWidth();
-          int height = bm.getHeight();
-          int newWidth = 50;
-          int newHeight = 50;
-
-          float scaleWidth = ((float) newWidth) / width;
-          float scaleHeight = ((float) newHeight) / height;
-
-          Matrix matrix = new Matrix();
-          // resize the bit map
-          matrix.postScale(scaleWidth, scaleHeight);
-
-          bm = Bitmap.createBitmap(bm, 0, 0, width, height, matrix, true);
-
-        } catch (IOException e) {
-          e.printStackTrace();
-        }
-        return bm;
-      }
-
-      protected void onPostExecute(Bitmap bm) {
-
-        /* SET THE ARTIST IMAAGE VIEW */
-        // profileImage.setImageBitmap(bm);
-
-      }
-    };
-    artistImageTask.execute();
+//    AsyncTask<Void, Void, Bitmap> artistImageTask = new AsyncTask<Void, Void, Bitmap>() {
+//      protected Bitmap doInBackground(Void... p) {
+//        Bitmap bm = null;
+//        try {
+//
+//          String url = currEchoArtistImage.getURL();
+//          InputStream is = new URL(url).openStream();
+//
+//          BitmapFactory.Options options = new BitmapFactory.Options();
+//          options.inJustDecodeBounds = true;
+//
+//          BitmapFactory.decodeStream(is, null, options);
+//
+//          options.inSampleSize = calculateInSampleSize(options, 50, 50);
+//          options.inJustDecodeBounds = false;
+//          is.close();
+//
+//          is = new URL(url).openStream();
+//          bm = BitmapFactory.decodeStream(is, null, options);
+//
+//          int width = bm.getWidth();
+//          int height = bm.getHeight();
+//          int newWidth = 50;
+//          int newHeight = 50;
+//
+//          float scaleWidth = ((float) newWidth) / width;
+//          float scaleHeight = ((float) newHeight) / height;
+//
+//          Matrix matrix = new Matrix();
+//          // resize the bit map
+//          matrix.postScale(scaleWidth, scaleHeight);
+//
+//          bm = Bitmap.createBitmap(bm, 0, 0, width, height, matrix, true);
+//
+//        } catch (IOException e) {
+//          e.printStackTrace();
+//        }
+//        return bm;
+//      }
+//
+//      protected void onPostExecute(Bitmap bm) {
+//
+//        /* SET THE ARTIST IMAAGE VIEW */
+//        // profileImage.setImageBitmap(bm);
+//
+//      }
+//    };
+//    artistImageTask.execute();
 
     return rowView;
   }

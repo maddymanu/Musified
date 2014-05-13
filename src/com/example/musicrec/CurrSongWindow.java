@@ -39,6 +39,7 @@ public class CurrSongWindow extends Activity {
   String artist, title;
   String url;
   Artist currEchoArtist;
+  Song song;
 
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -66,66 +67,63 @@ public class CurrSongWindow extends Activity {
     p.addIDSpace("7digital-US");
 
     try {
+
       List<Song> songs = en.searchSongs(p);
-      Song song = songs.get(0);
-        // get the release data from the first track returned for each song
-        final String url = song.getString("tracks[0].release_image");
+      if (songs.size() > 0) {
+        song = songs.get(0);
+        url = song.getString("tracks[0].release_image");
         Log.i("SONG INFO", song.getTitle() + " " + url);
+      }
 
-        // take the bitmap and calculate it just like CustomArrayAdapter in an
-        // AsyncTask
+      /* for SONG image */
+      AsyncTask<Void, Void, Bitmap> songImageTask = new AsyncTask<Void, Void, Bitmap>() {
+        protected Bitmap doInBackground(Void... p) {
+          Bitmap bm = null;
+          try {
 
-        /* for SONG image */
-        AsyncTask<Void, Void, Bitmap> songImageTask = new AsyncTask<Void, Void, Bitmap>() {
-          protected Bitmap doInBackground(Void... p) {
-            Bitmap bm = null;
-            try {
+            InputStream is = new URL(url).openStream();
 
-              // String url = currEchoArtistImage.getURL();
-              InputStream is = new URL(url).openStream();
+            BitmapFactory.Options options = new BitmapFactory.Options();
+            options.inJustDecodeBounds = true;
 
-              BitmapFactory.Options options = new BitmapFactory.Options();
-              options.inJustDecodeBounds = true;
+            BitmapFactory.decodeStream(is, null, options);
 
-              BitmapFactory.decodeStream(is, null, options);
+            options.inSampleSize = calculateInSampleSize(options, 200, 200);
+            options.inJustDecodeBounds = false;
+            is.close();
 
-              options.inSampleSize = calculateInSampleSize(options, 200, 200);
-              options.inJustDecodeBounds = false;
-              is.close();
+            is = new URL(url).openStream();
+            bm = BitmapFactory.decodeStream(is, null, options);
 
-              is = new URL(url).openStream();
-              bm = BitmapFactory.decodeStream(is, null, options);
+            int width = bm.getWidth();
+            int height = bm.getHeight();
+            int newWidth = 200;
+            int newHeight = 200;
 
-              int width = bm.getWidth();
-              int height = bm.getHeight();
-              int newWidth = 200;
-              int newHeight = 200;
+            float scaleWidth = ((float) newWidth) / width;
+            float scaleHeight = ((float) newHeight) / height;
 
-              float scaleWidth = ((float) newWidth) / width;
-              float scaleHeight = ((float) newHeight) / height;
+            Matrix matrix = new Matrix();
+            // resize the bit map
+            matrix.postScale(scaleWidth, scaleHeight);
 
-              Matrix matrix = new Matrix();
-              // resize the bit map
-              matrix.postScale(scaleWidth, scaleHeight);
+            bm = Bitmap.createBitmap(bm, 0, 0, width, height, matrix, true);
 
-              bm = Bitmap.createBitmap(bm, 0, 0, width, height, matrix, true);
-
-            } catch (IOException e) {
-              e.printStackTrace();
-            }
-            return bm;
+          } catch (IOException e) {
+            e.printStackTrace();
           }
+          return bm;
+        }
 
-          protected void onPostExecute(Bitmap bm) {
+        protected void onPostExecute(Bitmap bm) {
 
-            /* SET THE SONG IMAAGE VIEW */
-            songView.setImageBitmap(bm);
+          /* SET THE SONG IMAAGE VIEW */
+          songView.setImageBitmap(bm);
 
-          }
-        };
-        songImageTask.execute();
+        }
+      };
+      songImageTask.execute();
 
-      
     } catch (EchoNestException e) {
       e.printStackTrace();
     }
