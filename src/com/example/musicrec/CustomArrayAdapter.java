@@ -168,7 +168,7 @@ public class CustomArrayAdapter extends ArrayAdapter<Song> {
           bm = BitmapFactory.decodeStream(is);
 
           // testing
-          bm = getRoundedCornerBitmap(bm);
+          bm = getRoundedCornerBitmap(bm,35f);
 
           // bis.close();
           is.close();
@@ -220,6 +220,7 @@ public class CustomArrayAdapter extends ArrayAdapter<Song> {
           matrix.postScale(scaleWidth, scaleHeight);
 
           bm = Bitmap.createBitmap(bm, 0, 0, width, height, matrix, true);
+          bm = getRoundedCornerBitmap(bm,12f);
 
         } catch (IOException e) {
           e.printStackTrace();
@@ -239,7 +240,7 @@ public class CustomArrayAdapter extends ArrayAdapter<Song> {
     return rowView;
   }
 
-  public static Bitmap getRoundedCornerBitmap(Bitmap bitmap) {
+  public static Bitmap getRoundedCornerBitmap(Bitmap bitmap, float rnd) {
     Bitmap output = Bitmap.createBitmap(bitmap.getWidth(), bitmap.getHeight(),
         Config.ARGB_8888);
     Canvas canvas = new Canvas(output);
@@ -248,7 +249,7 @@ public class CustomArrayAdapter extends ArrayAdapter<Song> {
     final Paint paint = new Paint();
     final Rect rect = new Rect(0, 0, bitmap.getWidth(), bitmap.getHeight());
     final RectF rectF = new RectF(rect);
-    final float roundPx = 35;
+    final float roundPx = rnd;
 
     paint.setAntiAlias(true);
     canvas.drawARGB(0, 0, 0, 0);
