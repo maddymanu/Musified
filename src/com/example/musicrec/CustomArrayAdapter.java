@@ -43,7 +43,7 @@ public class CustomArrayAdapter extends ArrayAdapter<Song> {
 
   private final Context context;
 
-  private final ArrayList<Song> songArrayList;
+  private final List<Song> songArrayList;
   private int count = 0;
   Artist currEchoArtist;
   private EchoNestAPI en;
@@ -51,9 +51,9 @@ public class CustomArrayAdapter extends ArrayAdapter<Song> {
   com.echonest.api.v4.Song song;
   String url;
 
-  public CustomArrayAdapter(Context context, ArrayList<Song> itemsArrayList) {
+  public CustomArrayAdapter(Context context, List<Song> songList) {
 
-    super(context, R.layout.single_song_item, itemsArrayList);
+    super(context, R.layout.single_song_item, songList);
     /* TEMP SOL */
     StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
         .permitAll().build();
@@ -61,7 +61,7 @@ public class CustomArrayAdapter extends ArrayAdapter<Song> {
     en = new EchoNestAPI("FUS98WPLXFNIHZHHG");
 
     this.context = context;
-    this.songArrayList = itemsArrayList;
+    this.songArrayList = songList;
   }
 
   @Override
@@ -120,20 +120,6 @@ public class CustomArrayAdapter extends ArrayAdapter<Song> {
         "fontawesome-webfont.ttf");
     heartTV.setTypeface(font);
 
-    /* Getting the ARTIST URL */
-//    try {
-//      List<Artist> artists = en
-//          .searchArtists(currSong.get("artist").toString());
-//      if (artists.size() > 0) {
-//        currEchoArtist = artists.get(0);
-//      }
-//
-//      PagedList<Image> imageList = currEchoArtist.getImages(0, 1);
-//      currEchoArtistImage = imageList.get(0);
-//      Log.i("CURR", currEchoArtistImage.getURL());
-//    } catch (EchoNestException e) {
-//      e.printStackTrace();
-//    }
 
     SongParams p = new SongParams();
     p.setArtist(currSong.get("artist").toString());

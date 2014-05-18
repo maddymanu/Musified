@@ -40,21 +40,10 @@ public class FragmentTab1 extends SherlockFragment {
   public static Boolean IS_RUNNING = false;
   Map<String, String> map = new HashMap<String, String>();
 
-  // public static final String SERVICECMD =
-  // "com.android.music.musicservicecommand";
-  // public static final String CMDNAME = "command";
-  // public static final String CMDTOGGLEPAUSE = "togglepause";
-  // public static final String CMDSTOP = "stop";
-  // public static final String CMDPAUSE = "pause";
-  // public static final String CMDPREVIOUS = "previous";
-  // public static final String CMDNEXT = "next";
-
   Song currSong;
   private ArrayList<Song> songArrayList = null;
   int i = 0;
   
-  private static final String USER_ID = "Google";
-
   ListView listview;
   ArrayAdapter<String> adapter;
   CustomArrayAdapter adapter2;
@@ -82,12 +71,6 @@ public class FragmentTab1 extends SherlockFragment {
       }
     });
 
-    // try {
-    // Thread.sleep(2000);
-    // } catch (InterruptedException e) {
-    // // TODO Auto-generated catch block
-    // e.printStackTrace();
-    // }
 
     RequestAsyncTask r = Request.executeMyFriendsRequestAsync(
         ParseFacebookUtils.getSession(), new Request.GraphUserListCallback() {
@@ -115,7 +98,7 @@ public class FragmentTab1 extends SherlockFragment {
                   for (ParseObject obj : friendUsers) {
                     
                     ParseUser currUser = (ParseUser) obj;
-                    Log.d("User", "name is " + currUser.get("fbId"));
+                    //Log.d("User", "name is " + currUser.get("fbId"));
 
                     try {
                       currUser.fetchIfNeeded();
