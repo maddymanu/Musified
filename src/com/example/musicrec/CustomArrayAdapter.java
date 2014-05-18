@@ -34,6 +34,7 @@ import com.echonest.api.v4.EchoNestAPI;
 import com.echonest.api.v4.EchoNestException;
 import com.echonest.api.v4.Image;
 import com.echonest.api.v4.PagedList;
+import com.echonest.api.v4.SongParams;
 import com.parse.ParseException;
 import com.parse.ParseUser;
 
@@ -47,6 +48,8 @@ public class CustomArrayAdapter extends ArrayAdapter<Song> {
   Artist currEchoArtist;
   private EchoNestAPI en;
   Image currEchoArtistImage;
+  com.echonest.api.v4.Song song;
+  String url;
 
   public CustomArrayAdapter(Context context, ArrayList<Song> itemsArrayList) {
 
@@ -84,7 +87,6 @@ public class CustomArrayAdapter extends ArrayAdapter<Song> {
     final ImageView artistImage = (ImageView) rowView
         .findViewById(R.id.artistImage);
 
-
     // 4. Set the text for textView
     final Song currSong = (Song) songArrayList.get(position);
     // currSong.get
@@ -118,16 +120,35 @@ public class CustomArrayAdapter extends ArrayAdapter<Song> {
         "fontawesome-webfont.ttf");
     heartTV.setTypeface(font);
 
+    /* Getting the ARTIST URL */
+//    try {
+//      List<Artist> artists = en
+//          .searchArtists(currSong.get("artist").toString());
+//      if (artists.size() > 0) {
+//        currEchoArtist = artists.get(0);
+//      }
+//
+//      PagedList<Image> imageList = currEchoArtist.getImages(0, 1);
+//      currEchoArtistImage = imageList.get(0);
+//      Log.i("CURR", currEchoArtistImage.getURL());
+//    } catch (EchoNestException e) {
+//      e.printStackTrace();
+//    }
+
+    SongParams p = new SongParams();
+    p.setArtist(currSong.get("artist").toString());
+    p.setTitle(currSong.get("title").toString());
+    p.includeTracks(); // the album art is in the track data
+    p.setLimit(true); // only return songs that have track data
+    p.addIDSpace("7digital-US");
+
     try {
-      List<Artist> artists = en
-          .searchArtists(currSong.get("artist").toString());
-      if(artists.size() > 0) {
-        currEchoArtist = artists.get(0);
+
+      List<com.echonest.api.v4.Song> songs = en.searchSongs(p);
+      if (songs.size() > 0) {
+        song = songs.get(0);
+        url = song.getString("tracks[0].release_image");
       }
-      
-      PagedList<Image> imageList = currEchoArtist.getImages(0, 1);
-      currEchoArtistImage = imageList.get(0);
-      Log.i("CURR", currEchoArtistImage.getURL());
     } catch (EchoNestException e) {
       e.printStackTrace();
     }
@@ -145,8 +166,8 @@ public class CustomArrayAdapter extends ArrayAdapter<Song> {
 
           InputStream is = new URL(url).openStream();
           bm = BitmapFactory.decodeStream(is);
-          
-          //testing
+
+          // testing
           bm = getRoundedCornerBitmap(bm);
 
           // bis.close();
@@ -154,7 +175,7 @@ public class CustomArrayAdapter extends ArrayAdapter<Song> {
         } catch (IOException e) {
           e.printStackTrace();
         }
-        
+
         return bm;
       }
 
@@ -166,13 +187,13 @@ public class CustomArrayAdapter extends ArrayAdapter<Song> {
     };
     t.execute();
 
-    /* for artist image */
+    /* for song image */
     AsyncTask<Void, Void, Bitmap> artistImageTask = new AsyncTask<Void, Void, Bitmap>() {
       protected Bitmap doInBackground(Void... p) {
         Bitmap bm = null;
         try {
 
-          String url = currEchoArtistImage.getURL();
+//          /String url = currEchoArtistImage.getURL();
           InputStream is = new URL(url).openStream();
 
           BitmapFactory.Options options = new BitmapFactory.Options();
@@ -180,7 +201,7 @@ public class CustomArrayAdapter extends ArrayAdapter<Song> {
 
           BitmapFactory.decodeStream(is, null, options);
 
-          options.inSampleSize = calculateInSampleSize(options, 200, 200);
+          options.inSampleSize = calculateInSampleSize(options, 300, 300);
           options.inJustDecodeBounds = false;
           is.close();
 
@@ -189,8 +210,8 @@ public class CustomArrayAdapter extends ArrayAdapter<Song> {
 
           int width = bm.getWidth();
           int height = bm.getHeight();
-          int newWidth = 200;
-          int newHeight = 200;
+          int newWidth = 300;
+          int newHeight = 300;
 
           float scaleWidth = ((float) newWidth) / width;
           float scaleHeight = ((float) newHeight) / height;
@@ -217,26 +238,26 @@ public class CustomArrayAdapter extends ArrayAdapter<Song> {
 
     return rowView;
   }
-  
+
   public static Bitmap getRoundedCornerBitmap(Bitmap bitmap) {
-    Bitmap output = Bitmap.createBitmap(bitmap.getWidth(),
-        bitmap.getHeight(), Config.ARGB_8888);
+    Bitmap output = Bitmap.createBitmap(bitmap.getWidth(), bitmap.getHeight(),
+        Config.ARGB_8888);
     Canvas canvas = new Canvas(output);
- 
+
     final int color = 0xff424242;
     final Paint paint = new Paint();
     final Rect rect = new Rect(0, 0, bitmap.getWidth(), bitmap.getHeight());
     final RectF rectF = new RectF(rect);
     final float roundPx = 35;
- 
+
     paint.setAntiAlias(true);
     canvas.drawARGB(0, 0, 0, 0);
     paint.setColor(color);
     canvas.drawRoundRect(rectF, roundPx, roundPx, paint);
- 
+
     paint.setXfermode(new PorterDuffXfermode(Mode.SRC_IN));
     canvas.drawBitmap(bitmap, rect, rect, paint);
- 
+
     return output;
   }
 
