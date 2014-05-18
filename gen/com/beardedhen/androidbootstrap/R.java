@@ -107,18 +107,18 @@ public final class R {
 		public static final int bthumbnail_container_rounded = 0x7f020080;
 		public static final int bthumbnail_container_square = 0x7f020081;
 		public static final int bthumbnail_placeholder_default = 0x7f020082;
-		public static final int edittext_background = 0x7f0200a3;
-		public static final int edittext_background_danger = 0x7f0200a4;
-		public static final int edittext_background_rounded = 0x7f0200a5;
-		public static final int edittext_background_rounded_danger = 0x7f0200a6;
-		public static final int edittext_background_rounded_success = 0x7f0200a7;
-		public static final int edittext_background_rounded_warning = 0x7f0200a8;
-		public static final int edittext_background_success = 0x7f0200a9;
-		public static final int edittext_background_warning = 0x7f0200aa;
-		public static final int ic_launcher = 0x7f0200ab;
-		public static final int thumbnail_circle = 0x7f0200ad;
-		public static final int thumbnail_circle_container = 0x7f0200ae;
-		public static final int thumbnail_circle_minimal = 0x7f0200af;
+		public static final int edittext_background = 0x7f0200a4;
+		public static final int edittext_background_danger = 0x7f0200a5;
+		public static final int edittext_background_rounded = 0x7f0200a6;
+		public static final int edittext_background_rounded_danger = 0x7f0200a7;
+		public static final int edittext_background_rounded_success = 0x7f0200a8;
+		public static final int edittext_background_rounded_warning = 0x7f0200a9;
+		public static final int edittext_background_success = 0x7f0200aa;
+		public static final int edittext_background_warning = 0x7f0200ab;
+		public static final int ic_launcher = 0x7f0200ac;
+		public static final int thumbnail_circle = 0x7f0200ae;
+		public static final int thumbnail_circle_container = 0x7f0200af;
+		public static final int thumbnail_circle_minimal = 0x7f0200b0;
 	}
 	public static final class id {
 		public static final int action_settings = 0x7f04006e;
