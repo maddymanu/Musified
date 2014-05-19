@@ -24,40 +24,41 @@
         android:id="@+id/youtubeSearch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
         android:layout_below="@id/songImage"
+        android:layout_centerHorizontal="true"
         android:layout_margin="10dp"
         android:background="@drawable/youtube"
         android:onClick="openYoutubeSearch"
         android:text="YouTube"
         bootstrapbutton:bb_type="danger" />
 
-    <com.beardedhen.androidbootstrap.BootstrapButton
-        android:id="@+id/rdioSearch"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/youtubeSearch"
-        android:layout_centerHorizontal="true"
-        android:layout_margin="10dp"
-        android:adjustViewBounds="true"
-        android:ems="10"
         android:gravity="center"
-        android:onClick="openRdioSearch"
-        android:text="Rdio"
-        bootstrapbutton:bb_type="primary" />
+        android:orientation="horizontal" >
 
-    <com.beardedhen.androidbootstrap.BootstrapButton
-        android:id="@+id/spotifySearch"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/rdioSearch"
-        android:layout_centerHorizontal="true"
-        android:layout_margin="10dp"
-        android:adjustViewBounds="true"
-        android:ems="10"
-        android:gravity="center"
-        android:onClick="openSpotifySearch"
-        android:text="Spotify"
-        bootstrapbutton:bb_type="success" />
+        <Button
+            android:id="@+id/rdioSearch"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_below="@id/youtubeSearch"
+            android:layout_margin="10dp"
+            android:adjustViewBounds="true"
+            android:background="@drawable/rdioicon"
+            android:ems="10"
+            android:onClick="openRdioSearch" />
+
+        <Button
+            android:id="@+id/spotifySearch"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_below="@id/rdioSearch"
+            android:layout_margin="10dp"
+            android:adjustViewBounds="true"
+            android:background="@drawable/spotifyicon"
+            android:ems="10"
+            android:onClick="openSpotifySearch" />
+    </LinearLayout>
 
 </RelativeLayout>

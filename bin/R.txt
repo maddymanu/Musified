@@ -390,7 +390,7 @@ int drawable com_facebook_list_divider 0x7f020090
 int drawable com_facebook_list_section_header_background 0x7f020091
 int drawable com_facebook_loginbutton_silver 0x7f020092
 int drawable com_facebook_logo 0x7f020093
-int drawable com_facebook_picker_default_separator_color 0x7f0200b3
+int drawable com_facebook_picker_default_separator_color 0x7f0200b4
 int drawable com_facebook_picker_item_background 0x7f020094
 int drawable com_facebook_picker_list_focused 0x7f020095
 int drawable com_facebook_picker_list_longpressed 0x7f020096
@@ -417,11 +417,12 @@ int drawable edittext_background_success 0x7f0200aa
 int drawable edittext_background_warning 0x7f0200ab
 int drawable ic_launcher 0x7f0200ac
 int drawable rdioicon 0x7f0200ad
-int drawable thumbnail_circle 0x7f0200ae
-int drawable thumbnail_circle_container 0x7f0200af
-int drawable thumbnail_circle_minimal 0x7f0200b0
-int drawable x 0x7f0200b1
-int drawable youtube 0x7f0200b2
+int drawable spotifyicon 0x7f0200ae
+int drawable thumbnail_circle 0x7f0200af
+int drawable thumbnail_circle_container 0x7f0200b0
+int drawable thumbnail_circle_minimal 0x7f0200b1
+int drawable x 0x7f0200b2
+int drawable youtube 0x7f0200b3
 int id abs__action_bar 0x7f040022
 int id abs__action_bar_container 0x7f040021
 int id abs__action_bar_subtitle 0x7f040013

@@ -3,8 +3,8 @@
     xmlns:bootstrapbutton="http://schemas.android.com/apk/res-auto"
     xmlns:fontawesometext="http://schemas.android.com/apk/res-auto"
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content" 
-    android:background="@drawable/card_background">
+    android:layout_height="wrap_content"
+    android:background="@drawable/card_background" >
 
     <TextView
         android:id="@+id/title"
@@ -31,29 +31,57 @@
         android:layout_alignLeft="@+id/title"
         android:minHeight="50dp"
         android:minWidth="50dp"
-        android:paddingLeft="5dp"
-        />
-   
+        android:paddingLeft="5dp" />
 
     <ImageView
         android:id="@+id/artistImage"
-        
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:adjustViewBounds= "true"
+        android:layout_below="@id/artist"
         android:layout_centerInParent="true"
         android:layout_marginTop="45dp"
-        android:layout_below="@id/artist"
+        android:adjustViewBounds="true"
         android:minHeight="200dp"
-        android:minWidth="200dp"
-        />
+        android:minWidth="200dp" />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_below="@id/artistImage"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/spotifySearch"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_below="@id/artistImage"
+            android:layout_margin="10dp"
+            android:adjustViewBounds="true"
+            android:focusable="false"
+            android:background="@drawable/spotifyicon"
+            android:ems="10"
+            />
+
+        <Button
+            android:id="@+id/rdioSearch"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_below="@id/artistImage"
+            android:layout_margin="10dp"
+            android:layout_toLeftOf="@id/spotifySearch"
+            android:adjustViewBounds="true"
+            android:focusable="false"
+            android:background="@drawable/rdioicon"
+            android:ems="10" />
+    </LinearLayout>
 
     <TextView
         android:id="@+id/likeButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
         android:clickable="true"
         android:paddingRight="5dp"
         android:text="Like"
@@ -70,5 +98,6 @@
         android:text="@string/fa_heart"
         android:textColor="#C0C0C0"
         android:textSize="19sp" />
+
 
 </RelativeLayout>

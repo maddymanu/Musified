@@ -116,9 +116,9 @@ public final class R {
 		public static final int edittext_background_success = 0x7f0200aa;
 		public static final int edittext_background_warning = 0x7f0200ab;
 		public static final int ic_launcher = 0x7f0200ac;
-		public static final int thumbnail_circle = 0x7f0200ae;
-		public static final int thumbnail_circle_container = 0x7f0200af;
-		public static final int thumbnail_circle_minimal = 0x7f0200b0;
+		public static final int thumbnail_circle = 0x7f0200af;
+		public static final int thumbnail_circle_container = 0x7f0200b0;
+		public static final int thumbnail_circle_minimal = 0x7f0200b1;
 	}
 	public static final class id {
 		public static final int action_settings = 0x7f04006e;

@@ -15,6 +15,7 @@
         android:layout_marginBottom="10dp"
         android:divider="@null"
         android:dividerHeight="5dp" 
+        android:focusable="false"
         />
 
     <com.beardedhen.androidbootstrap.BootstrapButton
