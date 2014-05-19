@@ -39,8 +39,8 @@ public class Welcome extends SherlockFragmentActivity {
 		
 
 		// Set Tab Listeners
-		Tab1.setTabListener(new TabListener(fragmentTab1));
-		Tab2.setTabListener(new TabListener(fragmentTab2));
+		Tab1.setTabListener(new TabListener(fragmentTab2));
+		Tab2.setTabListener(new TabListener(fragmentTab1));
 
 
 		// Add tabs to actionbar
