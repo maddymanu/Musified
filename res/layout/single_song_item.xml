@@ -47,8 +47,8 @@
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
         android:layout_below="@id/artistImage"
+        android:gravity="center"
         android:orientation="horizontal" >
 
         <Button
@@ -56,31 +56,42 @@
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:layout_below="@id/artistImage"
-            android:layout_margin="10dp"
+            android:layout_margin="5dp"
             android:adjustViewBounds="true"
-            android:focusable="false"
             android:background="@drawable/spotifyicon"
             android:ems="10"
-            />
+            android:focusable="false" />
 
         <Button
             android:id="@+id/rdioSearch"
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:layout_below="@id/artistImage"
-            android:layout_margin="10dp"
+            android:layout_margin="5dp"
             android:layout_toLeftOf="@id/spotifySearch"
             android:adjustViewBounds="true"
-            android:focusable="false"
             android:background="@drawable/rdioicon"
-            android:ems="10" />
+            android:ems="10"
+            android:focusable="false" />
+
+        <Button
+            android:id="@+id/youtubeSearch"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_below="@id/artistImage"
+            android:layout_margin="5dp"
+            android:layout_toLeftOf="@id/spotifySearch"
+            android:adjustViewBounds="true"
+            android:background="@drawable/youtubeicon2"
+            android:ems="10"
+            android:focusable="false" />
     </LinearLayout>
 
     <TextView
         android:id="@+id/likeButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
+        android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
         android:clickable="true"
         android:paddingRight="5dp"
@@ -92,12 +103,11 @@
         android:id="@+id/heartTV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
+        android:layout_alignParentTop="true"
         android:layout_toLeftOf="@id/likeButton"
         android:paddingRight="5dp"
         android:text="@string/fa_heart"
         android:textColor="#C0C0C0"
         android:textSize="19sp" />
-
 
 </RelativeLayout>
