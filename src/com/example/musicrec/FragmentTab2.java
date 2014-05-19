@@ -41,7 +41,6 @@ public class FragmentTab2 extends SherlockFragment {
   Map<String, String> map = new HashMap<String, String>();
 
   Song currSong;
-  private ArrayList<Song> songArrayList = null;
   int i = 0;
 
   ListView listview;
@@ -52,7 +51,6 @@ public class FragmentTab2 extends SherlockFragment {
   public View onCreateView(LayoutInflater inflater, ViewGroup container,
       Bundle savedInstanceState) {
     View rootView = inflater.inflate(R.layout.tab_feed, container, false);
-    songArrayList = new ArrayList<Song>();
 
     getFacebookIdInBackground();
 
@@ -79,9 +77,13 @@ public class FragmentTab2 extends SherlockFragment {
             if (users != null) {
 
               List<String> friendsList = new ArrayList<String>();
+              final long startTime = System.currentTimeMillis();
+              
+              
               for (GraphUser user : users) {
                 friendsList.add(user.getId());
               }
+              
 
               @SuppressWarnings("rawtypes")
               final ParseQuery<ParseUser> friendQuery = ParseQuery
@@ -98,36 +100,32 @@ public class FragmentTab2 extends SherlockFragment {
                   query.findInBackground(new FindCallback<Song>() {
 
                     @Override
-                    public void done(List<Song> songList,
+                    public void done(final List<Song> songList,
                         ParseException e) {
 
-//                      if (e == null && songList != null) {
-//
-//                        for (i = 0; i < songList.size(); i++) {
-//
-//                          songArrayList.add((Song) songList.get(i));
-//
-//                        }
-//
-//                      }
 
                       listview = (ListView) getActivity().getWindow()
                           .getDecorView().findViewById(R.id.listview);
+                      
 
                       adapter2 = new CustomArrayAdapter(getActivity(),
                           songList);
                       listview.setAdapter(adapter2);
+                      adapter2.notifyDataSetChanged();
+                      
+                      long endTime   = System.currentTimeMillis();
+                      long totalTime = endTime - startTime;
+                      Log.i("TIMEc" , " " + totalTime);
 
                       listview
                           .setOnItemClickListener(new OnItemClickListener() {
                             public void onItemClick(AdapterView<?> parent,
                                 View view, int position, long id) {
-                              // create a new for song at "Position"
                               Intent currSongWindow = new Intent(getActivity(),
                                   CurrSongWindow.class);
-                              currSongWindow.putExtra("ARTIST", songArrayList
+                              currSongWindow.putExtra("ARTIST", songList
                                   .get(position).getArtist());
-                              currSongWindow.putExtra("TITLE", songArrayList
+                              currSongWindow.putExtra("TITLE", songList
                                   .get(position).getTitle());
                               startActivity(currSongWindow);
 
@@ -143,11 +141,14 @@ public class FragmentTab2 extends SherlockFragment {
 
               });
 
+              
             }
 
           }
 
         });
+    
+    
 
     IntentFilter iF = new IntentFilter();
     iF.addAction("com.android.music.metachanged");
@@ -220,8 +221,7 @@ public class FragmentTab2 extends SherlockFragment {
             if (user != null) {
               ParseUser.getCurrentUser().put("fbId", user.getId());
               ParseUser.getCurrentUser().saveInBackground();
-              // use this part to get details from the logged in
-              // user
+
             }
           }
         });

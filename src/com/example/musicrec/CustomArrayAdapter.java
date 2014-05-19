@@ -96,12 +96,8 @@ public class CustomArrayAdapter extends ArrayAdapter<Song> {
     titleView.setText(formattedTitle);
     artistView.setText(currSong.get("artist").toString());
 
-    final ParseUser songUser = currSong.getAuthor();
-    try {
-      songUser.fetchIfNeeded();
-    } catch (ParseException e1) {
-      e1.printStackTrace();
-    }
+    
+
 
     likeButtonTV.setOnClickListener(new View.OnClickListener() {
 
@@ -121,30 +117,40 @@ public class CustomArrayAdapter extends ArrayAdapter<Song> {
     heartTV.setTypeface(font);
 
 
-    SongParams p = new SongParams();
-    p.setArtist(currSong.get("artist").toString());
-    p.setTitle(currSong.get("title").toString());
-    p.includeTracks(); // the album art is in the track data
-    p.setLimit(true); // only return songs that have track data
-    p.addIDSpace("7digital-US");
+//    SongParams p = new SongParams();
+//    p.setArtist(currSong.get("artist").toString());
+//    p.setTitle(currSong.get("title").toString());
+//    p.includeTracks(); // the album art is in the track data
+//    p.setLimit(true); // only return songs that have track data
+//    p.addIDSpace("7digital-US");
+//
+//    try {
+//
+//      List<com.echonest.api.v4.Song> songs = en.searchSongs(p);
+//      if (songs.size() > 0) {
+//        song = songs.get(0);
+//        url = song.getString("tracks[0].release_image");
+//      }
+//    } catch (EchoNestException e) {
+//      e.printStackTrace();
+//    }
 
-    try {
-
-      List<com.echonest.api.v4.Song> songs = en.searchSongs(p);
-      if (songs.size() > 0) {
-        song = songs.get(0);
-        url = song.getString("tracks[0].release_image");
-      }
-    } catch (EchoNestException e) {
-      e.printStackTrace();
-    }
-
-    final String userFacebookId = songUser.get("fbId").toString();
+    
 
     /* for facebook Image */
     AsyncTask<Void, Void, Bitmap> t = new AsyncTask<Void, Void, Bitmap>() {
       protected Bitmap doInBackground(Void... p) {
         Bitmap bm = null;
+        
+        final ParseUser songUser = currSong.getAuthor();
+        
+        try {
+          songUser.fetchIfNeeded();
+        } catch (ParseException e) {
+          e.printStackTrace();
+        }
+        final String userFacebookId = songUser.get("fbId").toString();
+        
         try {
 
           String url = String.format("https://graph.facebook.com/%s/picture",
@@ -174,54 +180,54 @@ public class CustomArrayAdapter extends ArrayAdapter<Song> {
     t.execute();
 
     /* for song image */
-    AsyncTask<Void, Void, Bitmap> artistImageTask = new AsyncTask<Void, Void, Bitmap>() {
-      protected Bitmap doInBackground(Void... p) {
-        Bitmap bm = null;
-        try {
-
-//          /String url = currEchoArtistImage.getURL();
-          InputStream is = new URL(url).openStream();
-
-          BitmapFactory.Options options = new BitmapFactory.Options();
-          options.inJustDecodeBounds = true;
-
-          BitmapFactory.decodeStream(is, null, options);
-
-          options.inSampleSize = calculateInSampleSize(options, 300, 300);
-          options.inJustDecodeBounds = false;
-          is.close();
-
-          is = new URL(url).openStream();
-          bm = BitmapFactory.decodeStream(is, null, options);
-
-          int width = bm.getWidth();
-          int height = bm.getHeight();
-          int newWidth = 300;
-          int newHeight = 300;
-
-          float scaleWidth = ((float) newWidth) / width;
-          float scaleHeight = ((float) newHeight) / height;
-
-          Matrix matrix = new Matrix();
-          matrix.postScale(scaleWidth, scaleHeight);
-
-          bm = Bitmap.createBitmap(bm, 0, 0, width, height, matrix, true);
-          bm = getRoundedCornerBitmap(bm,12f);
-
-        } catch (IOException e) {
-          e.printStackTrace();
-        }
-        return bm;
-      }
-
-      protected void onPostExecute(Bitmap bm) {
-
-        /* SET THE ARTIST IMAAGE VIEW */
-        artistImage.setImageBitmap(bm);
-
-      }
-    };
-    artistImageTask.execute();
+//    AsyncTask<Void, Void, Bitmap> artistImageTask = new AsyncTask<Void, Void, Bitmap>() {
+//      protected Bitmap doInBackground(Void... p) {
+//        Bitmap bm = null;
+//        try {
+//
+////          /String url = currEchoArtistImage.getURL();
+//          InputStream is = new URL(url).openStream();
+//
+//          BitmapFactory.Options options = new BitmapFactory.Options();
+//          options.inJustDecodeBounds = true;
+//
+//          BitmapFactory.decodeStream(is, null, options);
+//
+//          options.inSampleSize = calculateInSampleSize(options, 300, 300);
+//          options.inJustDecodeBounds = false;
+//          is.close();
+//
+//          is = new URL(url).openStream();
+//          bm = BitmapFactory.decodeStream(is, null, options);
+//
+//          int width = bm.getWidth();
+//          int height = bm.getHeight();
+//          int newWidth = 300;
+//          int newHeight = 300;
+//
+//          float scaleWidth = ((float) newWidth) / width;
+//          float scaleHeight = ((float) newHeight) / height;
+//
+//          Matrix matrix = new Matrix();
+//          matrix.postScale(scaleWidth, scaleHeight);
+//
+//          bm = Bitmap.createBitmap(bm, 0, 0, width, height, matrix, true);
+//          bm = getRoundedCornerBitmap(bm,12f);
+//
+//        } catch (IOException e) {
+//          e.printStackTrace();
+//        }
+//        return bm;
+//      }
+//
+//      protected void onPostExecute(Bitmap bm) {
+//
+//        /* SET THE ARTIST IMAAGE VIEW */
+//        artistImage.setImageBitmap(bm);
+//
+//      }
+//    };
+//    artistImageTask.execute();
 
     return rowView;
   }
