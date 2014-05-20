@@ -223,6 +223,7 @@ public class CustomArrayAdapter extends ArrayAdapter<Song> {
           @Override
           public void onClick(View v) {
             //ActionBar actionBar = context.getActivity().getActionBar();
+            //Open new window with fbid and get feed again.
             
           }
         });
