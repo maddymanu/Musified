@@ -3,11 +3,15 @@ package com.example.musicrec;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.List;
 
 import android.annotation.SuppressLint;
+import android.app.SearchManager;
+import android.content.ActivityNotFoundException;
+import android.content.ComponentName;
 import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.Config;
 import android.graphics.BitmapFactory;
@@ -19,22 +23,26 @@ import android.graphics.PorterDuffXfermode;
 import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.Typeface;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.StrictMode;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.echonest.api.v4.Artist;
 import com.echonest.api.v4.EchoNestAPI;
 import com.echonest.api.v4.EchoNestException;
 import com.echonest.api.v4.Image;
-import com.echonest.api.v4.PagedList;
 import com.echonest.api.v4.SongParams;
+import com.google.android.youtube.player.YouTubeIntents;
 import com.parse.ParseException;
 import com.parse.ParseUser;
 
@@ -77,6 +85,12 @@ public class CustomArrayAdapter extends ArrayAdapter<Song> {
     // 3. Get the two text view from the rowView
     TextView titleView = (TextView) rowView.findViewById(R.id.title);
     TextView artistView = (TextView) rowView.findViewById(R.id.artist);
+
+    // Getting the buttons for all 3 playing services
+    Button spotBtn = (Button) rowView.findViewById(R.id.spotifySearch);
+    Button rdioBtn = (Button) rowView.findViewById(R.id.rdioSearch);
+    Button youtubeBtn = (Button) rowView.findViewById(R.id.youtubeSearch);
+
     final TextView likeButtonTV = (TextView) rowView
         .findViewById(R.id.likeButton);
     final TextView heartTV = (TextView) rowView.findViewById(R.id.heartTV);
@@ -109,10 +123,62 @@ public class CustomArrayAdapter extends ArrayAdapter<Song> {
       }
     });
 
+    spotBtn.setOnClickListener(new View.OnClickListener() {
+
+      @Override
+      public void onClick(View v) {
+        Intent intent = new Intent(Intent.ACTION_MAIN);
+        intent.setAction(MediaStore.INTENT_ACTION_MEDIA_PLAY_FROM_SEARCH);
+        intent.setComponent(new ComponentName("com.spotify.mobile.android.ui",
+            "com.spotify.mobile.android.ui.Launcher"));
+        intent.putExtra(SearchManager.QUERY, currSong.getTitle()
+            + " " + currSong.getArtist());
+        try {
+          context.startActivity(intent);
+        } catch (ActivityNotFoundException e) {
+          Toast.makeText(context, "You must first install Spotify",
+              Toast.LENGTH_LONG).show();
+          Intent i = new Intent(Intent.ACTION_VIEW, Uri
+              .parse("market://details?id=com.spotify.mobile.android.ui"));
+          context.startActivity(i);
+        }
+
+      }
+    });
+
+    rdioBtn.setOnClickListener(new View.OnClickListener() {
+
+      @Override
+      public void onClick(View v) {
+        boolean isRdioAvail = isRdioAvailable(context);
+        if (isRdioAvail) {
+          url = new String("rdio://search/" + currSong.getTitle() + "%20"
+              + currSong.getArtist());
+        } else {
+          url = "https://play.google.com/store/apps/details?id=com.rdio.android.ui";
+        }
+
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        intent.setData(Uri.parse(url));
+        context.startActivity(intent);
+
+      }
+    });
+
+    youtubeBtn.setOnClickListener(new View.OnClickListener() {
+
+      @Override
+      public void onClick(View v) {
+        Intent intent = YouTubeIntents.createSearchIntent(context, currSong.getTitle() + " "
+            + currSong.getArtist());
+        context.startActivity(intent);
+
+      }
+    });
+
     Typeface font = Typeface.createFromAsset(context.getAssets(),
         "fontawesome-webfont.ttf");
     heartTV.setTypeface(font);
-
 
     /* for facebook Image */
     AsyncTask<Void, Void, Bitmap> t = new AsyncTask<Void, Void, Bitmap>() {
@@ -263,6 +329,20 @@ public class CustomArrayAdapter extends ArrayAdapter<Song> {
       inSampleSize = heightRatio < widthRatio ? heightRatio : widthRatio;
     }
     return inSampleSize;
+  }
+
+  public boolean isRdioAvailable(Context context) {
+    PackageManager packageManager = context.getPackageManager();
+    Intent intent = packageManager
+        .getLaunchIntentForPackage("com.rdio.android.ui");
+
+    if (intent == null) {
+      // Check if the Brazil version of Rdio is installed
+      intent = packageManager
+          .getLaunchIntentForPackage("com.rdio.oi.android.ui");
+    }
+
+    return intent != null;
   }
 
 }

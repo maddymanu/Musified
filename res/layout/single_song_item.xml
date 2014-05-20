@@ -60,7 +60,7 @@
             android:adjustViewBounds="true"
             android:background="@drawable/spotifyicon"
             android:ems="10"
-            android:focusable="false" />
+            />
 
         <Button
             android:id="@+id/rdioSearch"
@@ -71,8 +71,7 @@
             android:layout_toLeftOf="@id/spotifySearch"
             android:adjustViewBounds="true"
             android:background="@drawable/rdioicon"
-            android:ems="10"
-            android:focusable="false" />
+            android:ems="10" />
 
         <Button
             android:id="@+id/youtubeSearch"
@@ -83,16 +82,15 @@
             android:layout_toLeftOf="@id/spotifySearch"
             android:adjustViewBounds="true"
             android:background="@drawable/youtubeicon2"
-            android:ems="10"
-            android:focusable="false" />
+            android:ems="10" />
     </LinearLayout>
 
     <TextView
         android:id="@+id/likeButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
         android:clickable="true"
         android:paddingRight="5dp"
         android:text="Like"
