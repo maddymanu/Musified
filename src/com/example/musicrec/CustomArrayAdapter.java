@@ -37,6 +37,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.actionbarsherlock.app.ActionBar;
 import com.echonest.api.v4.Artist;
 import com.echonest.api.v4.EchoNestAPI;
 import com.echonest.api.v4.EchoNestException;
@@ -217,6 +218,14 @@ public class CustomArrayAdapter extends ArrayAdapter<Song> {
       protected void onPostExecute(Bitmap bm) {
 
         profileImage.setImageBitmap(bm);
+        profileImage.setOnClickListener(new View.OnClickListener() {
+          
+          @Override
+          public void onClick(View v) {
+            //ActionBar actionBar = context.getActivity().getActionBar();
+            
+          }
+        });
 
       }
     };
@@ -282,8 +291,20 @@ public class CustomArrayAdapter extends ArrayAdapter<Song> {
 
       protected void onPostExecute(Bitmap bm) {
 
-        /* SET THE ARTIST IMAAGE VIEW */
+        /* SET THE ARTIST IMAGE VIEW */
         artistImage.setImageBitmap(bm);
+        artistImage.setOnClickListener(new View.OnClickListener() {
+          
+          @Override
+          public void onClick(View v) {
+            Intent currSongWindow = new Intent(context,
+                CurrSongWindow.class);
+            currSongWindow.putExtra("ARTIST", currSong.getArtist());
+            currSongWindow.putExtra("TITLE", currSong.getTitle());
+            context.startActivity(currSongWindow);
+            
+          }
+        });
 
       }
     };
