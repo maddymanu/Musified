@@ -224,6 +224,16 @@ public class CustomArrayAdapter extends ArrayAdapter<Song> {
           public void onClick(View v) {
             //ActionBar actionBar = context.getActivity().getActionBar();
             //Open new window with fbid and get feed again.
+            ParseUser songUser = currSong.getAuthor();
+            Log.i("USER" , songUser.get("fbId").toString());
+            //pass in fbId.
+            
+            Intent currFBUserWindow = new Intent(context,
+                CurrFBUserWindow.class);
+            currFBUserWindow.putExtra("fbId", currSong.get("fbId").toString());
+            //currFBUserWindow.putExtra("TITLE", currSong.getTitle());
+            context.startActivity(currFBUserWindow);
+            
             
           }
         });
