@@ -34,6 +34,9 @@
         <activity android:name=".CurrSongWindow"
             android:screenOrientation="portrait" >
         </activity>
+        <activity android:name=".CurrFBUserWindow"
+            android:screenOrientation="portrait" >
+        </activity>
         <activity
             android:name="LoginActivity"
             android:label="@string/title_activity_login"

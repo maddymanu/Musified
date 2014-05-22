@@ -132,8 +132,8 @@ public class CustomArrayAdapter extends ArrayAdapter<Song> {
         intent.setAction(MediaStore.INTENT_ACTION_MEDIA_PLAY_FROM_SEARCH);
         intent.setComponent(new ComponentName("com.spotify.mobile.android.ui",
             "com.spotify.mobile.android.ui.Launcher"));
-        intent.putExtra(SearchManager.QUERY, currSong.getTitle()
-            + " " + currSong.getArtist());
+        intent.putExtra(SearchManager.QUERY, currSong.getTitle() + " "
+            + currSong.getArtist());
         try {
           context.startActivity(intent);
         } catch (ActivityNotFoundException e) {
@@ -170,8 +170,8 @@ public class CustomArrayAdapter extends ArrayAdapter<Song> {
 
       @Override
       public void onClick(View v) {
-        Intent intent = YouTubeIntents.createSearchIntent(context, currSong.getTitle() + " "
-            + currSong.getArtist());
+        Intent intent = YouTubeIntents.createSearchIntent(context,
+            currSong.getTitle() + " " + currSong.getArtist());
         context.startActivity(intent);
 
       }
@@ -219,22 +219,21 @@ public class CustomArrayAdapter extends ArrayAdapter<Song> {
 
         profileImage.setImageBitmap(bm);
         profileImage.setOnClickListener(new View.OnClickListener() {
-          
+
           @Override
           public void onClick(View v) {
-            //ActionBar actionBar = context.getActivity().getActionBar();
-            //Open new window with fbid and get feed again.
+            // ActionBar actionBar = context.getActivity().getActionBar();
+            // Open new window with fbid and get feed again.
             ParseUser songUser = currSong.getAuthor();
-            Log.i("USER" , songUser.get("fbId").toString());
-            //pass in fbId.
-            
+            Log.i("USER", songUser.get("fbId").toString());
+            // pass in fbId.
+
             Intent currFBUserWindow = new Intent(context,
                 CurrFBUserWindow.class);
-            currFBUserWindow.putExtra("fbId", currSong.get("fbId").toString());
-            //currFBUserWindow.putExtra("TITLE", currSong.getTitle());
+            currFBUserWindow.putExtra("objectId", songUser.getObjectId()
+                .toString());
             context.startActivity(currFBUserWindow);
-            
-            
+
           }
         });
 
@@ -305,15 +304,14 @@ public class CustomArrayAdapter extends ArrayAdapter<Song> {
         /* SET THE ARTIST IMAGE VIEW */
         artistImage.setImageBitmap(bm);
         artistImage.setOnClickListener(new View.OnClickListener() {
-          
+
           @Override
           public void onClick(View v) {
-            Intent currSongWindow = new Intent(context,
-                CurrSongWindow.class);
+            Intent currSongWindow = new Intent(context, CurrSongWindow.class);
             currSongWindow.putExtra("ARTIST", currSong.getArtist());
             currSongWindow.putExtra("TITLE", currSong.getTitle());
             context.startActivity(currSongWindow);
-            
+
           }
         });
 
