@@ -45,7 +45,6 @@ public class CurrFBUserWindow extends Activity {
         
         //check list to be 0
         ParseUser currUser = (ParseUser) listOfUsers.get(0);
-        Log.i("FBUSER" , currUser.getUsername());
         
         ParseQuery<Song> query = ParseQuery.getQuery("Song");
         query.whereEqualTo("author", currUser);
