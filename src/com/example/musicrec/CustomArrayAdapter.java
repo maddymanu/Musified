@@ -110,8 +110,10 @@ public class CustomArrayAdapter extends ArrayAdapter<Song> {
         + currSong.get("title").toString().substring(1).toLowerCase();
     titleView.setText(formattedTitle);
     artistView.setText(currSong.get("artist").toString());
-
-    likeButtonTV.setOnClickListener(new View.OnClickListener() {
+    count = currSong.getLikes();
+    likeButtonTV.setText(""+count);
+    
+    heartTV.setOnClickListener(new View.OnClickListener() {
 
       @Override
       public void onClick(View v) {
@@ -119,10 +121,13 @@ public class CustomArrayAdapter extends ArrayAdapter<Song> {
         count = currSong.getLikes();
         count++;
         currSong.setLikes(count);
-        likeButtonTV.setClickable(false);
+        heartTV.setClickable(false);
+        likeButtonTV.setText(""+count);
         currSong.saveInBackground();
       }
     });
+    
+    
 
     spotBtn.setOnClickListener(new View.OnClickListener() {
 
