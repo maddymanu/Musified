@@ -11,6 +11,8 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.VIBRATE" />
 
     <application
         android:allowBackup="true"
@@ -31,10 +33,12 @@
             android:name=".Welcome"
             android:screenOrientation="portrait" >
         </activity>
-        <activity android:name=".CurrSongWindow"
+        <activity
+            android:name=".CurrSongWindow"
             android:screenOrientation="portrait" >
         </activity>
-        <activity android:name=".CurrFBUserWindow"
+        <activity
+            android:name=".CurrFBUserWindow"
             android:screenOrientation="portrait" >
         </activity>
         <activity
@@ -47,6 +51,23 @@
             android:label="@string/title_activity_register"
             android:screenOrientation="portrait" >
         </activity>
+
+        <service android:name="com.parse.PushService" />
+
+        <receiver android:name="com.parse.ParseBroadcastReceiver" >
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.intent.action.RECEIVE_BOOT_COMPLETED" />
+                <action android:name="android.intent.action.USER_PRESENT" />
+            </intent-filter>
+        </receiver>
+        <receiver android:name=".MyCustomReceiver" >
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.intent.action.USER_PRESENT" />
+                <action android:name="com.iakremera.pushnotificationdemo.UPDATE_STATUS" />
+            </intent-filter>
+        </receiver>
 
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"

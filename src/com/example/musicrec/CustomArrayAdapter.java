@@ -5,6 +5,9 @@ import java.io.InputStream;
 import java.net.URL;
 import java.util.List;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import android.annotation.SuppressLint;
 import android.app.SearchManager;
 import android.content.ActivityNotFoundException;
@@ -48,7 +51,6 @@ import com.parse.ParseInstallation;
 import com.parse.ParsePush;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
-import com.parse.PushService;
 import com.parse.SendCallback;
 
 @SuppressLint("NewApi")
@@ -138,9 +140,22 @@ public class CustomArrayAdapter extends ArrayAdapter<Song> {
         
         ParseQuery<ParseInstallation> query = ParseInstallation.getQuery();
         //query.whereEqualTo("deviceType", "android");
+        //change to songuser
+        JSONObject obj;
+        obj =new JSONObject();
+        try {
+          obj.put("alert","erwerwe");
+          obj.put("action","com.iakremera.pushnotificationdemo.UPDATE_STATUS");
+          obj.put("customdata","My string");
+        } catch (JSONException e) {
+          // TODO Auto-generated catch block
+          e.printStackTrace();
+        }
+        
         
         ParsePush push = new ParsePush();
         push.setQuery(query);
+        push.setData(obj);
         push.setMessage("I sent you this test message from Android!");
         
         push.sendInBackground(new SendCallback() {
