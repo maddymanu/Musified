@@ -67,11 +67,9 @@ public class CustomArrayAdapter extends ArrayAdapter<Song> {
   String url;
 
   public CustomArrayAdapter(Context context, List<Song> songList) {
-    
 
     super(context, R.layout.single_song_item, songList);
-    
-    
+
     /* TEMP SOL */
     StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
         .permitAll().build();
@@ -120,8 +118,9 @@ public class CustomArrayAdapter extends ArrayAdapter<Song> {
     titleView.setText(formattedTitle);
     artistView.setText(currSong.get("artist").toString());
     count = currSong.getLikes();
-    likeButtonTV.setText(""+count);
-    
+    likeButtonTV.setText("" + count);
+    final ParseUser currUser = ParseUser.getCurrentUser();
+
     heartTV.setOnClickListener(new View.OnClickListener() {
 
       @SuppressWarnings("static-access")
@@ -132,45 +131,39 @@ public class CustomArrayAdapter extends ArrayAdapter<Song> {
         count++;
         currSong.setLikes(count);
         heartTV.setClickable(false);
-        likeButtonTV.setText(""+count);
+        likeButtonTV.setText("" + count);
         currSong.saveInBackground();
-        
-        //also send a notification to a currSong.getAuthor
-        
-        
-        ParseQuery<ParseInstallation> query = ParseInstallation.getQuery();
-        //query.whereEqualTo("deviceType", "android");
-        //change to songuser
+
+        ParseQuery<ParseInstallation> userQuery = ParseInstallation.getQuery();
+        userQuery.whereContains("user", currSong.getAuthor().getUsername());
+
         JSONObject obj;
-        obj =new JSONObject();
+        obj = new JSONObject();
         try {
-          obj.put("alert","erwerwe");
-          obj.put("action","com.iakremera.pushnotificationdemo.UPDATE_STATUS");
-          obj.put("customdata","My string");
+          obj.put("alert", "erwerwe");
+          obj.put("action", "com.iakremera.pushnotificationdemo.UPDATE_STATUS");
+          obj.put("customdata", "My string");
         } catch (JSONException e) {
           // TODO Auto-generated catch block
           e.printStackTrace();
         }
-        
-        
+
         ParsePush push = new ParsePush();
-        push.setQuery(query);
+        push.setQuery(userQuery);
         push.setData(obj);
         push.setMessage("I sent you this test message from Android!");
-        
+
         push.sendInBackground(new SendCallback() {
-          
+
           @Override
           public void done(ParseException arg0) {
             Log.i("Liked!", "Notified");
-            
+
           }
         });
-        
+
       }
     });
-    
-    
 
     spotBtn.setOnClickListener(new View.OnClickListener() {
 

@@ -49,8 +49,12 @@ public class MainActivity extends Activity {
       startActivity(intent);
       finish();
     } else {
+      ParseInstallation installation = new ParseInstallation();
+      installation.put("user",ParseUser.getCurrentUser().getUsername());
+      installation.saveInBackground();
       Intent intent = new Intent(MainActivity.this, Welcome.class);
       startActivity(intent);
+      
     }
 
 //    IntentFilter iF = new IntentFilter();
