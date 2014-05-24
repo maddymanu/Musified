@@ -37,7 +37,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.actionbarsherlock.app.ActionBar;
 import com.echonest.api.v4.Artist;
 import com.echonest.api.v4.EchoNestAPI;
 import com.echonest.api.v4.EchoNestException;
@@ -45,7 +44,12 @@ import com.echonest.api.v4.Image;
 import com.echonest.api.v4.SongParams;
 import com.google.android.youtube.player.YouTubeIntents;
 import com.parse.ParseException;
+import com.parse.ParseInstallation;
+import com.parse.ParsePush;
+import com.parse.ParseQuery;
 import com.parse.ParseUser;
+import com.parse.PushService;
+import com.parse.SendCallback;
 
 @SuppressLint("NewApi")
 public class CustomArrayAdapter extends ArrayAdapter<Song> {
@@ -61,8 +65,11 @@ public class CustomArrayAdapter extends ArrayAdapter<Song> {
   String url;
 
   public CustomArrayAdapter(Context context, List<Song> songList) {
+    
 
     super(context, R.layout.single_song_item, songList);
+    
+    
     /* TEMP SOL */
     StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
         .permitAll().build();
@@ -115,6 +122,7 @@ public class CustomArrayAdapter extends ArrayAdapter<Song> {
     
     heartTV.setOnClickListener(new View.OnClickListener() {
 
+      @SuppressWarnings("static-access")
       @Override
       public void onClick(View v) {
         Log.i("Liked!", "Should only show once for 1 song!");
@@ -124,6 +132,26 @@ public class CustomArrayAdapter extends ArrayAdapter<Song> {
         heartTV.setClickable(false);
         likeButtonTV.setText(""+count);
         currSong.saveInBackground();
+        
+        //also send a notification to a currSong.getAuthor
+        
+        
+        ParseQuery<ParseInstallation> query = ParseInstallation.getQuery();
+        //query.whereEqualTo("deviceType", "android");
+        
+        ParsePush push = new ParsePush();
+        push.setQuery(query);
+        push.setMessage("I sent you this test message from Android!");
+        
+        push.sendInBackground(new SendCallback() {
+          
+          @Override
+          public void done(ParseException arg0) {
+            Log.i("Liked!", "Notified");
+            
+          }
+        });
+        
       }
     });
     

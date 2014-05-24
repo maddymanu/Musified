@@ -13,8 +13,10 @@ import android.util.Log;
 
 import com.parse.Parse;
 import com.parse.ParseFacebookUtils;
+import com.parse.ParseInstallation;
 import com.parse.ParseObject;
 import com.parse.ParseUser;
+import com.parse.PushService;
 
 public class MainActivity extends Activity {
 
@@ -38,6 +40,8 @@ public class MainActivity extends Activity {
         "j8H1tYNTndi5SdmMmxbRBUyaKZ8X3kJmvLWQvAIc");
     ParseFacebookUtils.initialize("830750263621357");
     ParseObject.registerSubclass(Song.class);
+    PushService.setDefaultPushCallback(this, MainActivity.class);
+    ParseInstallation.getCurrentInstallation().saveInBackground();
 
     ParseUser currentUser = ParseUser.getCurrentUser();
     if (currentUser == null) {
