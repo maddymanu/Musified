@@ -92,6 +92,10 @@ public class FragmentTab2 extends SherlockFragment {
 
                 public void done(List<ParseUser> friendUsers, ParseException e3) {
 
+                  if (friendUsers.size() == 0) {
+                    Log.i("Friend", "size0");
+                  }
+
                   ParseQuery<Song> query = ParseQuery.getQuery("Song");
                   query.whereContainedIn("author", friendUsers);
                   query.addDescendingOrder("createdAt");
@@ -107,9 +111,6 @@ public class FragmentTab2 extends SherlockFragment {
                       listview.setAdapter(adapter2);
                       adapter2.notifyDataSetChanged();
 
-                      
-
-                      /* REMOVE THIS IF THE IMAGVIEW CLICK WORKS */
 
                     }
                   });
@@ -194,6 +195,7 @@ public class FragmentTab2 extends SherlockFragment {
           public void onCompleted(GraphUser user, Response response) {
             if (user != null) {
               ParseUser.getCurrentUser().put("fbId", user.getId());
+              ParseUser.getCurrentUser().put("name", user.getName());
               ParseUser.getCurrentUser().saveInBackground();
 
             }

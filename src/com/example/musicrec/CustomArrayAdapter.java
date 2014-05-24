@@ -137,21 +137,20 @@ public class CustomArrayAdapter extends ArrayAdapter<Song> {
         ParseQuery<ParseInstallation> userQuery = ParseInstallation.getQuery();
         userQuery.whereContains("user", currSong.getAuthor().getUsername());
 
-        JSONObject obj;
-        obj = new JSONObject();
-        try {
-          obj.put("alert", "erwerwe");
-          obj.put("action", "com.iakremera.pushnotificationdemo.UPDATE_STATUS");
-          obj.put("customdata", "My string");
-        } catch (JSONException e) {
-          // TODO Auto-generated catch block
-          e.printStackTrace();
-        }
+//        JSONObject obj;
+//        obj = new JSONObject();
+//        try {
+//          obj.put("alert", "erwerwe");
+//          obj.put("action", "com.iakremera.pushnotificationdemo.UPDATE_STATUS");
+//          obj.put("customdata", "My string");
+//        } catch (JSONException e) {
+//          // TODO Auto-generated catch block
+//          e.printStackTrace();
+//        }
 
         ParsePush push = new ParsePush();
         push.setQuery(userQuery);
-        push.setData(obj);
-        push.setMessage("I sent you this test message from Android!");
+        push.setMessage(currUser.get("name") + " liked your Song!");
 
         push.sendInBackground(new SendCallback() {
 
