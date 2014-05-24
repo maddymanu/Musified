@@ -78,6 +78,8 @@ public class CustomArrayAdapter extends ArrayAdapter<Song> {
 
     this.context = context;
     this.songArrayList = songList;
+    
+//    JSONObject data = new JSONObject("{\"action\": \"com.example.UPDATE_STATUS\""});
   }
 
   @Override
@@ -137,29 +139,62 @@ public class CustomArrayAdapter extends ArrayAdapter<Song> {
         ParseQuery<ParseInstallation> userQuery = ParseInstallation.getQuery();
         userQuery.whereContains("user", currSong.getAuthor().getUsername());
 
+        try {
+          JSONObject data = new JSONObject(
+            "{\"action\": \"com.example.musicrec.UPDATE_STATUS\",\"name\": \"Vaughn\",\"newsItem\": \"Man bites dog\"}");
+          //data.put("customdata", "My string"); //works
+          ParsePush push = new ParsePush();
+          push.setQuery(userQuery);
+          push.setData(data);
+          push.setMessage(currUser.get("name") + " liked your Song!");
+          push.sendDataInBackground(data, userQuery);
+          
+          push.sendInBackground(new SendCallback() {
+
+            @Override
+            public void done(ParseException arg0) {
+              Log.i("Liked!", "Notified");
+
+            }
+          });
+        } catch (JSONException e1) {
+          // TODO Auto-generated catch block
+          e1.printStackTrace();
+        }
+        
 //        JSONObject obj;
 //        obj = new JSONObject();
 //        try {
 //          obj.put("alert", "erwerwe");
-//          obj.put("action", "com.iakremera.pushnotificationdemo.UPDATE_STATUS");
+//          obj.put("action", "com.example.musicrec.UPDATE_STATUS");
 //          obj.put("customdata", "My string");
+//          
+//          
+//          
+//    
+//          ParsePush push = new ParsePush();
+//          push.setQuery(userQuery);
+//          push.setData(obj);
+//          push.setMessage(currUser.get("name") + " liked your Song!");
+//
+//          push.sendInBackground(new SendCallback() {
+//
+//            @Override
+//            public void done(ParseException arg0) {
+//              Log.i("Liked!", "Notified");
+//
+//            }
+//          });
 //        } catch (JSONException e) {
 //          // TODO Auto-generated catch block
 //          e.printStackTrace();
 //        }
-
-        ParsePush push = new ParsePush();
-        push.setQuery(userQuery);
-        push.setMessage(currUser.get("name") + " liked your Song!");
-
-        push.sendInBackground(new SendCallback() {
-
-          @Override
-          public void done(ParseException arg0) {
-            Log.i("Liked!", "Notified");
-
-          }
-        });
+        
+//        JSONObject data = new JSONObject("{\"action\": \"com.example.UPDATE_STATUS\",
+//            \"name\": \"Vaughn\",
+//            \"newsItem\": \"Man bites dog\""}));
+    
+        
 
       }
     });

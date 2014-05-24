@@ -9,9 +9,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
-import android.util.Log;
+import android.support.v4.content.LocalBroadcastManager;
+import android.widget.Toast;
 
 import com.parse.Parse;
+import com.parse.ParseAnalytics;
 import com.parse.ParseFacebookUtils;
 import com.parse.ParseInstallation;
 import com.parse.ParseObject;
@@ -30,18 +32,29 @@ public class MainActivity extends Activity {
   // public static final String CMDPAUSE = "pause";
   // public static final String CMDPREVIOUS = "previous";
   // public static final String CMDNEXT = "next";
+  
+//  private BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
+//
+//    @Override
+//    public void onReceive(Context context, Intent intent) {         
+//      Toast.makeText(getApplicationContext(), "onReceive invoked!", Toast.LENGTH_LONG).show();
+//    }
+//};
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
+    
 
     Parse.initialize(this, "gyy3EnWqM4shEJQTBDvz01HHKERCmt6ldNZFei9H",
         "j8H1tYNTndi5SdmMmxbRBUyaKZ8X3kJmvLWQvAIc");
     ParseFacebookUtils.initialize("830750263621357");
     ParseObject.registerSubclass(Song.class);
-    PushService.setDefaultPushCallback(this, MainActivity.class);
+    PushService.setDefaultPushCallback(this, CurrSongWindow.class);
     ParseInstallation.getCurrentInstallation().saveInBackground();
+    ParseAnalytics.trackAppOpened(getIntent());
+    Parse.setLogLevel(Parse.LOG_LEVEL_VERBOSE);
 
     ParseUser currentUser = ParseUser.getCurrentUser();
     if (currentUser == null) {
@@ -65,6 +78,7 @@ public class MainActivity extends Activity {
 //    registerReceiver(mReceiver, iF);
 
   }
+  
 
 //  private BroadcastReceiver mReceiver = new BroadcastReceiver() {
 //    @Override
