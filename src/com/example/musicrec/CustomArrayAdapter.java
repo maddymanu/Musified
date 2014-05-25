@@ -78,8 +78,9 @@ public class CustomArrayAdapter extends ArrayAdapter<Song> {
 
     this.context = context;
     this.songArrayList = songList;
-    
-//    JSONObject data = new JSONObject("{\"action\": \"com.example.UPDATE_STATUS\""});
+
+    // JSONObject data = new
+    // JSONObject("{\"action\": \"com.example.UPDATE_STATUS\""});
   }
 
   @Override
@@ -140,43 +141,23 @@ public class CustomArrayAdapter extends ArrayAdapter<Song> {
         userQuery.whereContains("user", currSong.getAuthor().getUsername());
 
         try {
-          JSONObject data = new JSONObject(
-            "{\"action\": \"com.example.musicrec.UPDATE_STATUS\",\"name\": \"Vaughn\",\"newsItem\": \"Man bites dog\"}");
-          //data.put("customdata", "My string"); //works
+           JSONObject data = new JSONObject(
+           "{\"action\": \"com.example.musicrec.UPDATE_STATUS\",\"name\": \"Vaughn\",\"newsItem\": \"Man bites dog\"}");
+           data.put("data", "My string"); //works
+//          JSONObject data;
+//          data = new JSONObject();
+          data.put("action", "com.example.musicrec.UPDATE_STATUS");
+          data.put("songartist", currSong.get("artist").toString());
+          data.put("songtitle", currSong.get("title").toString());
+          data.put("title", "Musify");
+          data.put("alert", currUser.get("name") + " liked your Song!");
+          
           ParsePush push = new ParsePush();
           push.setQuery(userQuery);
           push.setData(data);
-          push.setMessage(currUser.get("name") + " liked your Song!");
+         // push.setMessage(currUser.get("name") + " liked your Song!");
           push.sendDataInBackground(data, userQuery);
-          
-          push.sendInBackground(new SendCallback() {
 
-            @Override
-            public void done(ParseException arg0) {
-              Log.i("Liked!", "Notified");
-
-            }
-          });
-        } catch (JSONException e1) {
-          // TODO Auto-generated catch block
-          e1.printStackTrace();
-        }
-        
-//        JSONObject obj;
-//        obj = new JSONObject();
-//        try {
-//          obj.put("alert", "erwerwe");
-//          obj.put("action", "com.example.musicrec.UPDATE_STATUS");
-//          obj.put("customdata", "My string");
-//          
-//          
-//          
-//    
-//          ParsePush push = new ParsePush();
-//          push.setQuery(userQuery);
-//          push.setData(obj);
-//          push.setMessage(currUser.get("name") + " liked your Song!");
-//
 //          push.sendInBackground(new SendCallback() {
 //
 //            @Override
@@ -185,16 +166,43 @@ public class CustomArrayAdapter extends ArrayAdapter<Song> {
 //
 //            }
 //          });
-//        } catch (JSONException e) {
-//          // TODO Auto-generated catch block
-//          e.printStackTrace();
-//        }
-        
-//        JSONObject data = new JSONObject("{\"action\": \"com.example.UPDATE_STATUS\",
-//            \"name\": \"Vaughn\",
-//            \"newsItem\": \"Man bites dog\""}));
-    
-        
+        } catch (JSONException e1) {
+          // TODO Auto-generated catch block
+          e1.printStackTrace();
+        }
+
+        // JSONObject obj;
+        // obj = new JSONObject();
+        // try {
+        // obj.put("alert", "erwerwe");
+        // obj.put("action", "com.example.musicrec.UPDATE_STATUS");
+        // obj.put("customdata", "My string");
+        //
+        //
+        //
+        //
+        // ParsePush push = new ParsePush();
+        // push.setQuery(userQuery);
+        // push.setData(obj);
+        // push.setMessage(currUser.get("name") + " liked your Song!");
+        //
+        // push.sendInBackground(new SendCallback() {
+        //
+        // @Override
+        // public void done(ParseException arg0) {
+        // Log.i("Liked!", "Notified");
+        //
+        // }
+        // });
+        // } catch (JSONException e) {
+        // // TODO Auto-generated catch block
+        // e.printStackTrace();
+        // }
+
+        // JSONObject data = new JSONObject("{\"action\":
+        // \"com.example.UPDATE_STATUS\",
+        // \"name\": \"Vaughn\",
+        // \"newsItem\": \"Man bites dog\""}));
 
       }
     });

@@ -5,6 +5,9 @@ import java.io.InputStream;
 import java.net.URL;
 import java.util.List;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import android.app.Activity;
 import android.app.SearchManager;
 import android.content.ActivityNotFoundException;
@@ -58,7 +61,28 @@ public class CurrSongWindow extends Activity {
       artist = extras.getString("ARTIST");
       title = extras.getString("TITLE");
     }
+    
+    
+    
+    String jsonData = extras.getString("com.parse.Data");
+    
+    if(jsonData != null) {
+      Log.d("JSON DATA",jsonData);
+      JSONObject json;
+      try {
+        json = new JSONObject(jsonData);
+        artist = json.getString("songartist");
+        title = json.getString("songtitle");
+        
+      } catch (JSONException e1) {
+        // TODO Auto-generated catch block
+        e1.printStackTrace();
+      }
+    }
 
+    
+    
+    
     SongParams p = new SongParams();
     p.setArtist(artist);
     p.setTitle(title);
