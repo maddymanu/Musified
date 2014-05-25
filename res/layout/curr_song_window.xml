@@ -20,21 +20,11 @@
         android:minWidth="200dp"
         android:paddingLeft="5dp" />
 
-    <com.beardedhen.androidbootstrap.BootstrapButton
-        android:id="@+id/youtubeSearch"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/songImage"
-        android:layout_centerHorizontal="true"
-        android:layout_margin="10dp"
-        android:background="@drawable/youtube"
-        android:onClick="openYoutubeSearch"
-        android:text="YouTube"
-        bootstrapbutton:bb_type="danger" />
 
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@id/songImage"
         android:gravity="center"
         android:orientation="horizontal" >
 
@@ -42,7 +32,7 @@
             android:id="@+id/rdioSearch"
             android:layout_width="48dp"
             android:layout_height="48dp"
-            android:layout_below="@id/youtubeSearch"
+
             android:layout_margin="10dp"
             android:adjustViewBounds="true"
             android:background="@drawable/rdioicon"
@@ -59,6 +49,17 @@
             android:background="@drawable/spotifyicon"
             android:ems="10"
             android:onClick="openSpotifySearch" />
+
+        <Button
+            android:id="@+id/youtubeSearch"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_margin="5dp"
+            android:adjustViewBounds="true"
+            android:layout_toLeftOf="@id/spotifySearch"
+            android:background="@drawable/youtubeicon2"
+            android:ems="10"
+            android:onClick="openYoutubeSearch" />
     </LinearLayout>
 
 </RelativeLayout>
