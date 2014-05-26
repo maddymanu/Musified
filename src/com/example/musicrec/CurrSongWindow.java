@@ -33,6 +33,7 @@ import com.echonest.api.v4.EchoNestAPI;
 import com.echonest.api.v4.EchoNestException;
 import com.echonest.api.v4.Song;
 import com.echonest.api.v4.SongParams;
+import com.facebook.android.Facebook;
 import com.google.android.youtube.player.YouTubeIntents;
 
 public class CurrSongWindow extends Activity {
@@ -220,6 +221,7 @@ public class CurrSongWindow extends Activity {
           Uri.parse("market://details?id=com.spotify.mobile.android.ui"));
       startActivity(i);
     }
+    
 
   }
 
