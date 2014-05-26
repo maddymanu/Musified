@@ -29,5 +29,15 @@
         android:text="@string/LogoutBtn"
         bootstrapbutton:bb_roundedCorners="true"
         bootstrapbutton:bb_type="warning" />
+    
+    <Button
+        android:id="@+id/invite_btn"
+        android:layout_width="113dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/listview"
+        android:layout_gravity="bottom"
+        android:layout_marginBottom="5dp"
+        android:layout_marginRight="5dp"
+        android:text="Invite Friends!" />
 
 </FrameLayout>

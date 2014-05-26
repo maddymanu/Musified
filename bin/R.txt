@@ -465,7 +465,7 @@ int id abs__submit_area 0x7f040031
 int id abs__textButton 0x7f040015
 int id abs__title 0x7f04001d
 int id abs__up 0x7f04000d
-int id action_settings 0x7f040073
+int id action_settings 0x7f040074
 int id artist 0x7f04006c
 int id artistImage 0x7f04006e
 int id com_facebook_login_activity_progress_bar 0x7f04004a
@@ -499,6 +499,7 @@ int id fragment_container 0x7f04003a
 int id heartTV 0x7f040070
 int id homeAsUp 0x7f040008
 int id image 0x7f040047
+int id invite_btn 0x7f040073
 int id large 0x7f040002
 int id layout 0x7f04003f
 int id lblColA 0x7f04006a
@@ -522,7 +523,7 @@ int id placeholder 0x7f040045
 int id popCancelB 0x7f040067
 int id popOkB 0x7f040066
 int id profileImage 0x7f04006d
-int id rdioSearch 0x7f040060
+int id rdioSearch 0x7f04005f
 int id registerButton 0x7f040039
 int id register_password 0x7f04003c
 int id register_username 0x7f04003b
@@ -534,13 +535,13 @@ int id sign_in 0x7f040037
 int id sign_up 0x7f04003d
 int id small 0x7f040000
 int id songImage 0x7f04005d
-int id spotifySearch 0x7f040061
+int id spotifySearch 0x7f040060
 int id tabMode 0x7f040005
 int id title 0x7f04005e
 int id txtText 0x7f040043
 int id useLogo 0x7f040006
 int id wrap_content 0x7f040003
-int id youtubeSearch 0x7f04005f
+int id youtubeSearch 0x7f040061
 int integer abs__max_action_buttons 0x7f0a0000
 int layout abs__action_bar_home 0x7f030000
 int layout abs__action_bar_tab 0x7f030001

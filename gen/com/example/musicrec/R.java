@@ -1396,7 +1396,7 @@ containing a value of this type.
         public static final int abs__textButton=0x7f040015;
         public static final int abs__title=0x7f04001d;
         public static final int abs__up=0x7f04000d;
-        public static final int action_settings=0x7f040073;
+        public static final int action_settings=0x7f040074;
         public static final int artist=0x7f04006c;
         public static final int artistImage=0x7f04006e;
         public static final int com_facebook_login_activity_progress_bar=0x7f04004a;
@@ -1430,6 +1430,7 @@ containing a value of this type.
         public static final int heartTV=0x7f040070;
         public static final int homeAsUp=0x7f040008;
         public static final int image=0x7f040047;
+        public static final int invite_btn=0x7f040073;
         public static final int large=0x7f040002;
         public static final int layout=0x7f04003f;
         public static final int lblColA=0x7f04006a;
@@ -1453,7 +1454,7 @@ containing a value of this type.
         public static final int popCancelB=0x7f040067;
         public static final int popOkB=0x7f040066;
         public static final int profileImage=0x7f04006d;
-        public static final int rdioSearch=0x7f040060;
+        public static final int rdioSearch=0x7f04005f;
         public static final int registerButton=0x7f040039;
         public static final int register_password=0x7f04003c;
         public static final int register_username=0x7f04003b;
@@ -1465,13 +1466,13 @@ containing a value of this type.
         public static final int sign_up=0x7f04003d;
         public static final int small=0x7f040000;
         public static final int songImage=0x7f04005d;
-        public static final int spotifySearch=0x7f040061;
+        public static final int spotifySearch=0x7f040060;
         public static final int tabMode=0x7f040005;
         public static final int title=0x7f04005e;
         public static final int txtText=0x7f040043;
         public static final int useLogo=0x7f040006;
         public static final int wrap_content=0x7f040003;
-        public static final int youtubeSearch=0x7f04005f;
+        public static final int youtubeSearch=0x7f040061;
     }
     public static final class integer {
         public static final int abs__max_action_buttons=0x7f0a0000;

@@ -121,7 +121,7 @@ public final class R {
 		public static final int thumbnail_circle_minimal = 0x7f0200b1;
 	}
 	public static final class id {
-		public static final int action_settings = 0x7f040073;
+		public static final int action_settings = 0x7f040074;
 		public static final int container = 0x7f040044;
 		public static final int dimensionsLabel = 0x7f040046;
 		public static final int image = 0x7f040047;

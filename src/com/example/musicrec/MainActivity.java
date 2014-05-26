@@ -4,13 +4,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 import android.app.Activity;
-import android.content.BroadcastReceiver;
-import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
+import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.content.LocalBroadcastManager;
-import android.widget.Toast;
+import android.util.Log;
 
 import com.parse.Parse;
 import com.parse.ParseAnalytics;
@@ -69,7 +66,17 @@ public class MainActivity extends Activity {
       startActivity(intent);
       
     }
-
+    
+    String requestId;
+    Uri intentUri = getIntent().getData();
+    if (intentUri != null) {
+        String requestIdParam = intentUri.getQueryParameter("request_ids");
+        if (requestIdParam != null) {
+            String array[] = requestIdParam.split(",");
+            requestId = array[0];
+            Log.i("FB-MainAc", "Request id: "+requestId);
+        }
+    }
 //    IntentFilter iF = new IntentFilter();
 //    iF.addAction("com.android.music.metachanged");
 //    iF.addAction("com.android.music.playstatechanged");

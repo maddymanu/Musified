@@ -79,8 +79,6 @@ public class CustomArrayAdapter extends ArrayAdapter<Song> {
     this.context = context;
     this.songArrayList = songList;
 
-    // JSONObject data = new
-    // JSONObject("{\"action\": \"com.example.UPDATE_STATUS\""});
   }
 
   @Override
@@ -129,7 +127,6 @@ public class CustomArrayAdapter extends ArrayAdapter<Song> {
       @SuppressWarnings("static-access")
       @Override
       public void onClick(View v) {
-        Log.i("Liked!", "Should only show once for 1 song!");
         count = currSong.getLikes();
         count++;
         currSong.setLikes(count);
@@ -141,68 +138,35 @@ public class CustomArrayAdapter extends ArrayAdapter<Song> {
         userQuery.whereContains("user", currSong.getAuthor().getUsername());
 
         try {
-           JSONObject data = new JSONObject(
-           "{\"action\": \"com.example.musicrec.UPDATE_STATUS\",\"name\": \"Vaughn\",\"newsItem\": \"Man bites dog\"}");
-           data.put("data", "My string"); //works
-//          JSONObject data;
-//          data = new JSONObject();
+          JSONObject data = new JSONObject(
+              "{\"action\": \"com.example.musicrec.UPDATE_STATUS\",\"name\": \"Vaughn\",\"newsItem\": \"Man bites dog\"}");
+          data.put("data", "My string");
+          // JSONObject data;
+          // data = new JSONObject();
           data.put("action", "com.example.musicrec.UPDATE_STATUS");
           data.put("songartist", currSong.get("artist").toString());
           data.put("songtitle", currSong.get("title").toString());
           data.put("title", "Musify");
           data.put("alert", currUser.get("name") + " liked your Song!");
-          
+
           ParsePush push = new ParsePush();
           push.setQuery(userQuery);
           push.setData(data);
-         // push.setMessage(currUser.get("name") + " liked your Song!");
+          // push.setMessage(currUser.get("name") + " liked your Song!");
           push.sendDataInBackground(data, userQuery);
 
-//          push.sendInBackground(new SendCallback() {
-//
-//            @Override
-//            public void done(ParseException arg0) {
-//              Log.i("Liked!", "Notified");
-//
-//            }
-//          });
+          // push.sendInBackground(new SendCallback() {
+          //
+          // @Override
+          // public void done(ParseException arg0) {
+          // Log.i("Liked!", "Notified");
+          //
+          // }
+          // });
         } catch (JSONException e1) {
           // TODO Auto-generated catch block
           e1.printStackTrace();
         }
-
-        // JSONObject obj;
-        // obj = new JSONObject();
-        // try {
-        // obj.put("alert", "erwerwe");
-        // obj.put("action", "com.example.musicrec.UPDATE_STATUS");
-        // obj.put("customdata", "My string");
-        //
-        //
-        //
-        //
-        // ParsePush push = new ParsePush();
-        // push.setQuery(userQuery);
-        // push.setData(obj);
-        // push.setMessage(currUser.get("name") + " liked your Song!");
-        //
-        // push.sendInBackground(new SendCallback() {
-        //
-        // @Override
-        // public void done(ParseException arg0) {
-        // Log.i("Liked!", "Notified");
-        //
-        // }
-        // });
-        // } catch (JSONException e) {
-        // // TODO Auto-generated catch block
-        // e.printStackTrace();
-        // }
-
-        // JSONObject data = new JSONObject("{\"action\":
-        // \"com.example.UPDATE_STATUS\",
-        // \"name\": \"Vaughn\",
-        // \"newsItem\": \"Man bites dog\""}));
 
       }
     });
@@ -338,43 +302,48 @@ public class CustomArrayAdapter extends ArrayAdapter<Song> {
         try {
 
           List<com.echonest.api.v4.Song> songs = en.searchSongs(p1);
-          if (songs.size() > 0) {
+          if (songs.size() != 0) {
             song = songs.get(0);
-            url = song.getString("tracks[0].release_image");
+            try {
+              url = song.getString("tracks[0].release_image");
+            } catch (IndexOutOfBoundsException e) {
+
+            }
           }
         } catch (EchoNestException e) {
           e.printStackTrace();
         }
         try {
 
-          // /String url = currEchoArtistImage.getURL();
-          InputStream is = new URL(url).openStream();
+          if (url != null) {
+            InputStream is = new URL(url).openStream();
 
-          BitmapFactory.Options options = new BitmapFactory.Options();
-          options.inJustDecodeBounds = true;
+            BitmapFactory.Options options = new BitmapFactory.Options();
+            options.inJustDecodeBounds = true;
 
-          BitmapFactory.decodeStream(is, null, options);
+            BitmapFactory.decodeStream(is, null, options);
 
-          options.inSampleSize = calculateInSampleSize(options, 300, 300);
-          options.inJustDecodeBounds = false;
-          is.close();
+            options.inSampleSize = calculateInSampleSize(options, 300, 300);
+            options.inJustDecodeBounds = false;
+            is.close();
 
-          is = new URL(url).openStream();
-          bm = BitmapFactory.decodeStream(is, null, options);
+            is = new URL(url).openStream();
+            bm = BitmapFactory.decodeStream(is, null, options);
 
-          int width = bm.getWidth();
-          int height = bm.getHeight();
-          int newWidth = 300;
-          int newHeight = 300;
+            int width = bm.getWidth();
+            int height = bm.getHeight();
+            int newWidth = 300;
+            int newHeight = 300;
 
-          float scaleWidth = ((float) newWidth) / width;
-          float scaleHeight = ((float) newHeight) / height;
+            float scaleWidth = ((float) newWidth) / width;
+            float scaleHeight = ((float) newHeight) / height;
 
-          Matrix matrix = new Matrix();
-          matrix.postScale(scaleWidth, scaleHeight);
+            Matrix matrix = new Matrix();
+            matrix.postScale(scaleWidth, scaleHeight);
 
-          bm = Bitmap.createBitmap(bm, 0, 0, width, height, matrix, true);
-          bm = getRoundedCornerBitmap(bm, 12f);
+            bm = Bitmap.createBitmap(bm, 0, 0, width, height, matrix, true);
+            bm = getRoundedCornerBitmap(bm, 12f);
+          }
 
         } catch (IOException e) {
           e.printStackTrace();

@@ -33,9 +33,9 @@ public class MyCustomReceiver extends BroadcastReceiver {
                            String key = (String) itr.next();  
                            if (key.equals("customdata"))  
                            {  
-                                Intent pupInt = new Intent(context, ShowPopUp.class);  
-                                pupInt.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK );  
-                                context.getApplicationContext().startActivity(pupInt);  
+//                                Intent pupInt = new Intent(context, ShowPopUp.class);  
+//                                pupInt.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK );  
+//                                context.getApplicationContext().startActivity(pupInt);  
                            }  
                            Log.d(TAG, "..." + key + " => " + json.getString(key));  
                       }  

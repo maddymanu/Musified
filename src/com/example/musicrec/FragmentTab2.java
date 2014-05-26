@@ -1,7 +1,6 @@
 package com.example.musicrec;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -10,26 +9,29 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockFragment;
+import com.facebook.FacebookException;
+import com.facebook.FacebookOperationCanceledException;
 import com.facebook.Request;
 import com.facebook.RequestAsyncTask;
 import com.facebook.Response;
+import com.facebook.Session;
 import com.facebook.model.GraphUser;
-import com.google.android.youtube.player.YouTubeIntents;
+import com.facebook.widget.WebDialog;
+import com.facebook.widget.WebDialog.OnCompleteListener;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseFacebookUtils;
-import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
@@ -45,6 +47,7 @@ public class FragmentTab2 extends SherlockFragment {
 
   ListView listview;
   CustomArrayAdapter adapter2;
+  private String requestId;
 
   @SuppressWarnings("deprecation")
   @Override
@@ -67,6 +70,28 @@ public class FragmentTab2 extends SherlockFragment {
 
       }
     });
+    
+    Button invBtn = (Button) rootView.findViewById(R.id.invite_btn);
+    invBtn.setOnClickListener(new View.OnClickListener() {
+      
+      @Override
+      public void onClick(View v) {
+        sendRequestDialog();        
+        
+      }
+    });
+    
+    Uri intentUri = getActivity().getIntent().getData();
+    if (intentUri != null) {
+        String requestIdParam = intentUri.getQueryParameter("request_ids");
+        if (requestIdParam != null) {
+            String array[] = requestIdParam.split(",");
+            requestId = array[0];
+            Log.i("FB", "Request id: "+requestId);
+        }
+    }
+    
+    
 
     RequestAsyncTask r = Request.executeMyFriendsRequestAsync(
         ParseFacebookUtils.getSession(), new Request.GraphUserListCallback() {
@@ -77,7 +102,6 @@ public class FragmentTab2 extends SherlockFragment {
             if (users != null) {
 
               List<String> friendsList = new ArrayList<String>();
-              final long startTime = System.currentTimeMillis();
 
               for (GraphUser user : users) {
                 friendsList.add(user.getId());
@@ -202,5 +226,48 @@ public class FragmentTab2 extends SherlockFragment {
           }
         });
   }
+  
+  private void sendRequestDialog() {
+    Bundle params = new Bundle();
+    params.putString("message", "Learn how to make your Android apps social");
+
+    WebDialog requestsDialog = (
+        new WebDialog.RequestsDialogBuilder(getActivity(),
+            Session.getActiveSession(),
+            params))
+            .setOnCompleteListener(new OnCompleteListener() {
+
+                @Override
+                public void onComplete(Bundle values,
+                    FacebookException error) {
+                    if (error != null) {
+                        if (error instanceof FacebookOperationCanceledException) {
+                            Toast.makeText(getActivity().getApplicationContext(), 
+                                "Request cancelled", 
+                                
+                                Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(getActivity().getApplicationContext(), 
+                                "Network Error", 
+                                Toast.LENGTH_SHORT).show();
+                        }
+                    } else {
+                        final String requestId = values.getString("request");
+                        if (requestId != null) {
+                            Toast.makeText(getActivity().getApplicationContext(), 
+                                "Request sent",  
+                                Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(getActivity().getApplicationContext(), 
+                                "Request cancelled", 
+                                Toast.LENGTH_SHORT).show();
+                        }
+                    }   
+                }
+
+            })
+            .build();
+    requestsDialog.show();
+}
 
 }
