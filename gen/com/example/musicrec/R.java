@@ -2082,6 +2082,7 @@ containing a value of this type.
         public static final int Theme_Sherlock_Light_DarkActionBar=0x7f080058;
         public static final int Theme_Sherlock_Light_NoActionBar=0x7f08005a;
         public static final int Theme_Sherlock_NoActionBar=0x7f080059;
+        public static final int Theme_Styled=0x7f08005d;
         public static final int Widget=0x7f080002;
         public static final int Widget_Sherlock_ActionBar=0x7f080004;
         public static final int Widget_Sherlock_ActionBar_Solid=0x7f080005;

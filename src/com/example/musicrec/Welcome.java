@@ -23,13 +23,14 @@ public class Welcome extends SherlockFragmentActivity {
     ActionBar actionBar = getSupportActionBar();
 
     // Hide Actionbar Icon
-    actionBar.setDisplayShowHomeEnabled(false);
+    actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS); 
+    actionBar.setDisplayShowHomeEnabled(true);
 
     // Hide Actionbar Title
     actionBar.setDisplayShowTitleEnabled(true);
 
     // Create Actionbar Tabs
-    actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+    
 
     // Set Tab Icon and Titles
     Tab1 = actionBar.newTab().setText("Friends");

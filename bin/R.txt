@@ -1071,6 +1071,7 @@ int style Theme_Sherlock_Light 0x7f080057
 int style Theme_Sherlock_Light_DarkActionBar 0x7f080058
 int style Theme_Sherlock_Light_NoActionBar 0x7f08005a
 int style Theme_Sherlock_NoActionBar 0x7f080059
+int style Theme_Styled 0x7f08005d
 int style Widget 0x7f080002
 int style Widget_Sherlock_ActionBar 0x7f080004
 int style Widget_Sherlock_ActionBar_Solid 0x7f080005

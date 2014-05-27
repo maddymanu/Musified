@@ -42,6 +42,7 @@
         </activity>
         <activity
             android:name=".Welcome"
+            android:theme="@style/Theme.Styled"
             android:screenOrientation="portrait" >
         </activity>
         <activity
