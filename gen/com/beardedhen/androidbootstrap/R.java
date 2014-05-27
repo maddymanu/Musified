@@ -8,24 +8,24 @@ package com.beardedhen.androidbootstrap;
 
 public final class R {
 	public static final class attr {
-		public static final int bb_icon_left = 0x7f010075;
-		public static final int bb_icon_right = 0x7f010076;
-		public static final int bb_roundedCorners = 0x7f010077;
-		public static final int bb_size = 0x7f010079;
-		public static final int bb_text_alignment = 0x7f010078;
-		public static final int bb_text_gravity = 0x7f01007a;
-		public static final int bb_type = 0x7f010074;
-		public static final int bct_image = 0x7f010083;
-		public static final int bct_minimal = 0x7f010085;
-		public static final int bct_size = 0x7f010084;
-		public static final int be_roundedCorners = 0x7f01007c;
-		public static final int be_state = 0x7f01007d;
-		public static final int bt_height = 0x7f010081;
-		public static final int bt_image = 0x7f01007f;
-		public static final int bt_inside_padding = 0x7f010082;
-		public static final int bt_roundedCorners = 0x7f01007e;
-		public static final int bt_width = 0x7f010080;
-		public static final int fa_icon = 0x7f01007b;
+		public static final int bb_icon_left = 0x7f010083;
+		public static final int bb_icon_right = 0x7f010084;
+		public static final int bb_roundedCorners = 0x7f010085;
+		public static final int bb_size = 0x7f010087;
+		public static final int bb_text_alignment = 0x7f010086;
+		public static final int bb_text_gravity = 0x7f010088;
+		public static final int bb_type = 0x7f010082;
+		public static final int bct_image = 0x7f010091;
+		public static final int bct_minimal = 0x7f010093;
+		public static final int bct_size = 0x7f010092;
+		public static final int be_roundedCorners = 0x7f01008a;
+		public static final int be_state = 0x7f01008b;
+		public static final int bt_height = 0x7f01008f;
+		public static final int bt_image = 0x7f01008d;
+		public static final int bt_inside_padding = 0x7f010090;
+		public static final int bt_roundedCorners = 0x7f01008c;
+		public static final int bt_width = 0x7f01008e;
+		public static final int fa_icon = 0x7f010089;
 	}
 	public static final class color {
 		public static final int bbutton_danger = 0x7f060017;
@@ -80,14 +80,14 @@ public final class R {
 		public static final int white = 0x7f06000d;
 	}
 	public static final class dimen {
-		public static final int activity_horizontal_margin = 0x7f05001c;
-		public static final int activity_vertical_margin = 0x7f05001d;
-		public static final int bbuton_rounded_corner_radius = 0x7f05001e;
-		public static final int bthumbnail_rounded_corner_radius = 0x7f05001f;
-		public static final int padding_large = 0x7f050023;
-		public static final int padding_medium = 0x7f050022;
-		public static final int padding_micro = 0x7f050020;
-		public static final int padding_small = 0x7f050021;
+		public static final int activity_horizontal_margin = 0x7f07001c;
+		public static final int activity_vertical_margin = 0x7f07001d;
+		public static final int bbuton_rounded_corner_radius = 0x7f07001e;
+		public static final int bthumbnail_rounded_corner_radius = 0x7f07001f;
+		public static final int padding_large = 0x7f070023;
+		public static final int padding_medium = 0x7f070022;
+		public static final int padding_micro = 0x7f070020;
+		public static final int padding_small = 0x7f070021;
 	}
 	public static final class drawable {
 		public static final int bbuton_danger = 0x7f020072;
@@ -121,21 +121,21 @@ public final class R {
 		public static final int thumbnail_circle_minimal = 0x7f0200b1;
 	}
 	public static final class id {
-		public static final int action_settings = 0x7f040074;
-		public static final int container = 0x7f040044;
-		public static final int dimensionsLabel = 0x7f040046;
-		public static final int image = 0x7f040047;
-		public static final int layout = 0x7f04003f;
-		public static final int lblColA = 0x7f04006a;
-		public static final int lblColB = 0x7f04006b;
-		public static final int lblLeft = 0x7f040040;
-		public static final int lblMiddle = 0x7f040041;
-		public static final int lblRight = 0x7f040042;
-		public static final int lblSubTitle = 0x7f040069;
-		public static final int lblText = 0x7f040062;
-		public static final int lblTitle = 0x7f040068;
-		public static final int placeholder = 0x7f040045;
-		public static final int txtText = 0x7f040043;
+		public static final int action_settings = 0x7f04007b;
+		public static final int container = 0x7f04004a;
+		public static final int dimensionsLabel = 0x7f04004c;
+		public static final int image = 0x7f04004d;
+		public static final int layout = 0x7f040045;
+		public static final int lblColA = 0x7f040070;
+		public static final int lblColB = 0x7f040071;
+		public static final int lblLeft = 0x7f040046;
+		public static final int lblMiddle = 0x7f040047;
+		public static final int lblRight = 0x7f040048;
+		public static final int lblSubTitle = 0x7f04006f;
+		public static final int lblText = 0x7f040068;
+		public static final int lblTitle = 0x7f04006e;
+		public static final int placeholder = 0x7f04004b;
+		public static final int txtText = 0x7f040049;
 	}
 	public static final class layout {
 		public static final int bootstrap_button = 0x7f030019;
@@ -152,15 +152,15 @@ public final class R {
 		public static final int main = 0x7f0b0000;
 	}
 	public static final class string {
-		public static final int action_settings = 0x7f070027;
-		public static final int app_name = 0x7f070026;
-		public static final int hello_world = 0x7f070028;
+		public static final int action_settings = 0x7f090027;
+		public static final int app_name = 0x7f090026;
+		public static final int hello_world = 0x7f090028;
 	}
 	public static final class style {
-		public static final int AppBaseTheme = 0x7f08005b;
+		public static final int AppBaseTheme = 0x7f0a005b;
 	}
 	public static final class styleable {
-		public static final int[] BootstrapButton = { 0x0101000e, 0x01010095, 0x010100f4, 0x0101014f, 0x7f010074, 0x7f010075, 0x7f010076, 0x7f010077, 0x7f010078, 0x7f010079, 0x7f01007a };
+		public static final int[] BootstrapButton = { 0x0101000e, 0x01010095, 0x010100f4, 0x0101014f, 0x7f010082, 0x7f010083, 0x7f010084, 0x7f010085, 0x7f010086, 0x7f010087, 0x7f010088 };
 		public static final int BootstrapButton_android_enabled = 0;
 		public static final int BootstrapButton_android_layout_width = 2;
 		public static final int BootstrapButton_android_text = 3;
@@ -172,26 +172,26 @@ public final class R {
 		public static final int BootstrapButton_bb_text_alignment = 8;
 		public static final int BootstrapButton_bb_text_gravity = 10;
 		public static final int BootstrapButton_bb_type = 4;
-		public static final int[] BootstrapCircleThumbnail = { 0x0101014f, 0x7f010083, 0x7f010084, 0x7f010085 };
+		public static final int[] BootstrapCircleThumbnail = { 0x0101014f, 0x7f010091, 0x7f010092, 0x7f010093 };
 		public static final int BootstrapCircleThumbnail_android_text = 0;
 		public static final int BootstrapCircleThumbnail_bct_image = 1;
 		public static final int BootstrapCircleThumbnail_bct_minimal = 3;
 		public static final int BootstrapCircleThumbnail_bct_size = 2;
-		public static final int[] BootstrapEditText = { 0x0101000e, 0x01010095, 0x0101014f, 0x01010150, 0x7f01007c, 0x7f01007d };
+		public static final int[] BootstrapEditText = { 0x0101000e, 0x01010095, 0x0101014f, 0x01010150, 0x7f01008a, 0x7f01008b };
 		public static final int BootstrapEditText_android_enabled = 0;
 		public static final int BootstrapEditText_android_hint = 3;
 		public static final int BootstrapEditText_android_text = 2;
 		public static final int BootstrapEditText_android_textSize = 1;
 		public static final int BootstrapEditText_be_roundedCorners = 4;
 		public static final int BootstrapEditText_be_state = 5;
-		public static final int[] BootstrapThumbnail = { 0x0101014f, 0x7f01007e, 0x7f01007f, 0x7f010080, 0x7f010081, 0x7f010082 };
+		public static final int[] BootstrapThumbnail = { 0x0101014f, 0x7f01008c, 0x7f01008d, 0x7f01008e, 0x7f01008f, 0x7f010090 };
 		public static final int BootstrapThumbnail_android_text = 0;
 		public static final int BootstrapThumbnail_bt_height = 4;
 		public static final int BootstrapThumbnail_bt_image = 2;
 		public static final int BootstrapThumbnail_bt_inside_padding = 5;
 		public static final int BootstrapThumbnail_bt_roundedCorners = 1;
 		public static final int BootstrapThumbnail_bt_width = 3;
-		public static final int[] FontAwesomeText = { 0x01010095, 0x01010098, 0x7f01007b };
+		public static final int[] FontAwesomeText = { 0x01010095, 0x01010098, 0x7f010089 };
 		public static final int FontAwesomeText_android_textColor = 1;
 		public static final int FontAwesomeText_android_textSize = 0;
 		public static final int FontAwesomeText_fa_icon = 2;
