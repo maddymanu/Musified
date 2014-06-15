@@ -31,13 +31,13 @@ public class Welcome extends SherlockFragmentActivity {
     actionBar.setDisplayShowTitleEnabled(true);
 
     // Create Actionbar Tabs
-    SlidingMenu menu = new SlidingMenu(this);
-    menu.setMode(SlidingMenu.LEFT);
-    menu.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
-    menu.setFadeDegree(0.35f);
-    menu.setBehindOffset(300);
-    menu.attachToActivity(this, SlidingMenu.SLIDING_CONTENT);
-    menu.setMenu(R.layout.activity_login_facebook);
+//    SlidingMenu menu = new SlidingMenu(this);
+//    menu.setMode(SlidingMenu.LEFT);
+//    menu.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
+//    menu.setFadeDegree(0.35f);
+//    menu.setBehindOffset(300);
+//    menu.attachToActivity(this, SlidingMenu.SLIDING_CONTENT);
+//    menu.setMenu(R.layout.activity_login_facebook);
     
 
     // Set Tab Icon and Titles

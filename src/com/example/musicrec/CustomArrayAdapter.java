@@ -298,12 +298,15 @@ public class CustomArrayAdapter extends ArrayAdapter<Song> {
         p1.includeTracks(); // the album art is in the track data
         p1.setLimit(true); // only return songs that have track data
         p1.addIDSpace("7digital-US");
+        Log.i("TASK" , "starting");
 
         try {
 
           List<com.echonest.api.v4.Song> songs = en.searchSongs(p1);
+          Log.i("TASK" , "" + songs.size());
           if (songs.size() != 0) {
             song = songs.get(0);
+            Log.i("TASK" , song.getArtistName());
             try {
               url = song.getString("tracks[0].release_image");
             } catch (IndexOutOfBoundsException e) {
