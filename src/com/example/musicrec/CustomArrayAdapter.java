@@ -298,7 +298,8 @@ public class CustomArrayAdapter extends ArrayAdapter<Song> {
         p1.includeTracks(); // the album art is in the track data
         p1.setLimit(true); // only return songs that have track data
         p1.addIDSpace("7digital-US");
-
+        
+        //fix this
         try {
 
           List<com.echonest.api.v4.Song> songs = en.searchSongs(p1);
