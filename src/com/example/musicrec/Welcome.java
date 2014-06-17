@@ -7,7 +7,6 @@ import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
-import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 
 //Is basically the Tab Holder for different tabs
 
@@ -24,21 +23,13 @@ public class Welcome extends SherlockFragmentActivity {
     ActionBar actionBar = getSupportActionBar();
 
     // Hide Actionbar Icon
-    actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS); 
-    actionBar.setDisplayShowHomeEnabled(true);
+    actionBar.setDisplayShowHomeEnabled(false);
 
     // Hide Actionbar Title
     actionBar.setDisplayShowTitleEnabled(true);
 
     // Create Actionbar Tabs
-//    SlidingMenu menu = new SlidingMenu(this);
-//    menu.setMode(SlidingMenu.LEFT);
-//    menu.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
-//    menu.setFadeDegree(0.35f);
-//    menu.setBehindOffset(300);
-//    menu.attachToActivity(this, SlidingMenu.SLIDING_CONTENT);
-//    menu.setMenu(R.layout.activity_login_facebook);
-    
+    actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 
     // Set Tab Icon and Titles
     Tab1 = actionBar.newTab().setText("Friends");

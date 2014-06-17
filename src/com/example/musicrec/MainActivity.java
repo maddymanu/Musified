@@ -43,7 +43,7 @@ public class MainActivity extends Activity {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
     
-    
+
     Parse.initialize(this, "gyy3EnWqM4shEJQTBDvz01HHKERCmt6ldNZFei9H",
         "j8H1tYNTndi5SdmMmxbRBUyaKZ8X3kJmvLWQvAIc");
     ParseFacebookUtils.initialize("830750263621357");
