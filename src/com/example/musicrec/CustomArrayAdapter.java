@@ -300,6 +300,7 @@ public class CustomArrayAdapter extends ArrayAdapter<Song> {
         p1.addIDSpace("7digital-US");
         
         //fix this
+        // echonest search for songs not working
         try {
 
           List<com.echonest.api.v4.Song> songs = en.searchSongs(p1);
