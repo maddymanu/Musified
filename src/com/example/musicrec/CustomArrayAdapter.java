@@ -65,6 +65,9 @@ public class CustomArrayAdapter extends ArrayAdapter<Song> {
   Image currEchoArtistImage;
   com.echonest.api.v4.Song song;
   String url;
+  String url2 = "";
+  String artistName = "";
+  String songName = "";
 
   public CustomArrayAdapter(Context context, List<Song> songList) {
 
@@ -116,8 +119,10 @@ public class CustomArrayAdapter extends ArrayAdapter<Song> {
     String formattedTitle = currSong.get("title").toString().substring(0, 1)
         .toUpperCase()
         + currSong.get("title").toString().substring(1).toLowerCase();
+    songName = formattedTitle;
     titleView.setText(formattedTitle);
     artistView.setText(currSong.get("artist").toString());
+    artistName = currSong.get("artist").toString();
     count = currSong.getLikes();
     likeButtonTV.setText("" + count);
     final ParseUser currUser = ParseUser.getCurrentUser();
@@ -293,8 +298,9 @@ public class CustomArrayAdapter extends ArrayAdapter<Song> {
       protected Bitmap doInBackground(Void... p) {
         Bitmap bm = null;
         SongParams p1 = new SongParams();
-        p1.setArtist(currSong.get("artist").toString());
-        p1.setTitle(currSong.get("title").toString());
+        p1.setArtist(artistName);
+        p1.setTitle(songName);
+        //Log.i("SONG DATA " , " "  + artistName + songName);
         p1.includeTracks(); // the album art is in the track data
         p1.setLimit(true); // only return songs that have track data
         p1.addIDSpace("7digital-US");
