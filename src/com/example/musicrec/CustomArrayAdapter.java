@@ -296,11 +296,11 @@ public class CustomArrayAdapter extends ArrayAdapter<Song> {
     /* for song image */
     AsyncTask<Void, Void, Bitmap> artistImageTask = new AsyncTask<Void, Void, Bitmap>() {
       protected Bitmap doInBackground(Void... p) {
+        url = null;
         Bitmap bm = null;
         SongParams p1 = new SongParams();
-        p1.setArtist(artistName);
-        p1.setTitle(songName);
-        //Log.i("SONG DATA " , " "  + artistName + songName);
+        p1.setArtist(currSong.get("artist").toString());
+        p1.setTitle(currSong.get("title").toString());
         p1.includeTracks(); // the album art is in the track data
         p1.setLimit(true); // only return songs that have track data
         p1.addIDSpace("7digital-US");
@@ -362,6 +362,7 @@ public class CustomArrayAdapter extends ArrayAdapter<Song> {
       protected void onPostExecute(Bitmap bm) {
 
         /* SET THE ARTIST IMAGE VIEW */
+        //check if not null.
         artistImage.setImageBitmap(bm);
         artistImage.setOnClickListener(new View.OnClickListener() {
 
