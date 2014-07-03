@@ -304,8 +304,8 @@ public class CustomArrayAdapter extends ArrayAdapter<Song> {
         p1.includeTracks(); // the album art is in the track data
         p1.setLimit(true); // only return songs that have track data
         p1.addIDSpace("7digital-US");
-        
-        //fix this
+
+        // fix this
         // echonest search for songs not working
         try {
 
@@ -316,6 +316,23 @@ public class CustomArrayAdapter extends ArrayAdapter<Song> {
               url = song.getString("tracks[0].release_image");
             } catch (IndexOutOfBoundsException e) {
 
+            }
+          } else {
+            SongParams p2 = new SongParams();
+            p2.setTitle(currSong.get("title").toString());
+            p2.includeTracks(); // the album art is in the track data
+            p2.setLimit(true); // only return songs that have track data
+            p2.addIDSpace("7digital-US");
+
+            List<com.echonest.api.v4.Song> songsWithoutArtists = en
+                .searchSongs(p2);
+            if (songsWithoutArtists.size() != 0) {
+              song = songsWithoutArtists.get(0);
+              try {
+                url = song.getString("tracks[0].release_image");
+              } catch (IndexOutOfBoundsException e) {
+
+              }
             }
           }
         } catch (EchoNestException e) {
@@ -362,8 +379,9 @@ public class CustomArrayAdapter extends ArrayAdapter<Song> {
       protected void onPostExecute(Bitmap bm) {
 
         /* SET THE ARTIST IMAGE VIEW */
-        //check if not null.
+        // check if not null.
         artistImage.setImageBitmap(bm);
+        Log.i("SONG INFO", " " + url);
         artistImage.setOnClickListener(new View.OnClickListener() {
 
           @Override
