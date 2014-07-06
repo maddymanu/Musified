@@ -35,8 +35,8 @@ public class Welcome extends SherlockFragmentActivity {
         .findViewById(R.id.optionsListView);
     TextView sliderHeaderText = (TextView) sliderView
         .findViewById(R.id.headerTextView);
-    sliderHeaderText.setText("Options!");
-    String[] items2 = new String[] { "xxx", "xxx", "xxx", "blech" };
+    sliderHeaderText.setText("Options");
+    String[] items2 = new String[] { "Notifications", "Settings", "Send" };
     ArrayAdapter<String> sliderListViewAdapter = new ArrayAdapter<String>(
         context, android.R.layout.simple_list_item_1, android.R.id.text1,
         items2);
