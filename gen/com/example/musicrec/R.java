@@ -1509,7 +1509,7 @@ containing a value of this type.
         public static final int abs__textButton=0x7f04001b;
         public static final int abs__title=0x7f040023;
         public static final int abs__up=0x7f04000b;
-        public static final int action_settings=0x7f04007b;
+        public static final int action_settings=0x7f04007d;
         public static final int artist=0x7f040072;
         public static final int artistImage=0x7f040074;
         public static final int com_facebook_login_activity_progress_bar=0x7f040050;
@@ -1541,10 +1541,11 @@ containing a value of this type.
         public static final int facebookLogin=0x7f04003e;
         public static final int fragment_container=0x7f040040;
         public static final int fullscreen=0x7f040013;
+        public static final int headerTextView=0x7f040077;
         public static final int heartTV=0x7f040076;
         public static final int homeAsUp=0x7f040006;
         public static final int image=0x7f04004d;
-        public static final int invite_btn=0x7f04007a;
+        public static final int invite_btn=0x7f04007c;
         public static final int large=0x7f040017;
         public static final int layout=0x7f040045;
         public static final int lblColA=0x7f040070;
@@ -1558,14 +1559,15 @@ containing a value of this type.
         public static final int left=0x7f040010;
         public static final int likeButton=0x7f040075;
         public static final int listMode=0x7f040002;
-        public static final int listview=0x7f040078;
+        public static final int listview=0x7f04007a;
         public static final int login_password=0x7f04003c;
         public static final int login_username=0x7f04003b;
-        public static final int logout_btn=0x7f040079;
+        public static final int logout_btn=0x7f04007b;
         public static final int margin=0x7f040012;
         public static final int menuEditItemLayout=0x7f040069;
         public static final int none=0x7f040014;
         public static final int normal=0x7f040001;
+        public static final int optionsListView=0x7f040078;
         public static final int picker_subtitle=0x7f04005d;
         public static final int placeholder=0x7f04004b;
         public static final int popCancelB=0x7f04006d;
@@ -1583,7 +1585,7 @@ containing a value of this type.
         public static final int signInButton=0x7f040044;
         public static final int sign_in=0x7f04003d;
         public static final int sign_up=0x7f040043;
-        public static final int slidingmenumain=0x7f040077;
+        public static final int slidingmenumain=0x7f040079;
         public static final int small=0x7f040016;
         public static final int songImage=0x7f040063;
         public static final int spotifySearch=0x7f040066;
@@ -1651,8 +1653,9 @@ containing a value of this type.
         public static final int sherlock_spinner_dropdown_item=0x7f030032;
         public static final int sherlock_spinner_item=0x7f030033;
         public static final int single_song_item=0x7f030034;
-        public static final int slidingmenumain=0x7f030035;
-        public static final int tab_feed=0x7f030036;
+        public static final int slider_list=0x7f030035;
+        public static final int slidingmenumain=0x7f030036;
+        public static final int tab_feed=0x7f030037;
     }
     public static final class menu {
         public static final int main=0x7f0b0000;
