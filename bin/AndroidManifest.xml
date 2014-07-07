@@ -45,6 +45,11 @@
             android:theme="@style/Theme.Styled"
             android:screenOrientation="portrait" >
         </activity>
+       	<activity
+            android:name=".NotificationTray"
+            android:theme="@style/Theme.Styled"
+            android:screenOrientation="portrait" >
+        </activity>
         <activity
             android:name=".CurrSongWindow"
             android:screenOrientation="portrait" >

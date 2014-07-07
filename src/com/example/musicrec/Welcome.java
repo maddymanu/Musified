@@ -1,10 +1,14 @@
 package com.example.musicrec;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -61,6 +65,19 @@ public class Welcome extends SherlockFragmentActivity {
     menu.setBehindOffset(300);
     menu.attachToActivity(this, SlidingMenu.SLIDING_CONTENT);
     menu.setMenu(sliderView);
+
+    sliderList.setOnItemClickListener(new OnItemClickListener() {
+      @Override
+      public void onItemClick(AdapterView<?> parent, View view, int position,
+          long id) {
+        //Open Different Intents
+        if(position == 0) { // Notifications
+          //Open Notifcation List
+          Intent intent = new Intent(Welcome.this, NotificationTray.class);
+          startActivity(intent);
+        }
+      }
+    });
 
     // Set Tab Icon and Titles
     Tab1 = actionBar.newTab().setText("Friends");

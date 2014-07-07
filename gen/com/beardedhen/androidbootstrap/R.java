@@ -138,15 +138,15 @@ public final class R {
 		public static final int txtText = 0x7f040049;
 	}
 	public static final class layout {
-		public static final int bootstrap_button = 0x7f030019;
-		public static final int bootstrap_button_fill = 0x7f03001a;
-		public static final int bootstrap_edit_text = 0x7f03001b;
-		public static final int bootstrap_thumbnail = 0x7f03001c;
-		public static final int bootstrap_thumbnail_circle = 0x7f03001d;
-		public static final int font_awesome_text = 0x7f03002d;
-		public static final int row_title = 0x7f03002f;
-		public static final int row_title_and_subtitle = 0x7f030030;
-		public static final int row_two_columns = 0x7f030031;
+		public static final int bootstrap_button = 0x7f03001a;
+		public static final int bootstrap_button_fill = 0x7f03001b;
+		public static final int bootstrap_edit_text = 0x7f03001c;
+		public static final int bootstrap_thumbnail = 0x7f03001d;
+		public static final int bootstrap_thumbnail_circle = 0x7f03001e;
+		public static final int font_awesome_text = 0x7f03002e;
+		public static final int row_title = 0x7f030030;
+		public static final int row_title_and_subtitle = 0x7f030031;
+		public static final int row_two_columns = 0x7f030032;
 	}
 	public static final class menu {
 		public static final int main = 0x7f0b0000;

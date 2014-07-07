@@ -164,19 +164,9 @@ public class CustomArrayAdapter extends ArrayAdapter<Song> {
           ParsePush push = new ParsePush();
           push.setQuery(userQuery);
           push.setData(data);
-          // push.setMessage(currUser.get("name") + " liked your Song!");
           push.sendDataInBackground(data, userQuery);
 
-          // push.sendInBackground(new SendCallback() {
-          //
-          // @Override
-          // public void done(ParseException arg0) {
-          // Log.i("Liked!", "Notified");
-          //
-          // }
-          // });
         } catch (JSONException e1) {
-          // TODO Auto-generated catch block
           e1.printStackTrace();
         }
 
