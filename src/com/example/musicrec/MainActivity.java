@@ -48,6 +48,7 @@ public class MainActivity extends Activity {
         "j8H1tYNTndi5SdmMmxbRBUyaKZ8X3kJmvLWQvAIc");
     ParseFacebookUtils.initialize("830750263621357");
     ParseObject.registerSubclass(Song.class);
+    ParseObject.registerSubclass(NotificationType.class);
     PushService.setDefaultPushCallback(this, CurrSongWindow.class);
     ParseInstallation.getCurrentInstallation().saveInBackground();
     ParseAnalytics.trackAppOpened(getIntent());

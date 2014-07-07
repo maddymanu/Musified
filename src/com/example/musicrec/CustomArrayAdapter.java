@@ -141,6 +141,13 @@ public class CustomArrayAdapter extends ArrayAdapter<Song> {
 
         ParseQuery<ParseInstallation> userQuery = ParseInstallation.getQuery();
         userQuery.whereContains("user", currSong.getAuthor().getUsername());
+        
+        //create a new NotificationType
+        NotificationType newNotificationType = new NotificationType();
+        newNotificationType.setFromUser(currUser);
+        newNotificationType.setToUser(currSong.getAuthor());
+        newNotificationType.setType("Like");
+        newNotificationType.saveInBackground();
 
         try {
           JSONObject data = new JSONObject(
