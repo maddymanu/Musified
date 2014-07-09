@@ -148,6 +148,7 @@ public class CustomArrayAdapter extends ArrayAdapter<Song> {
         newNotificationType.setToUser(currSong.getAuthor());
         newNotificationType.setType("Like");
         newNotificationType.saveInBackground();
+        //setStatus = new
 
         try {
           JSONObject data = new JSONObject(
