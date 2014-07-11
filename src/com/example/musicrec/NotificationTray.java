@@ -1,16 +1,31 @@
 package com.example.musicrec;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
 import java.util.List;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.Paint;
+import android.graphics.PorterDuffXfermode;
+import android.graphics.Rect;
+import android.graphics.RectF;
+import android.graphics.Bitmap.Config;
+import android.graphics.PorterDuff.Mode;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -81,11 +96,13 @@ class NotificationsAdapter extends ArrayAdapter<NotificationType> {
 
     // 2. Get rowView from inflater
     if (convertView == null) {
-      convertView = inflater.inflate(
-          R.layout.single_notification_item, null);
+      convertView = inflater.inflate(R.layout.single_notification_item, null);
     }
 
-    TextView titleView = (TextView) convertView.findViewById(R.id.title);
+    final TextView titleView = (TextView) convertView.findViewById(R.id.title);
+    final ImageView profileImage = (ImageView) convertView
+        .findViewById(R.id.profImageView);
+
     NotificationType currNotification = null;
     try {
       currNotification = (NotificationType) notificationsArrayList
@@ -95,17 +112,99 @@ class NotificationsAdapter extends ArrayAdapter<NotificationType> {
       e.printStackTrace();
     }
     
-    ParseUser fromUser = currNotification.getFromUser();
+    final ParseUser fromUser = currNotification.getFromUser();
+
+    // For facebook profile image
+    AsyncTask<Void, Void, Bitmap> t = new AsyncTask<Void, Void, Bitmap>() {
+      protected Bitmap doInBackground(Void... p) {
+        Bitmap bm = null;
+
+
+        try {
+          fromUser.fetchIfNeeded();
+        } catch (ParseException e) {
+          // TODO Auto-generated catch block
+          e.printStackTrace();
+        }
+
+        final String userFacebookId = fromUser.get("fbId").toString();
+
+        try {
+
+          String url = String.format("https://graph.facebook.com/%s/picture",
+              userFacebookId);
+
+          InputStream is = new URL(url).openStream();
+          bm = BitmapFactory.decodeStream(is);
+
+          // testing
+          bm = getRoundedCornerBitmap(bm, 35f);
+
+          // bis.close();
+          is.close();
+        } catch (IOException e) {
+          e.printStackTrace();
+        }
+
+        return bm;
+      }
+
+      protected void onPostExecute(Bitmap bm) {
+
+        profileImage.setImageBitmap(bm);
+        profileImage.setOnClickListener(new View.OnClickListener() {
+
+          @Override
+          public void onClick(View v) {
+            // ActionBar actionBar = context.getActivity().getActionBar();
+            // Open new window with fbid and get feed again.
+
+            Intent currFBUserWindow = new Intent(c, CurrFBUserWindow.class);
+            currFBUserWindow.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            currFBUserWindow.putExtra("objectId", fromUser.getObjectId()
+                .toString());
+            c.startActivity(currFBUserWindow);
+
+          }
+        });
+
+      }
+    };
+    t.execute();
+    
+    //TODO try smooth scrolling.
     try {
       fromUser.fetchIfNeeded();
     } catch (ParseException e) {
       // TODO Auto-generated catch block
       e.printStackTrace();
     }
-
-    titleView.setText(fromUser.get("name")+ " " + currNotification.getType() + "s your Song:");
+    
+    titleView.setText(fromUser.get("name") +  "Likes your Song:");
 
     return convertView;
+  }
+
+  public static Bitmap getRoundedCornerBitmap(Bitmap bitmap, float rnd) {
+    Bitmap output = Bitmap.createBitmap(bitmap.getWidth(), bitmap.getHeight(),
+        Config.ARGB_8888);
+    Canvas canvas = new Canvas(output);
+
+    final int color = 0xff424242;
+    final Paint paint = new Paint();
+    final Rect rect = new Rect(0, 0, bitmap.getWidth(), bitmap.getHeight());
+    final RectF rectF = new RectF(rect);
+    final float roundPx = rnd;
+
+    paint.setAntiAlias(true);
+    canvas.drawARGB(0, 0, 0, 0);
+    paint.setColor(color);
+    canvas.drawRoundRect(rectF, roundPx, roundPx, paint);
+
+    paint.setXfermode(new PorterDuffXfermode(Mode.SRC_IN));
+    canvas.drawBitmap(bitmap, rect, rect, paint);
+
+    return output;
   }
 
 }
