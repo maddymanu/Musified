@@ -35,5 +35,13 @@ public class NotificationType extends ParseObject {
   public void setType(String t) {
     put("type", t);
   }
+  
+  public Song getSong() {
+    return (Song) get("Song");
+  }
+
+  public void setSong(Song song) {
+    put("Song", song);
+  }
 
 }

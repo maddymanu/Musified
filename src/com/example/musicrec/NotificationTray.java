@@ -63,7 +63,6 @@ public class NotificationTray extends Activity {
       public void done(List<NotificationType> notificationList,
           ParseException arg1) {
         listview = (ListView) findViewById(R.id.notificationListView);
-        Log.i("NOTI", "size is= " + notificationList.size());
         adapter = new NotificationsAdapter(NotificationTray.this
             .getApplicationContext(), 5, notificationList);
         listview.setAdapter(adapter);
@@ -113,6 +112,7 @@ class NotificationsAdapter extends ArrayAdapter<NotificationType> {
     }
     
     final ParseUser fromUser = currNotification.getFromUser();
+    final Song currSong = currNotification.getSong();
 
     // For facebook profile image
     AsyncTask<Void, Void, Bitmap> t = new AsyncTask<Void, Void, Bitmap>() {
@@ -122,12 +122,19 @@ class NotificationsAdapter extends ArrayAdapter<NotificationType> {
 
         try {
           fromUser.fetchIfNeeded();
+          if(currSong != null) {
+            currSong.fetchIfNeeded();
+          }
+          
         } catch (ParseException e) {
           // TODO Auto-generated catch block
           e.printStackTrace();
         }
+        
+        
 
         final String userFacebookId = fromUser.get("fbId").toString();
+        
 
         try {
 
@@ -150,7 +157,14 @@ class NotificationsAdapter extends ArrayAdapter<NotificationType> {
       }
 
       protected void onPostExecute(Bitmap bm) {
-
+        
+        String songTitle = "";
+        String artistTitle = "";
+        if(currSong != null) {
+          songTitle = currSong.getTitle();
+          artistTitle = currSong.getArtist();
+        }
+        titleView.setText(fromUser.get("name") +  " Likes your Song " + songTitle);
         profileImage.setImageBitmap(bm);
         profileImage.setOnClickListener(new View.OnClickListener() {
 
@@ -173,14 +187,15 @@ class NotificationsAdapter extends ArrayAdapter<NotificationType> {
     t.execute();
     
     //TODO try smooth scrolling.
-    try {
-      fromUser.fetchIfNeeded();
-    } catch (ParseException e) {
-      // TODO Auto-generated catch block
-      e.printStackTrace();
-    }
-    
-    titleView.setText(fromUser.get("name") +  "Likes your Song:");
+//    try {
+//      fromUser.fetchIfNeeded();
+//      currSong.fetchIfNeeded();
+//    } catch (ParseException e) {
+//      // TODO Auto-generated catch block
+//      e.printStackTrace();
+//    }
+//    
+//    titleView.setText(fromUser.get("name") +  "Likes your Song " + currSong.getTitle());
 
     return convertView;
   }
