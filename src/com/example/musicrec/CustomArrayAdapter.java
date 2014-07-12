@@ -139,6 +139,7 @@ public class CustomArrayAdapter extends ArrayAdapter<Song> {
         likeButtonTV.setText("" + count);
         currSong.saveInBackground();
 
+        //FIX THIS
         ParseQuery<ParseInstallation> userQuery = ParseInstallation.getQuery();
         userQuery.whereContains("user", currSong.getAuthor().getUsername());
         
@@ -388,6 +389,7 @@ public class CustomArrayAdapter extends ArrayAdapter<Song> {
           @Override
           public void onClick(View v) {
             Intent currSongWindow = new Intent(context, CurrSongWindow.class);
+            currSongWindow.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             currSongWindow.putExtra("ARTIST", currSong.getArtist());
             currSongWindow.putExtra("TITLE", currSong.getTitle());
             context.startActivity(currSongWindow);

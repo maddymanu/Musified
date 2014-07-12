@@ -110,7 +110,7 @@ class NotificationsAdapter extends ArrayAdapter<NotificationType> {
     } catch (NullPointerException e) {
       e.printStackTrace();
     }
-    
+
     final ParseUser fromUser = currNotification.getFromUser();
     final Song currSong = currNotification.getSong();
 
@@ -119,22 +119,18 @@ class NotificationsAdapter extends ArrayAdapter<NotificationType> {
       protected Bitmap doInBackground(Void... p) {
         Bitmap bm = null;
 
-
         try {
           fromUser.fetchIfNeeded();
-          if(currSong != null) {
+          if (currSong != null) {
             currSong.fetchIfNeeded();
           }
-          
+
         } catch (ParseException e) {
           // TODO Auto-generated catch block
           e.printStackTrace();
         }
-        
-        
 
         final String userFacebookId = fromUser.get("fbId").toString();
-        
 
         try {
 
@@ -157,14 +153,24 @@ class NotificationsAdapter extends ArrayAdapter<NotificationType> {
       }
 
       protected void onPostExecute(Bitmap bm) {
-        
-        String songTitle = "";
-        String artistTitle = "";
-        if(currSong != null) {
-          songTitle = currSong.getTitle();
-          artistTitle = currSong.getArtist();
-        }
-        titleView.setText(fromUser.get("name") +  " Likes your Song " + songTitle);
+
+        final String songTitle = currSong.getTitle();
+        final String artistTitle = currSong.getArtist();
+
+        titleView.setText(fromUser.get("name") + " Likes your Song "
+            + songTitle);
+        titleView.setOnClickListener(new View.OnClickListener() {
+
+          @Override
+          public void onClick(final View v) {
+            Intent currSongWindow = new Intent(c, CurrSongWindow.class);
+            currSongWindow.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            currSongWindow.putExtra("ARTIST", artistTitle);
+            currSongWindow.putExtra("TITLE", songTitle);
+            c.startActivity(currSongWindow);
+
+          }
+        });
         profileImage.setImageBitmap(bm);
         profileImage.setOnClickListener(new View.OnClickListener() {
 
@@ -185,17 +191,18 @@ class NotificationsAdapter extends ArrayAdapter<NotificationType> {
       }
     };
     t.execute();
-    
-    //TODO try smooth scrolling.
-//    try {
-//      fromUser.fetchIfNeeded();
-//      currSong.fetchIfNeeded();
-//    } catch (ParseException e) {
-//      // TODO Auto-generated catch block
-//      e.printStackTrace();
-//    }
-//    
-//    titleView.setText(fromUser.get("name") +  "Likes your Song " + currSong.getTitle());
+
+    // TODO try smooth scrolling.
+    // try {
+    // fromUser.fetchIfNeeded();
+    // currSong.fetchIfNeeded();
+    // } catch (ParseException e) {
+    // // TODO Auto-generated catch block
+    // e.printStackTrace();
+    // }
+    //
+    // titleView.setText(fromUser.get("name") + "Likes your Song " +
+    // currSong.getTitle());
 
     return convertView;
   }
