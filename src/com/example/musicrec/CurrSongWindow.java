@@ -84,20 +84,40 @@ public class CurrSongWindow extends Activity {
     
     
     
-    SongParams p = new SongParams();
-    p.setArtist(artist);
-    p.setTitle(title);
-    p.includeTracks(); // the album art is in the track data
-    p.setLimit(true); // only return songs that have track data
-    p.addIDSpace("7digital-US");
+    SongParams p1 = new SongParams();
+    p1.setArtist(artist);
+    p1.setTitle(title);
+    p1.includeTracks(); // the album art is in the track data
+    p1.setLimit(true); // only return songs that have track data
+    p1.addIDSpace("7digital-US");
 
     try {
 
-      List<Song> songs = en.searchSongs(p);
-      if (songs.size() > 0) {
+      List<com.echonest.api.v4.Song> songs = en.searchSongs(p1);
+      if (songs.size() != 0) {
         song = songs.get(0);
-        url = song.getString("tracks[0].release_image");
-        Log.i("SONG INFO", song.getTitle() + " " + url);
+        try {
+          url = song.getString("tracks[0].release_image");
+        } catch (IndexOutOfBoundsException e) {
+
+        }
+      } else {
+        SongParams p2 = new SongParams();
+        p2.setTitle(title);
+        p2.includeTracks(); // the album art is in the track data
+        p2.setLimit(true); // only return songs that have track data
+        p2.addIDSpace("7digital-US");
+
+        List<com.echonest.api.v4.Song> songsWithoutArtists = en
+            .searchSongs(p2);
+        if (songsWithoutArtists.size() != 0) {
+          song = songsWithoutArtists.get(0);
+          try {
+            url = song.getString("tracks[0].release_image");
+          } catch (IndexOutOfBoundsException e) {
+
+          }
+        }
       }
 
       /* for SONG image */
@@ -133,6 +153,7 @@ public class CurrSongWindow extends Activity {
             matrix.postScale(scaleWidth, scaleHeight);
 
             bm = Bitmap.createBitmap(bm, 0, 0, width, height, matrix, true);
+            bm = CustomArrayAdapter.getRoundedCornerBitmap(bm, 12f);
 
           } catch (IOException e) {
             e.printStackTrace();

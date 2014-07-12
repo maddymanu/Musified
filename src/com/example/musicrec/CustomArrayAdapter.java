@@ -300,6 +300,7 @@ public class CustomArrayAdapter extends ArrayAdapter<Song> {
       protected Bitmap doInBackground(Void... p) {
         url = null;
         Bitmap bm = null;
+        
         SongParams p1 = new SongParams();
         p1.setArtist(currSong.get("artist").toString());
         p1.setTitle(currSong.get("title").toString());
