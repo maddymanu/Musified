@@ -49,13 +49,13 @@ public class NotificationTray extends Activity {
     // add listview images etc.
     // set status to old.
 
-    // only get new status notifications
-    // TODO
-
+    //TODO
+    // CHANGE to whereEqualto toUser = currUser.
     ParseUser currUser = ParseUser.getCurrentUser();
     ParseQuery<NotificationType> query = ParseQuery
         .getQuery("NotificationType");
     query.whereEqualTo("fromUser", currUser);
+    query.whereEqualTo("status", "new");
     query.addDescendingOrder("createdAt");
     query.findInBackground(new FindCallback<NotificationType>() {
 
@@ -66,6 +66,12 @@ public class NotificationTray extends Activity {
         adapter = new NotificationsAdapter(NotificationTray.this
             .getApplicationContext(), 5, notificationList);
         listview.setAdapter(adapter);
+        
+        for (NotificationType currNoti : notificationList) {
+          currNoti.setStatus("old");
+          currNoti.saveInBackground();
+        }
+        
       }
 
     });
