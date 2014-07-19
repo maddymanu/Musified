@@ -126,6 +126,8 @@ public class CustomArrayAdapter extends ArrayAdapter<Song> {
     count = currSong.getLikes();
     likeButtonTV.setText("" + count);
     final ParseUser currUser = ParseUser.getCurrentUser();
+    
+    //Beginning send to friends.!
 
     heartTV.setOnClickListener(new View.OnClickListener() {
 
