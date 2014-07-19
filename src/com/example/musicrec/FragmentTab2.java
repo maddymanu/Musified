@@ -61,19 +61,6 @@ public class FragmentTab2 extends SherlockFragment {
 
     getFacebookIdInBackground();
 
-    com.beardedhen.androidbootstrap.BootstrapButton btn = (com.beardedhen.androidbootstrap.BootstrapButton) rootView
-        .findViewById(R.id.logout_btn);
-    btn.setOnClickListener(new View.OnClickListener() {
-
-      @Override
-      public void onClick(View v) {
-        ParseUser.getCurrentUser();
-        ParseUser.logOut();
-        Intent intent = new Intent(getActivity(), LoginActivity.class);
-        startActivity(intent);
-
-      }
-    });
 
     Button invBtn = (Button) rootView.findViewById(R.id.invite_btn);
 

@@ -1509,7 +1509,7 @@ containing a value of this type.
         public static final int abs__textButton=0x7f04001b;
         public static final int abs__title=0x7f040023;
         public static final int abs__up=0x7f04000b;
-        public static final int action_settings=0x7f04007e;
+        public static final int action_settings=0x7f04007d;
         public static final int artist=0x7f040074;
         public static final int artistImage=0x7f040076;
         public static final int com_facebook_login_activity_progress_bar=0x7f040052;
@@ -1544,7 +1544,7 @@ containing a value of this type.
         public static final int heartTV=0x7f040078;
         public static final int homeAsUp=0x7f040006;
         public static final int image=0x7f04004f;
-        public static final int invite_btn=0x7f04007d;
+        public static final int invite_btn=0x7f04007c;
         public static final int large=0x7f040017;
         public static final int layout=0x7f040047;
         public static final int lblColA=0x7f040071;
@@ -1561,7 +1561,6 @@ containing a value of this type.
         public static final int listview=0x7f04007b;
         public static final int login_password=0x7f04003c;
         public static final int login_username=0x7f04003b;
-        public static final int logout_btn=0x7f04007c;
         public static final int margin=0x7f040012;
         public static final int menuEditItemLayout=0x7f04006a;
         public static final int none=0x7f040014;

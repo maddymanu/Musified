@@ -4,20 +4,19 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
+import com.parse.ParseUser;
 
 //Is basically the Tab Holder for different tabs
 
@@ -38,7 +37,7 @@ public class Welcome extends SherlockFragmentActivity {
     ListView sliderList = (ListView) sliderView
         .findViewById(R.id.optionsListView);
 //    
-    String[] items2 = new String[] { "Notifications", "Settings", "Send" };
+    String[] items2 = new String[] { "Notifications", "Settings", "Send", "Logout" , "Invite!"};
     ArrayAdapter<String> sliderListViewAdapter = new ArrayAdapter<String>(
         context, android.R.layout.simple_list_item_1, android.R.id.text1,
         items2);
@@ -69,9 +68,17 @@ public class Welcome extends SherlockFragmentActivity {
       public void onItemClick(AdapterView<?> parent, View view, int position,
           long id) {
         //Open Different Intents
-        if(position == 0) { // Notifications
-          //Open Notifcation List
+        
+        // Open Notification Menu
+        if(position == 0) { 
           Intent intent = new Intent(Welcome.this, NotificationTray.class);
+          startActivity(intent);
+        } 
+        // Logout
+        else if(position == 3) {
+          ParseUser.getCurrentUser();
+          ParseUser.logOut();
+          Intent intent = new Intent(Welcome.this, LoginActivity.class);
           startActivity(intent);
         }
       }

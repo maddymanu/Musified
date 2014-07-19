@@ -479,7 +479,7 @@ int id abs__submit_area 0x7f040037
 int id abs__textButton 0x7f04001b
 int id abs__title 0x7f040023
 int id abs__up 0x7f04000b
-int id action_settings 0x7f04007e
+int id action_settings 0x7f04007d
 int id artist 0x7f040074
 int id artistImage 0x7f040076
 int id com_facebook_login_activity_progress_bar 0x7f040052
@@ -514,7 +514,7 @@ int id fullscreen 0x7f040013
 int id heartTV 0x7f040078
 int id homeAsUp 0x7f040006
 int id image 0x7f04004f
-int id invite_btn 0x7f04007d
+int id invite_btn 0x7f04007c
 int id large 0x7f040017
 int id layout 0x7f040047
 int id lblColA 0x7f040071
@@ -531,7 +531,6 @@ int id listMode 0x7f040002
 int id listview 0x7f04007b
 int id login_password 0x7f04003c
 int id login_username 0x7f04003b
-int id logout_btn 0x7f04007c
 int id margin 0x7f040012
 int id menuEditItemLayout 0x7f04006a
 int id none 0x7f040014
