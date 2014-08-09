@@ -51,7 +51,7 @@ public class FragmentTab2 extends SherlockFragment {
   ListView listview;
   List<GraphUser> friendListForInvites = null;
   CustomArrayAdapter adapter2;
-  private String requestId;
+  //private String requestId;
 
   @SuppressWarnings("deprecation")
   @Override
@@ -87,7 +87,8 @@ public class FragmentTab2 extends SherlockFragment {
               friendQuery.findInBackground(new FindCallback<ParseUser>() {
 
                 public void done(List<ParseUser> friendUsers, ParseException e3) {
-
+                  
+                  //getting the list of friends complete here
                   if (friendUsers.size() == 0) {
                     Log.i("Friend", "size0");
                   }

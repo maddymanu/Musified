@@ -102,6 +102,7 @@ public class CustomArrayAdapter extends ArrayAdapter<Song> {
     Button spotBtn = (Button) rowView.findViewById(R.id.spotifySearch);
     Button rdioBtn = (Button) rowView.findViewById(R.id.rdioSearch);
     Button youtubeBtn = (Button) rowView.findViewById(R.id.youtubeSearch);
+    Button shareButton = (Button) rowView.findViewById(R.id.sendSong);
 
     final TextView likeButtonTV = (TextView) rowView
         .findViewById(R.id.likeButton);
@@ -219,6 +220,15 @@ public class CustomArrayAdapter extends ArrayAdapter<Song> {
         Intent intent = new Intent(Intent.ACTION_VIEW);
         intent.setData(Uri.parse(url));
         context.startActivity(intent);
+
+      }
+    });
+    
+    shareButton.setOnClickListener(new View.OnClickListener() {
+
+      @Override
+      public void onClick(View v) {
+        Log.i("SHARE" , "pressed!");
 
       }
     });

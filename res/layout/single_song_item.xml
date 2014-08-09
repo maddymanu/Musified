@@ -86,6 +86,17 @@
             android:adjustViewBounds="true"
             android:background="@drawable/youtubeicon2"
             android:ems="10" />
+        
+        <Button
+            android:id="@+id/sendSong"
+            android:layout_width="48dp"
+            android:text="Share!"
+            android:layout_height="48dp"
+            android:layout_below="@id/artistImage"
+            android:layout_margin="5dp"
+            android:layout_toLeftOf="@id/spotifySearch"
+            android:adjustViewBounds="true"
+            android:ems="10" />
     </LinearLayout>
 
     <TextView
