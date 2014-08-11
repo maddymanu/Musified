@@ -229,6 +229,8 @@ public class CustomArrayAdapter extends ArrayAdapter<Song> {
       @Override
       public void onClick(View v) {
         Log.i("SHARE" , "pressed!");
+        Intent shareList = new Intent(context, FriendPicker.class);
+        context.startActivity(shareList);
 
       }
     });

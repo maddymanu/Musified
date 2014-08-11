@@ -391,6 +391,8 @@
     <string name="password_label">Password:</string>
     <string name="already_have_an_account_label">Already Have An Account? Log In!</string>
     <string name="sign_in_label">Sign In</string>
+    <string name="menu_share">Share</string>
+    <string name="menu_discard">Discard</string>
     <string name="dont_have_an_account_label">Dont have an account? Register!</string>
 
 </resources>
