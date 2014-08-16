@@ -121,19 +121,19 @@ public final class R {
 		public static final int thumbnail_circle_minimal = 0x7f0200b4;
 	}
 	public static final class id {
-		public static final int action_settings = 0x7f040084;
+		public static final int action_settings = 0x7f040083;
 		public static final int container = 0x7f04004f;
 		public static final int dimensionsLabel = 0x7f040051;
 		public static final int image = 0x7f040052;
 		public static final int layout = 0x7f04004a;
-		public static final int lblColA = 0x7f040077;
-		public static final int lblColB = 0x7f040078;
+		public static final int lblColA = 0x7f040076;
+		public static final int lblColB = 0x7f040077;
 		public static final int lblLeft = 0x7f04004b;
 		public static final int lblMiddle = 0x7f04004c;
 		public static final int lblRight = 0x7f04004d;
-		public static final int lblSubTitle = 0x7f040076;
+		public static final int lblSubTitle = 0x7f040075;
 		public static final int lblText = 0x7f04006c;
-		public static final int lblTitle = 0x7f040075;
+		public static final int lblTitle = 0x7f040074;
 		public static final int placeholder = 0x7f040050;
 		public static final int txtText = 0x7f04004e;
 	}

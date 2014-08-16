@@ -31,14 +31,4 @@
         android:layout_centerVertical="true"
         android:focusable="false" />
 
-    <TextView
-        android:id="@+id/textView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/linearLayout1"
-        android:layout_alignParentTop="true"
-        android:layout_marginLeft="46dp"
-        android:layout_marginTop="43dp"
-        android:text="TextViewTester" />
-
 </com.manuelpeinado.multichoiceadapter.CheckableRelativeLayout>

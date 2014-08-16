@@ -24,8 +24,6 @@ public class FriendPicker extends Activity {
   List<GraphUser> friendListForInvites = null;
 
   FriendPickerAdapter adapter;
-  List<String> items = Arrays.asList("Hello", "Second", "Bye", "BHbc",
-      "3f3rf23", "ef23rf3rf");
 
   protected void onCreate(final Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -88,20 +86,6 @@ public class FriendPicker extends Activity {
     adapter.save(outState);
   }
 
-  @SuppressWarnings("deprecation")
-  private static void getFacebookIdInBackground() {
-    Request.executeMeRequestAsync(ParseFacebookUtils.getSession(),
-        new Request.GraphUserCallback() {
-          @Override
-          public void onCompleted(GraphUser user, Response response) {
-            if (user != null) {
-              ParseUser.getCurrentUser().put("fbId", user.getId());
-              ParseUser.getCurrentUser().put("name", user.getName());
-              ParseUser.getCurrentUser().saveInBackground();
 
-            }
-          }
-        });
-  }
 
 }
