@@ -15,12 +15,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.manuelpeinado.multichoiceadapter.MultiChoiceBaseAdapter;
+import com.parse.ParseUser;
 
 public class FriendPickerAdapter extends MultiChoiceBaseAdapter {
 
-  private List<String> items;
+  private List<ParseUser> items;
 
-  public FriendPickerAdapter(Bundle savedInstanceState, List<String> items) {
+  public FriendPickerAdapter(Bundle savedInstanceState, List<ParseUser> items) {
       super(savedInstanceState);
       this.items = items;
       Log.i("Adapter!" , "Entering the aapter atleeast");
@@ -32,12 +33,13 @@ public class FriendPickerAdapter extends MultiChoiceBaseAdapter {
       Toast.makeText(getContext(), "Share", Toast.LENGTH_SHORT).show();
       return true;
     }
+    Log.i("MENU" , " This tem was clicked " + item + getCheckedItemCount());
+    getCheckedItemCount();
     return false;
   }
 
   @Override
   public boolean onCreateActionMode(ActionMode mode, Menu menu) {
-    Log.i("Adapter!" , "Entering onCreateAction");
     MenuInflater inflater = mode.getMenuInflater();
     inflater.inflate(R.menu.my_action_mode, menu);
     return true;
@@ -66,15 +68,14 @@ public class FriendPickerAdapter extends MultiChoiceBaseAdapter {
 
   @Override
   protected View getViewImpl(int position, View convertView, ViewGroup parent) {
-    Log.i("Adapter!" , "Entering getViewImpl");
     if (convertView == null) {
       int layout = R.layout.friend_picker_list_item;
       LayoutInflater inflater = LayoutInflater.from(getContext());
       convertView = inflater.inflate(layout, parent, false);
     }
     ViewGroup group = (ViewGroup) convertView;
-    String str = (String) getItem(position);
-    ((TextView) group.findViewById(R.id.friend_name)).setText(str);
+    String name = (String) ((ParseUser) getItem(position)).get("name");
+    ((TextView) group.findViewById(R.id.friend_name)).setText(name);
     // ((TextView)group.findViewById(android.R.id.text2)).setText(building.height);
     return group;
   }

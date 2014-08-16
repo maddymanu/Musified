@@ -24,51 +24,9 @@ public class LoginActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_login_facebook);
 
-//		mUsernameField = (EditText) findViewById(R.id.login_username);
-//		mPasswordField = (EditText) findViewById(R.id.login_password);
-//		mErrorField = (TextView) findViewById(R.id.error_messages);
+
 	}
 
-//	public void signIn(final View v) {
-//		v.setEnabled(false);
-//		ParseUser.logInInBackground(mUsernameField.getText().toString(),
-//				mPasswordField.getText().toString(), new LogInCallback() {
-//					@Override
-//					public void done(ParseUser user, ParseException e) {
-//						if (user != null) {
-//							Intent intent = new Intent(LoginActivity.this,
-//									Welcome.class);
-//							startActivity(intent);
-//							finish();
-//						} else {
-//							// Signup failed. Look at the ParseException to see
-//							// what happened.
-//							switch (e.getCode()) {
-//							case ParseException.USERNAME_TAKEN:
-//								mErrorField
-//										.setText("Sorry, this username has already been taken.");
-//								break;
-//							case ParseException.USERNAME_MISSING:
-//								mErrorField
-//										.setText("Sorry, you must supply a username to register.");
-//								break;
-//							case ParseException.PASSWORD_MISSING:
-//								mErrorField
-//										.setText("Sorry, you must supply a password to register.");
-//								break;
-//							case ParseException.OBJECT_NOT_FOUND:
-//								mErrorField
-//										.setText("Sorry, those credentials were invalid.");
-//								break;
-//							default:
-//								mErrorField.setText(e.getLocalizedMessage());
-//								break;
-//							}
-//							v.setEnabled(true);
-//						}
-//					}
-//				});
-//	}
 
 	public void loginUsingFacebook(View v) {
 		ParseFacebookUtils.logIn(this, new LogInCallback() {
@@ -91,11 +49,7 @@ public class LoginActivity extends Activity {
 		});
 	}
 
-//	public void showRegistration(View v) {
-//		Intent intent = new Intent(this, RegisterActivity.class);
-//		startActivity(intent);
-//		finish();
-//	}
+
 
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
