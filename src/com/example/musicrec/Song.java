@@ -3,6 +3,11 @@ import com.parse.ParseClassName;
 import com.parse.ParseObject;
 import com.parse.ParseUser;
 
+/*
+ * Parse Class
+ * Used to store info about a particular song.
+ */
+
 @ParseClassName("Song")
 public class Song extends ParseObject{
 	

@@ -17,17 +17,17 @@ public class MyCustomReceiver extends BroadcastReceiver {
        try {  
             if (intent == null)  
             {  
-                 Log.d(TAG, "Receiver intent null");  
+                 //Log.d(TAG, "Receiver intent null");  
             }  
             else  
             {  
                  String action = intent.getAction();  
-                 Log.d(TAG, "got action " + action );  
+                 //Log.d(TAG, "got action " + action );  
                  if (action.equals("com.example.musicrec.UPDATE_STATUS"))  
                  {  
                       String channel = intent.getExtras().getString("com.parse.Channel");  
                       JSONObject json = new JSONObject(intent.getExtras().getString("com.parse.Data"));  
-                      Log.d(TAG, "got action " + action + " on channel " + channel + " with:");  
+                      //Log.d(TAG, "got action " + action + " on channel " + channel + " with:");  
                       Iterator itr = json.keys();  
                       while (itr.hasNext()) {  
                            String key = (String) itr.next();  
@@ -37,12 +37,12 @@ public class MyCustomReceiver extends BroadcastReceiver {
 //                                pupInt.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK );  
 //                                context.getApplicationContext().startActivity(pupInt);  
                            }  
-                           Log.d(TAG, "..." + key + " => " + json.getString(key));  
+                           //Log.d(TAG, "..." + key + " => " + json.getString(key));  
                       }  
                  }  
             }  
        } catch (JSONException e) {  
-            Log.d(TAG, "JSONException: " + e.getMessage());  
+            //Log.d(TAG, "JSONException: " + e.getMessage());  
        }  
   }  
 }

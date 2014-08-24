@@ -48,20 +48,30 @@ public class Welcome extends SherlockFragmentActivity {
   //Store the fragment tabs for each view.
   Fragment fragmentTab1 = new FragmentTab1();
   Fragment fragmentTab2 = new FragmentTab2();
+  
+  //stores the context
   final Context context = this;
+  
+  //list to store facebook users for app invitations
   List<GraphUser> friendListForInvites = null;
 
   @SuppressWarnings("deprecation")
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
-
+    
+    //inflates the layout
     LayoutInflater inflater = (LayoutInflater) context
         .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+    
+    //This implements the slidein-sldeout drawer from the left
     View sliderView = inflater.inflate(R.layout.slider_list, null);
+    
+    //This stores the list for the options in the sliderlist
     ListView sliderList = (ListView) sliderView
         .findViewById(R.id.optionsListView);
-
+    
+    //Gets the list of friends from the current user for invites
     RequestAsyncTask r = Request.executeMyFriendsRequestAsync(
         ParseFacebookUtils.getSession(), new Request.GraphUserListCallback() {
 
@@ -69,7 +79,8 @@ public class Welcome extends SherlockFragmentActivity {
           @Override
           public void onCompleted(List<GraphUser> users, Response response) {
             if (users != null) {
-
+              
+              //sets the friendlist as the search result
               friendListForInvites = users;
 
             }
@@ -77,14 +88,17 @@ public class Welcome extends SherlockFragmentActivity {
           }
 
         });
-    
+     
+    //this stores the strings for the slider listview
     String[] items2 = new String[] { "Notifications", "Settings", "Send",
         "Logout", "Invite!" };
+    //setting the listview for the slider
     ArrayAdapter<String> sliderListViewAdapter = new ArrayAdapter<String>(
         context, android.R.layout.simple_list_item_1, android.R.id.text1,
         items2);
     sliderList.setAdapter(sliderListViewAdapter);
-
+    
+    //getting the actionbar
     ActionBar actionBar = getSupportActionBar();
 
     // Hide Actionbar Icon
@@ -104,7 +118,8 @@ public class Welcome extends SherlockFragmentActivity {
     menu.setBehindOffset(300);
     menu.attachToActivity(this, SlidingMenu.SLIDING_CONTENT);
     menu.setMenu(sliderView);
-
+    
+    //implements the listener for the slider list items
     sliderList.setOnItemClickListener(new OnItemClickListener() {
       @Override
       public void onItemClick(AdapterView<?> parent, View view, int position,
@@ -152,15 +167,20 @@ public class Welcome extends SherlockFragmentActivity {
 
     return super.onCreateOptionsMenu(menu);
   }
-
+  
+  /*
+   * This function is used to invite facebook friends to try out this app.
+   * TODO - Complete invites
+   */
   @SuppressWarnings("deprecation")
   private void inviteFromFacebook(Activity activity, List<GraphUser> list) {
-
+    
+    //if no friend, return
     if (list == null || list.size() == 0)
       return;
-
+    
+    //setting parameters for what to message fb friend
     Bundle parameters = new Bundle();
-
     parameters.putString("message", "Use my app!");
 
     Facebook mFacebook = new Facebook("830750263621357");

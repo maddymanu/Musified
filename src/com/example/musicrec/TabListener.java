@@ -6,6 +6,9 @@ import com.actionbarsherlock.app.ActionBar.Tab;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 
+/*
+ * This is essentially a class to implement clicking on a particular tab.
+ */
 public class TabListener implements ActionBar.TabListener {
 
 	Fragment fragment;

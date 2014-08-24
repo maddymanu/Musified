@@ -4,6 +4,11 @@ import com.parse.ParseClassName;
 import com.parse.ParseObject;
 import com.parse.ParseUser;
 
+/*
+ * Parse Class.
+ * used to store info about a single notification.
+ */
+
 @ParseClassName("NotificationType")
 public class NotificationType extends ParseObject {
 
