@@ -53,37 +53,74 @@ import com.parse.ParseQuery;
 import com.parse.ParseUser;
 import com.parse.SendCallback;
 
+
+/*
+ * This class is used for the custom list view.
+ * holds the image, buttons for youtube, rdio and spotify 
+ * and also links to the users profiles.
+ * 
+ */
+
+
 @SuppressLint("NewApi")
 public class CustomArrayAdapter extends ArrayAdapter<Song> {
-
+  
+  //stores the current context
   private final Context context;
-
+  
+  //stores the songlist for the listview
   private final List<Song> songArrayList;
+  
+  //stores the count for the "likes"
   private int count = 0;
+  
+  //Stores the artist of the API search song
   Artist currEchoArtist;
+  
+  //used to search for strong details
   private EchoNestAPI en;
+  
+  //Stores the image of the searched API song.
   Image currEchoArtistImage;
+  
+  //Stores the song from the API
   com.echonest.api.v4.Song song;
+  
+  //store the urls for the song/imag
   String url;
   String url2 = "";
+  
+  //store the artistname, songname of each song.
   String artistName = "";
   String songName = "";
-
+  
+  /*
+   * Used to create a new adapter with the gievn details
+   */
   public CustomArrayAdapter(Context context, List<Song> songList) {
 
     super(context, R.layout.single_song_item, songList);
 
-    /* TEMP SOL */
+    
     StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
         .permitAll().build();
     StrictMode.setThreadPolicy(policy);
+    
+    //initializes the API
     en = new EchoNestAPI("FUS98WPLXFNIHZHHG");
-
+    
+    //sets the context
     this.context = context;
+    
+    //sets the songlist
     this.songArrayList = songList;
 
   }
-
+  
+  /*
+   * Sets the view for each list item.
+   * 
+   */
   @Override
   public View getView(int position, View convertView, ViewGroup parent) {
 
@@ -102,39 +139,56 @@ public class CustomArrayAdapter extends ArrayAdapter<Song> {
     Button spotBtn = (Button) rowView.findViewById(R.id.spotifySearch);
     Button rdioBtn = (Button) rowView.findViewById(R.id.rdioSearch);
     Button youtubeBtn = (Button) rowView.findViewById(R.id.youtubeSearch);
+    
+    //getting the share button.
     Button shareButton = (Button) rowView.findViewById(R.id.sendSong);
-
+    
+    //getting the textviews for likes
     final TextView likeButtonTV = (TextView) rowView
         .findViewById(R.id.likeButton);
     final TextView heartTV = (TextView) rowView.findViewById(R.id.heartTV);
-
+    
+    //getting the imageviews for the song and the user
     final ImageView profileImage = (ImageView) rowView
         .findViewById(R.id.profileImage);
-
     final ImageView artistImage = (ImageView) rowView
         .findViewById(R.id.artistImage);
 
-    // 4. Set the text for textView
+    // gets the song from the list with the curr position
     final Song currSong = (Song) songArrayList.get(position);
-    // currSong.get
+    
+    // formats the title of the song
     String formattedTitle = currSong.get("title").toString().substring(0, 1)
         .toUpperCase()
         + currSong.get("title").toString().substring(1).toLowerCase();
+    //asigning songname
     songName = formattedTitle;
+    
+    //setting the songname
     titleView.setText(formattedTitle);
+    
+    //settign the artistname
     artistView.setText(currSong.get("artist").toString());
+    
+    //storing the artist name
     artistName = currSong.get("artist").toString();
+    
+    //gets the number of likes for this song
     count = currSong.getLikes();
+    
+    //sets the like count
     likeButtonTV.setText("" + count);
+    
+    //gets the currently logged in user
     final ParseUser currUser = ParseUser.getCurrentUser();
     
-    //Beginning send to friends.!
-
+    //button click listener for the like button
     heartTV.setOnClickListener(new View.OnClickListener() {
 
       @SuppressWarnings("static-access")
       @Override
       public void onClick(View v) {
+        //updates the song count by 1
         count = currSong.getLikes();
         count++;
         currSong.setLikes(count);
@@ -142,37 +196,46 @@ public class CustomArrayAdapter extends ArrayAdapter<Song> {
         likeButtonTV.setText("" + count);
         currSong.saveInBackground();
 
-        //FIX THIS
+        /*
+         * This part is used to send a like notification to the song user
+         */
+        
+        //creates a query for the notification assigning song user as the receiver
         ParseQuery<ParseInstallation> userQuery = ParseInstallation.getQuery();
         userQuery.whereContains("user", currSong.getAuthor().getUsername());
         
-        //create a new NotificationType
+        //create a new NotificationType 
         NotificationType newNotificationType = new NotificationType();
+        
+        //sets the from user as the logged in user
         newNotificationType.setFromUser(currUser);
+        
+        //sets the receiver user, the type of the notification, status as new, and the song details
         newNotificationType.setToUser(currSong.getAuthor());
         newNotificationType.setType("Like");
         newNotificationType.setStatus("new");
         newNotificationType.setSong(currSong);
         newNotificationType.saveInBackground();
         
-        //setStatus = new
-        //set
-
+        
+        //create a new notification for the receiving user
         try {
           JSONObject data = new JSONObject(
               "{\"action\": \"com.example.musicrec.UPDATE_STATUS\",\"name\": \"Vaughn\",\"newsItem\": \"Man bites dog\"}");
           data.put("data", "My string");
-          // JSONObject data;
-          // data = new JSONObject();
+          
+          //assigns song details to the notification
           data.put("action", "com.example.musicrec.UPDATE_STATUS");
           data.put("songartist", currSong.get("artist").toString());
           data.put("songtitle", currSong.get("title").toString());
           data.put("title", "Musify");
           data.put("alert", currUser.get("name") + " liked your Song!");
-
+          
+          //pushes the pushnotification to the server
           ParsePush push = new ParsePush();
           push.setQuery(userQuery);
           push.setData(data);
+          //sends the data in background.
           push.sendDataInBackground(data, userQuery);
 
         } catch (JSONException e1) {
@@ -181,7 +244,11 @@ public class CustomArrayAdapter extends ArrayAdapter<Song> {
 
       }
     });
-
+    
+    /*
+     * Spotify button listener.
+     * Opens spotify if installed with the song, otherwise opens play store.
+     */
     spotBtn.setOnClickListener(new View.OnClickListener() {
 
       @Override
@@ -204,7 +271,11 @@ public class CustomArrayAdapter extends ArrayAdapter<Song> {
 
       }
     });
-
+    
+    /*
+     * Rdia button Listener.
+     * Opens Rdio app if installed, otherwise opens play store.
+     */
     rdioBtn.setOnClickListener(new View.OnClickListener() {
 
       @Override
@@ -224,17 +295,23 @@ public class CustomArrayAdapter extends ArrayAdapter<Song> {
       }
     });
     
+    /*
+     * Opens the friendlist to share the song with them.
+     */
     shareButton.setOnClickListener(new View.OnClickListener() {
 
       @Override
       public void onClick(View v) {
-        Log.i("SHARE" , "pressed!");
         Intent shareList = new Intent(context, FriendPicker.class);
         context.startActivity(shareList);
 
       }
     });
-
+    
+    /*
+     * youtube button listener.
+     * Opens youtube with the song search.
+     */
     youtubeBtn.setOnClickListener(new View.OnClickListener() {
 
       @Override
@@ -245,7 +322,8 @@ public class CustomArrayAdapter extends ArrayAdapter<Song> {
 
       }
     });
-
+    
+    //Sets the heart icon 
     Typeface font = Typeface.createFromAsset(context.getAssets(),
         "fontawesome-webfont.ttf");
     heartTV.setTypeface(font);

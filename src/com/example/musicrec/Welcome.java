@@ -34,11 +34,18 @@ import com.parse.ParseFacebookUtils;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
-//Is basically the Tab Holder for different tabs
+/*
+ * This class provides the main "frame" for the app.
+ * It provides the top 2 fragment-tabs for different views.
+ */
 
 public class Welcome extends SherlockFragmentActivity {
-
+  
+  
+  //Store the top 2 tabs
   ActionBar.Tab Tab1, Tab2;
+  
+  //Store the fragment tabs for each view.
   Fragment fragmentTab1 = new FragmentTab1();
   Fragment fragmentTab2 = new FragmentTab2();
   final Context context = this;
@@ -70,7 +77,7 @@ public class Welcome extends SherlockFragmentActivity {
           }
 
         });
-    //
+    
     String[] items2 = new String[] { "Notifications", "Settings", "Send",
         "Logout", "Invite!" };
     ArrayAdapter<String> sliderListViewAdapter = new ArrayAdapter<String>(
