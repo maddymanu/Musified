@@ -20,7 +20,7 @@ import com.parse.ParseUser;
 
 /*
  * This class is used to display the songs from a partiular Facebook user
- * 
+ * Ignore
  * 
  */
 public class CurrFBUserWindow extends Activity {
