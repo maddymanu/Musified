@@ -9,6 +9,10 @@ import com.parse.ParseInstallation;
 import com.parse.ParseObject;
 import com.parse.PushService;
 
+/*
+ * This class is essentially beginning the different SDK's for the app.
+ * Parse and Facebook.
+ */
 public class MainApplication extends Application {
   @Override
   public void onCreate() {
