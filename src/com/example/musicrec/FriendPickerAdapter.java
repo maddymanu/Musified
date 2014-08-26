@@ -95,6 +95,7 @@ public class FriendPickerAdapter extends MultiChoiceBaseAdapter {
   
   /*
    * This method is used to view each list item.
+   * Runs over each item in the list of friends.
    */
   @Override
   protected View getViewImpl(int position, View convertView, ViewGroup parent) {
