@@ -37,6 +37,7 @@ import com.parse.ParseUser;
 /*
  * This class provides the main "frame" for the app.
  * It provides the top 2 fragment-tabs for different views.
+ * Trial Comment.
  */
 
 public class Welcome extends SherlockFragmentActivity {
