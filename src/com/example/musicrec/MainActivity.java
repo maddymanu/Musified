@@ -17,6 +17,10 @@ import com.parse.ParseObject;
 import com.parse.ParseUser;
 import com.parse.PushService;
 
+/*
+ * This is the first activity that open.
+ * It send the user to the Welcome class is he's logged in or asks him to login.
+ */
 public class MainActivity extends Activity {
 
   Map<String, String> map = new HashMap<String, String>();
@@ -43,7 +47,9 @@ public class MainActivity extends Activity {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
     
-
+    /*
+     * Initializing Parse and facebook SDK's
+     */
     Parse.initialize(this, "gyy3EnWqM4shEJQTBDvz01HHKERCmt6ldNZFei9H",
         "j8H1tYNTndi5SdmMmxbRBUyaKZ8X3kJmvLWQvAIc");
     ParseFacebookUtils.initialize("830750263621357");
@@ -53,13 +59,17 @@ public class MainActivity extends Activity {
     ParseInstallation.getCurrentInstallation().saveInBackground();
     ParseAnalytics.trackAppOpened(getIntent());
     Parse.setLogLevel(Parse.LOG_LEVEL_VERBOSE);
-
+    
+    //Trying to get the logged in user.
     ParseUser currentUser = ParseUser.getCurrentUser();
+    
+    //If user is not logged in, send him to the login activity
     if (currentUser == null) {
       Intent intent = new Intent(this, LoginActivity.class);
       startActivity(intent);
       finish();
-    } else {
+    } else // if hes logged in send him to the Welcome activity
+    {
       ParseInstallation installation = new ParseInstallation();
       installation.put("user",ParseUser.getCurrentUser().getUsername());
       installation.saveInBackground();

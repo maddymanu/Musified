@@ -13,21 +13,22 @@ import com.parse.ParseException;
 import com.parse.ParseFacebookUtils;
 import com.parse.ParseUser;
 
+/*
+ * This class is the facebook Login Activity
+ */
 public class LoginActivity extends Activity {
 
-	private EditText mUsernameField;
-	private EditText mPasswordField;
-	private TextView mErrorField;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_login_facebook);
 
-
 	}
 
-
+	/*
+	 * Decides which activity to start based on whether or not the user is present.
+	 */
 	public void loginUsingFacebook(View v) {
 		ParseFacebookUtils.logIn(this, new LogInCallback() {
 			@Override
@@ -50,7 +51,9 @@ public class LoginActivity extends Activity {
 	}
 
 
-
+	/*
+	 * This is the calling activity that asks Facbook to authenticate the user.
+	 */
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);

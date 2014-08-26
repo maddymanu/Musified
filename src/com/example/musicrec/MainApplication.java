@@ -11,7 +11,7 @@ import com.parse.PushService;
 
 /*
  * This class is essentially beginning the different SDK's for the app.
- * Parse and Facebook.
+ * Parse and Facebook initializations.
  */
 public class MainApplication extends Application {
   @Override
