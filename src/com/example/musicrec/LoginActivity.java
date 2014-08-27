@@ -53,6 +53,7 @@ public class LoginActivity extends Activity {
 
 	/*
 	 * This is the calling activity that asks Facbook to authenticate the user.
+	 * 
 	 */
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {

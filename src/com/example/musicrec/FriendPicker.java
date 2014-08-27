@@ -19,16 +19,23 @@ import com.parse.ParseFacebookUtils;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
+/*
+ * This class is the activity that is called when a share button is clicked.
+ * It populates a list of friends the user has and sends them to FriendPickerAdapter.
+ */
 public class FriendPicker extends Activity {
-
+  
+  //list to store the list of friends
   List<GraphUser> friendListForInvites = null;
-
+  
+  //custom list adapter 
   FriendPickerAdapter adapter;
 
   protected void onCreate(final Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_friend_picker);
-
+    
+    //assigning the listview
     final ListView listView = (ListView) findViewById(R.id.list_of_friends);
 
     // Get List of friends.
@@ -39,15 +46,19 @@ public class FriendPicker extends Activity {
           @SuppressWarnings("unchecked")
           @Override
           public void onCompleted(List<GraphUser> users, Response response) {
+            
+            //if this user has friends
             if (users != null) {
-
+              
+              //add all friends to a separate list.
               friendListForInvites = users;
               List<String> friendsList = new ArrayList<String>();
 
               for (GraphUser user : users) {
                 friendsList.add(user.getId());
               }
-
+              
+              //get a list of ParseUsers for these facebook friends
               @SuppressWarnings("rawtypes")
               final ParseQuery<ParseUser> friendQuery = ParseQuery
                   .getUserQuery();
@@ -59,14 +70,15 @@ public class FriendPicker extends Activity {
 
                   // getting the list of friends complete here
                   if (friendUsers.size() == 0) {
-                    Log.i("Friend", "size0");
+                    //Log.i("Friend", "size0");
                   }
 
                   // friendUsers is the list of friends here
-
+                  
+                  //create a new custom adapter for FriendPicker
                   adapter = new FriendPickerAdapter(savedInstanceState,
                       friendUsers);
-
+                  
                   adapter.setAdapterView(listView);
 
                 }
@@ -80,7 +92,7 @@ public class FriendPicker extends Activity {
         });
 
   }
-
+  
   @Override
   protected void onSaveInstanceState(Bundle outState) {
     adapter.save(outState);
