@@ -332,49 +332,54 @@ public class CustomArrayAdapter extends ArrayAdapter<Song> {
     AsyncTask<Void, Void, Bitmap> t = new AsyncTask<Void, Void, Bitmap>() {
       protected Bitmap doInBackground(Void... p) {
         Bitmap bm = null;
-
+        
+        //getting the user for the song.
         final ParseUser songUser = currSong.getAuthor();
-
         try {
           songUser.fetchIfNeeded();
         } catch (ParseException e) {
           e.printStackTrace();
         }
+        //getting the facebook identifier or the user.
         final String userFacebookId = songUser.get("fbId").toString();
 
         try {
-
+          
+          //getting his profile image
           String url = String.format("https://graph.facebook.com/%s/picture",
               userFacebookId);
 
           InputStream is = new URL(url).openStream();
           bm = BitmapFactory.decodeStream(is);
 
-          // testing
+          // rounding off corners
           bm = getRoundedCornerBitmap(bm, 35f);
 
-          // bis.close();
           is.close();
         } catch (IOException e) {
           e.printStackTrace();
         }
-
+        
+        //returning the image
         return bm;
       }
 
       protected void onPostExecute(Bitmap bm) {
-
+        
+        //setting the profile image.
         profileImage.setImageBitmap(bm);
         profileImage.setOnClickListener(new View.OnClickListener() {
-
+          
+          //opens the user profile if the user image is clicked 
           @Override
           public void onClick(View v) {
             // ActionBar actionBar = context.getActivity().getActionBar();
             // Open new window with fbid and get feed again.
             ParseUser songUser = currSong.getAuthor();
-            Log.i("USER", songUser.get("fbId").toString());
+            //Log.i("USER", songUser.get("fbId").toString());
             // pass in fbId.
-
+            
+            //opening window for current song user
             Intent currFBUserWindow = new Intent(context,
                 CurrFBUserWindow.class);
             currFBUserWindow.putExtra("objectId", songUser.getObjectId()
@@ -394,6 +399,7 @@ public class CustomArrayAdapter extends ArrayAdapter<Song> {
         url = null;
         Bitmap bm = null;
         
+        //passing in the song parameters to look for song metadata.
         SongParams p1 = new SongParams();
         p1.setArtist(currSong.get("artist").toString());
         p1.setTitle(currSong.get("title").toString());
@@ -404,7 +410,8 @@ public class CustomArrayAdapter extends ArrayAdapter<Song> {
         // fix this
         // echonest search for songs not working
         try {
-
+          
+          //Searching for songs and selecting the first one.
           List<com.echonest.api.v4.Song> songs = en.searchSongs(p1);
           if (songs.size() != 0) {
             song = songs.get(0);
@@ -413,13 +420,17 @@ public class CustomArrayAdapter extends ArrayAdapter<Song> {
             } catch (IndexOutOfBoundsException e) {
 
             }
-          } else {
+          } 
+          //if no songs were found, search for the artist instead.
+          else {
+            //
             SongParams p2 = new SongParams();
             p2.setTitle(currSong.get("title").toString());
             p2.includeTracks(); // the album art is in the track data
             p2.setLimit(true); // only return songs that have track data
             p2.addIDSpace("7digital-US");
-
+            
+            //get the list of artists and show the first one.
             List<com.echonest.api.v4.Song> songsWithoutArtists = en
                 .searchSongs(p2);
             if (songsWithoutArtists.size() != 0) {
@@ -435,7 +446,8 @@ public class CustomArrayAdapter extends ArrayAdapter<Song> {
           e.printStackTrace();
         }
         try {
-
+          
+          //downloading the image from the url.
           if (url != null) {
             InputStream is = new URL(url).openStream();
 
@@ -461,7 +473,8 @@ public class CustomArrayAdapter extends ArrayAdapter<Song> {
 
             Matrix matrix = new Matrix();
             matrix.postScale(scaleWidth, scaleHeight);
-
+            
+            //creating a bitmap and rounding off corners.
             bm = Bitmap.createBitmap(bm, 0, 0, width, height, matrix, true);
             bm = getRoundedCornerBitmap(bm, 12f);
           }
@@ -477,9 +490,12 @@ public class CustomArrayAdapter extends ArrayAdapter<Song> {
         /* SET THE ARTIST IMAGE VIEW */
         // check if not null.
         artistImage.setImageBitmap(bm);
-        Log.i("SONG INFO", " " + url);
+        //Log.i("SONG INFO", " " + url);
+        
+        //if the image is clicked, open that songs individual window.
         artistImage.setOnClickListener(new View.OnClickListener() {
-
+          
+          // opens the window for the current song.
           @Override
           public void onClick(View v) {
             Intent currSongWindow = new Intent(context, CurrSongWindow.class);
@@ -497,7 +513,10 @@ public class CustomArrayAdapter extends ArrayAdapter<Song> {
 
     return rowView;
   }
-
+  
+  /*
+   * function to round off corners of a bitmap.
+   */
   public static Bitmap getRoundedCornerBitmap(Bitmap bitmap, float rnd) {
     Bitmap output = Bitmap.createBitmap(bitmap.getWidth(), bitmap.getHeight(),
         Config.ARGB_8888);
@@ -519,7 +538,8 @@ public class CustomArrayAdapter extends ArrayAdapter<Song> {
 
     return output;
   }
-
+  
+  //calculates the size of the input image.
   private static int calculateInSampleSize(BitmapFactory.Options options,
       int reqWidth, int reqHeight) {
 
@@ -536,7 +556,8 @@ public class CustomArrayAdapter extends ArrayAdapter<Song> {
     }
     return inSampleSize;
   }
-
+  
+  //checks if rdio app id available on the device.
   public boolean isRdioAvailable(Context context) {
     PackageManager packageManager = context.getPackageManager();
     Intent intent = packageManager
